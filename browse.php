@@ -297,6 +297,7 @@ body {
       <div class="content">
         <div class="grid-container">
           <script src="send_data.js"></script>
+          <script src="local_storage.js"></script>
           <div style="display: none;">
             <!--<audio id="audio">  
               <source src="./tts/output/Alf.wav" type="audio/wav" id="audio_src"/>

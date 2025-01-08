@@ -7,8 +7,8 @@ if (file_exists($file_path)) {
     // Read the file contents
     $file_content = file_get_contents($file_path);
 
-    // Set the cookie
-    setcookie("audio_file_path", $file_content, time() + (86400 * 30), "C:/xampp/htdocs/joerg/"); // 86400 = 1 day
+    // Ausführen einer JavaScript-Datei auf dem Server
+    $output = shell_exec('node meine_datei.js');
 } else {
     echo "File not found.";
 }
