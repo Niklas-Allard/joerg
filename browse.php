@@ -348,12 +348,10 @@ body {
 
                         $id = $id + 1; 
 
-                        $cover_path = loading_user_data("user_data.json")["cover_path"] . "/" . $item . ".ico";
-
-                        console_log($cover_path);
+                        console_log('./img/' . $item . '.ico');
 
                         echo '
-                        <div class="card" id="'. $item . '" style="background-image: url(' . $cover_path . '); background-size: cover; background-position: center;">
+                        <div class="card" id="'. $item . '" style="background-image: url("./img/' . $item . '.ico"); background-size: cover; background-position: center;">
                             
                             <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="post" id="form' . $item . '">
