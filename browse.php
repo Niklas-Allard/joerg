@@ -336,10 +336,14 @@ body {
                     if ($item !== "." && $item !== ".." && is_dir($directory . "/" . $item) && $item !== ".wd_tv") {
                       
                         if (!(is_file("img/" . $item . ".ico"))){
+                          if (loading_user_data("user_data.json")["log"]) {
 
-                          $message = "No Image: " . $item;
+                            // Toggles the log on and off
+                            
+                            $message = "No Image: " . $item;
 
-                          $log->saving_log($message);
+                            $log->saving_log($message);
+                          }
                         } 
 
                         $id = $id + 1; 
@@ -427,9 +431,14 @@ body {
               else {
                 echo "<p>Das Verzeichnis wurde nicht gefunden.</p>";
 
-                $message = "Verzeichnis nicht gefunden. Path: " . $directory;
+                if (loading_user_data("user_data.json")["log"]) {
 
-                $log->saving_log($message);
+                  // Toggles the log on and off
+                  
+                  $message = "Verzeichnis nicht gefunden. Path: " . $directory;
+
+                  $log->saving_log($message);
+                }
               };
             };
 
