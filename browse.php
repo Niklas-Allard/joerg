@@ -348,10 +348,10 @@ body {
 
                         $id = $id + 1; 
 
-                        console_log('./img/' . $item . '.ico');
+                        console_log('img/' . $item . '.ico'); // url("img/' . $item . '.ico")
 
                         echo '
-                        <div class="card" id="'. $item . '" style="background-image: url("./img/' . $item . '.ico"); background-size: cover; background-position: center;">
+                        <div class="card" id="'. $item . '" style="background-image: url("img/' . $item . '.ico"); background-size: cover; background-position: center;">
                             
                             <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="post" id="form' . $item . '">
