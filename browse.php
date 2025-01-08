@@ -348,7 +348,7 @@ body {
 
                         $id = $id + 1; 
 
-                        console_log('img/' . $item . '.ico'); // url("img/' . $item . '.ico")
+                        console_log('img/' . $item . '.ico'); // background-size: cover; background-position: center;
 
                         echo '
                         <div class="card" id="'. $item . '" style="background-image: url("img/' . $item . '.ico"); background-size: cover; background-position: center;">
