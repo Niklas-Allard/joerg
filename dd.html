@@ -45,13 +45,6 @@
             border: 1px solid #ccc;
         }
 
-        .preview {
-            border: 1px solid #ccc; 
-            padding: 10px; 
-            min-height: 50px;
-            font-size: 30px;
-        }
-
         #darkModeToggle {
             margin: 20px 0;
             padding: 10px;
@@ -69,13 +62,18 @@
     <p>Geben Sie Text mit mathematischen Symbolen ein:</p>
     <textarea id="mathInput" placeholder="Hier erscheint der Text..."></textarea>
     <div class="button-container">
-        <button onclick="insertMath('\\(\\frac{a}{b}\\)')">Bruch (\frac{a}{b})</button>
+        <button onclick="insertFraction()">Bruch (frac{a}{b})</button>
         <button onclick="insertMath('\\(x^2\\)')">Quadrat (x^2)</button>
         <button onclick="insertMath('\\(\\sqrt{x}\\)')">Wurzel (\sqrt{x})</button>
         <button onclick="insertMath('\\(\\int_{a}^{b}\\)')">Integral (\int_{a}^{b})</button>
+        <button onclick="insertMath('\\(\\pi\\)')">Pi (π)</button>
+        <button onclick="insertMath('\\(+\\)')">Plus (+)</button>
+        <button onclick="insertMath('\\(-\\)')">Minus (-)</button>
+        <button onclick="insertMath('\\(\\cdot\\)')">Mal (⋅)</button>
+        <button onclick="insertMath('\\(\\div\\)')">Geteilt (÷)</button>
     </div>
     <h2>Vorschau:</h2>
-    <div id="preview" class="preview"></div>
+    <div id="preview" style="border: 1px solid #ccc; padding: 10px; min-height: 50px;"></div>
 
     <script>
         const textarea = document.getElementById('mathInput');
@@ -89,6 +87,15 @@
             const textAfter = textarea.value.substring(cursorPos);
             textarea.value = textBefore + mathCode + textAfter;
             updatePreview();
+        }
+
+        // Funktion zum Einfügen eines Bruchs mit Benutzerwerten
+        function insertFraction() {
+            const numerator = prompt('Geben Sie den Zähler ein:');
+            const denominator = prompt('Geben Sie den Nenner ein:');
+            if (numerator !== null && denominator !== null) {
+                insertMath(`\\(\\frac{${numerator}}{${denominator}}\\)`);
+            }
         }
 
         // Funktion zur Aktualisierung der MathJax-Vorschau
