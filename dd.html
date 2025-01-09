@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax Text Input</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --button-bg: #f0f0f0;
+            --button-text: #000000;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .button-container {
+            margin-top: 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-size: 16px;
+            margin-top: 10px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            border: 1px solid #ccc;
+        }
+
+        .preview {
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            min-height: 50px;
+            font-size: 30px;
+        }
+
+        #darkModeToggle {
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 16px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>MathJax Text Input</h1>
+    <button id="darkModeToggle" onclick="toggleDarkMode()">Dark Mode einschalten</button>
+    <p>Geben Sie Text mit mathematischen Symbolen ein:</p>
+    <textarea id="mathInput" placeholder="Hier erscheint der Text..."></textarea>
+    <div class="button-container">
+        <button onclick="insertMath('\\(\\frac{a}{b}\\)')">Bruch (\frac{a}{b})</button>
+        <button onclick="insertMath('\\(x^2\\)')">Quadrat (x^2)</button>
+        <button onclick="insertMath('\\(\\sqrt{x}\\)')">Wurzel (\sqrt{x})</button>
+        <button onclick="insertMath('\\(\\int_{a}^{b}\\)')">Integral (\int_{a}^{b})</button>
+    </div>
+    <h2>Vorschau:</h2>
+    <div id="preview" class="preview"></div>
+
+    <script>
+        const textarea = document.getElementById('mathInput');
+        const preview = document.getElementById('preview');
+        let darkModeEnabled = false;
+
+        // Funktion zum Einfügen von MathJax-Code in das Textfeld
+        function insertMath(mathCode) {
+            const cursorPos = textarea.selectionStart;
+            const textBefore = textarea.value.substring(0, cursorPos);
+            const textAfter = textarea.value.substring(cursorPos);
+            textarea.value = textBefore + mathCode + textAfter;
+            updatePreview();
+        }
+
+        // Funktion zur Aktualisierung der MathJax-Vorschau
+        function updatePreview() {
+            const sanitizedInput = textarea.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            preview.innerHTML = sanitizedInput.replace(/\n/g, '<br>');
+            MathJax.typesetPromise([preview]).catch((err) => console.error(err));
+        }
+
+        // Dark Mode umschalten
+        function toggleDarkMode() {
+            darkModeEnabled = !darkModeEnabled;
+            if (darkModeEnabled) {
+                document.documentElement.style.setProperty('--background-color', '#333333');
+                document.documentElement.style.setProperty('--text-color', '#ffffff');
+                document.documentElement.style.setProperty('--button-bg', '#555555');
+                document.documentElement.style.setProperty('--button-text', '#ffffff');
+                document.getElementById('darkModeToggle').textContent = 'Dark Mode ausschalten';
+            } else {
+                document.documentElement.style.setProperty('--background-color', '#ffffff');
+                document.documentElement.style.setProperty('--text-color', '#000000');
+                document.documentElement.style.setProperty('--button-bg', '#f0f0f0');
+                document.documentElement.style.setProperty('--button-text', '#000000');
+                document.getElementById('darkModeToggle').textContent = 'Dark Mode einschalten';
+            }
+        }
+
+        // Aktualisiere die Vorschau bei Eingabe
+        textarea.addEventListener('input', updatePreview);
+
+        // Aktualisiere die Vorschau beim Drücken von Enter
+        textarea.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const cursorPos = textarea.selectionStart;
+                const textBefore = textarea.value.substring(0, cursorPos);
+                const textAfter = textarea.value.substring(cursorPos);
+                textarea.value = textBefore + '\n' + textAfter;
+                updatePreview();
+            }
+        });
+    </script>
+</body>
+</html>
