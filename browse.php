@@ -417,7 +417,9 @@ body {
                         </script>
                         ';
                     }
-                    elseif (is_file($directory . "/" . $item)) {}
+                    elseif (is_file($directory . "/" . $item)) {  // TODO Video/Audio Support
+
+                    }
                 };
               }
               elseif (is_file($directory)) {
