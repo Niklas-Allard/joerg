@@ -4,6 +4,6 @@
     "path_background": "",
     "cover_path": "H:/Covers",
     "show_title": "True",
-    "log": true,
+    "log": false,
     "elements_per_page": 20
 }
