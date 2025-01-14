@@ -8,7 +8,7 @@ if (file_exists($file_path)) {
     $file_content = file_get_contents($file_path);
 
     // Ausführen einer JavaScript-Datei auf dem Server
-    $output = shell_exec('node meine_datei.js');
+    $output = shell_exec('node local_storage.js');
 } else {
     echo "File not found.";
 }
