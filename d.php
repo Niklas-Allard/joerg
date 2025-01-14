@@ -233,11 +233,9 @@ body {
       <!-- Hauptinhalt -->
       <div class="content">
         
-      <video autoplay id="movie" width="80%" controls>
-        <source id="movie_source" src="C:\xampp\htdocs\joerg\background\Die Fraggles - s01e01 - Der Anfang.avi"/>
+      <video id="movie" width="80%" controls>
+        <source id="movie_source" src=<?php echo rawurlencode("H:/filme/Die Dackel sind los (2013)/Die Dackel sind los (2013).mkv")?>/>
       </video>
-
-    <!-- TODO Den Rahmen mit Navbar und Titel usw. hinzufügen.-->
 
     <script>
 
