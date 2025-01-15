@@ -44,7 +44,7 @@ if message != "":
     engine.setProperty('volume', 1.0)  # Werte zwischen 0.0 und 1.0
 
     # Datei speichern (z. B. als WAV)
-    output_file = f"./output/{message}.wav"
+    output_file = f"output/{message}.wav"
     engine.save_to_file(message, output_file)
 
     # Warten, bis die Sprachausgabe abgeschlossen ist
@@ -56,4 +56,4 @@ if message != "":
 
     from response_to_website import response_to_website
 
-    response_to_website(output_file)
+    response_to_website("./tts/" + output_file)

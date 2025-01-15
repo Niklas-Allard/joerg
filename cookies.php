@@ -7,8 +7,8 @@ if (file_exists($file_path)) {
     // Read the file contents
     $file_content = file_get_contents($file_path);
 
-    // Ausführen einer JavaScript-Datei auf dem Server
-    $output = shell_exec('node local_storage.js');
+    // setting cookie
+    setcookie("audio_path", $file_content, time() + (86400), "/"); // 1 Tag gültig
 } else {
     echo "File not found.";
 }
