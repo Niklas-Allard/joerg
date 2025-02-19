@@ -37,7 +37,7 @@ class Log {
 
         $data = $this->loading_log();
 
-        $filtered_array = array_filter($data, function($value) {
+        $filtered_array = array_filter($data, function($value, $user_input) {
             return $value !== $user_input;
         });
 

@@ -299,10 +299,11 @@ body {
           <script src="send_data.js"></script>
           <script src="local_storage.js"></script>
           <div style="display: none;">
-            <!--<audio id="audio">  
+            <audio id="audio">  
               <source src="./tts/output/Alf.wav" type="audio/wav" id="audio_src"/>
-            </audio>  -->
+            </audio>
           </div>
+          <script src="getting_server_data.js"></script>
           <div id="bigCard" class="bigCard"></div>
           <!--<script>
             const audio = document.getElementById("audio");
@@ -411,7 +412,7 @@ body {
                               bigCard' . $id . '.style.width = "0%";
                               bigCard' . $id . '.style.height = "0%";
                               
-                              audio_stop();
+                              //audio_stop();
                             });
 
                         </script>
