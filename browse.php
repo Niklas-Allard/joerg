@@ -90,33 +90,6 @@ body {
   cursor: pointer;
 }
 
-.info-box {
-  position: absolute;
-  top: 100%; /* Zeigt die Info-Box direkt unter dem Header-Text an */
-  left: 0; /* Positioniert die Info-Box linksbündig zum Header-Text */
-  width: 25vw;
-  height: 35vh;
-  background-color: white;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  text-align: center; /* Text in der Box bleibt zentriert */
-  display: none; /* Versteckt die Info-Box standardmäßig */
-  z-index: 10;
-}
-
-.info-box img {
-  width: 80%;
-  height: 80%;
-  margin-bottom: 10px;
-}
-
-.info-box p {
-  margin: 0;
-}
-
 .header-text:hover .info-box {
   display: block; /* Zeigt die Info-Box beim Hover */
 }
@@ -282,13 +255,6 @@ body {
     <div class="main-container">
       <!-- Bereich über dem Container -->
       <div class="header">
-        <div class="header-text">
-          Hover über mich!
-          <div class="info-box">
-            <img src="https://media04.meinbezirk.at/article/2017/11/08/2/11285172_XL.jpg?1559975767" alt="Info-Bild">
-            <p>Dies ist eine Info-Box mit Bild und Text.</p>
-          </div>
-        </div>
         <span class="header-icon">
           <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" fill="white"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
         </span>
@@ -320,8 +286,6 @@ body {
               // TODO Die Möglichkeit das Videos angezeigt werden muss implementiert werden
 
               require "log.php";
-
-              $log = new Log;
 
               console_log($directory);
 
