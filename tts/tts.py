@@ -16,8 +16,10 @@ for file_name in os.listdir(folder):
 
 # Generierung der Text-To-Speach-Datei
 
-with open("./communication.txt", mode = "r") as file:
+with open("./communication.txt", mode = "r", encoding="utf-8") as file:
     input = file.read()
+
+print(input)
 
 message = ""
 
@@ -27,7 +29,6 @@ for letter in input:
         break
 
     message += letter
-
 
 if message != "":
 
@@ -43,8 +44,23 @@ if message != "":
     # Lautstärke (optional)
     engine.setProperty('volume', 1.0)  # Werte zwischen 0.0 und 1.0
 
+    # Austauschen der Umlaute mit Unicode-Zeichen
+
+    output_file_name = message # Dateiname für die WAV-Datei
+
+    output_file_name = output_file_name.replace("ä", "ae")
+    output_file_name = output_file_name.replace("ö", "oe")
+    output_file_name = output_file_name.replace("ü", "ue")
+    output_file_name = output_file_name.replace("Ä", "Ae")
+    output_file_name = output_file_name.replace("Ö", "Oe")
+    output_file_name = output_file_name.replace("Ü", "Ue")
+    output_file_name = output_file_name.replace("ß", "ss")
+
     # Datei speichern (z. B. als WAV)
-    output_file = f"output/{message}.wav"
+    output_file = f"output/{output_file_name}.wav"
+
+    # Erstellung der Sprachausgabe und Entgültige Speicherung
+
     engine.save_to_file(message, output_file)
 
     # Warten, bis die Sprachausgabe abgeschlossen ist

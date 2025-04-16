@@ -264,17 +264,17 @@ body {
         <div class="grid-container">
           <script src="send_data.js"></script>
           <script src="local_storage.js"></script>
-          <div style="display: none;">
-            <audio id="audio">  
-              <source src="./tts/output/Alf.wav" type="audio/wav" id="audio_src"/>
+          <div style="display: none;" id="audio_container">
+            <audio id="audio_element">  
+              <source src="tts/output/Die Fraggles - Back to the Rock.wav" type="audio/wav" id="audio_src"/>
             </audio>
           </div>
           <script src="getting_server_data.js"></script>
           <div id="bigCard" class="bigCard"></div>
-          <!--<script>
-            const audio = document.getElementById("audio");
-            const source = document.getElementById("audio_src");
-          </script>-->
+          <script>
+
+            const audio_div = document.getElementById("audio_container");
+          </script>
           <?php 
 
             require "console_log.php";
@@ -295,7 +295,9 @@ body {
                 $items = scandir($directory);
 
                 $id = 0; // solves problems if an item has spaces in it
-
+                
+                $counter = 0; // for the page system | counts the cars
+                
                 foreach ($items as $item) {
                     // Nur Ordner anzeigen (ohne "." und "..")
                     if ($item !== "." && $item !== ".." && is_dir($directory . "/" . $item) && $item !== ".wd_tv") {
@@ -310,13 +312,29 @@ body {
                             $log->saving_log($message);
                           }
                         } 
+                        
+                        $page = loading_user_data("user_data.json");
+
+                        if ($page["current_page"] * 21 == $counter) {
+                                                  continue;
+                        };
+
+                        if ($counter == 21) {
+                          continue;
+                        };
+                        
+                        $counter++;
 
                         $id = $id + 1; 
 
                         console_log('img/' . $item . '.ico'); // background-size: cover; background-position: center;
 
+                        $item_img_path = $item;
+                      
+                        $item_img_path = str_replace(" ", "\\00a0", $item_img_path);
+
                         echo '
-                        <div class="card" id="'. $item . '" style="background-image: url("img/' . $item . '.ico"); background-size: cover; background-position: center;">
+                        <div class="card" id="'. $item . '" style="background-image: url(\'img/' . $item . '.ico\'); background-size: cover; background-position: center;">
                             
                             <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="post" id="form' . $item . '">
@@ -335,6 +353,7 @@ body {
                               document.getElementById("form' . $item . '").submit();
                             });
 
+
                             // triggers if the cursor enters the div
                             element' . $id . '.addEventListener("mouseenter", () => {
                               console.log("Cursor ist auf dem Element.");
@@ -342,17 +361,14 @@ body {
                               // Starte den Timer
                               timer = setTimeout(() => {
                                 console.log("Der Cursor war 2 Sekunden auf dem Element."); // TODO Sound ist noch nicht implementiert
+                                
+                                const audio_content' . $id . ' = "<audio id=\"audio_element\">" + 
+                                  "<source src=\"tts/output/' . $item . '.wav\" type=\"audio/wav\" id=\"audio_src\"/>" + 
+                                "</audio>";
 
-                                send_data("' . $item . '");
+                                audio_div.innerHTML = audio_content' . $id . ';
 
-                                if (getCookie("audio_file_path") == null) {
-                                  console.log("Cookie not found");
-                                }else{
-                                  audio_play(getCookie("audio_file_path"));
-                                }
-                                  
-                                //audio_src.src= output; // definiert in einer andere JS-Datei
-                                //audio.play();
+                                document.getElementById("audio_element").play();
 
                                 bigCard' . $id . '.style.display = "block";
                                 bigCard' . $id . '.style.width = "50%";
@@ -363,6 +379,12 @@ body {
 
                                 bigCard.innerHTML = bigCardHTML;
                               }, delay' . $id . ');
+
+                              // Starte den Timer
+                              timer = setTimeout(() => {
+
+                                send_data("' . $item . '");
+                              }, 500);
                             });
 
                             // Event, wenn die Maus das Element verlässt

@@ -7,32 +7,35 @@
 </head>
 <body>
     <style>
-
         body{
             background: black;
         }
-
     </style>
+
     <video autoplay id="movie" width="80%">
-        <source id="movie_source" src="assets/BIKINI PLANET - Ehrenmänner of the Galaxy 2 I Julien Bam.mp4"/>
+
     </video>
 
-    <p id="time" style="color: white"></p>
-
     <!-- TODO Den Rahmen mit Navbar und Titel usw. hinzufügen.-->
+ 
+    <script> 
 
-    <script>
-        
-        const movie_source_src = document.getElementById("movie_source").getAttribute("src")
+        localStorage.setItem("videoPath", "assets/BIKINI PLANET - Ehrenmänner of the Galaxy 2 I Julien Bam.mp4")
+    
+        const movie = document.getElementById("movie");
+
+        const src_element = '<source id="movie_source" src="' + localStorage.getItem('videoPath') + '"/>'
+
+        movie.innerHTML = src_element
+
+        const movie_source_src = document.getElementById("movie_source").getAttribute("src") // src of video/source
 
         console.log(movie_source_src)
-
+        
         // saving the path
         localStorage.setItem('videoPath', movie_source_src);
 
         // pausing and playing through an click
-        const movie = document.getElementById("movie");
-
         movie.addEventListener("click", () => {
             console.log("event")
 
@@ -47,12 +50,6 @@
 
         });
 
-        // Display time
-
-        const time_text = document.getElementById("time")
-
-        time_text.innerText = movie.currentTime
-
         // checks if the video has ended
         movie.addEventListener('ended', () => {
             console.log('Das Video ist zu Ende.');
@@ -65,18 +62,22 @@
             console.log(currentTime)
             localStorage.setItem('videoTime', currentTime);
         }, 5000); // Alle 5 Sekunden
-
-    </script>
         
-    <script>
-        while (true) {
-            // Display time
+    </script>
 
-            const time_text = document.getElementById("time")
+    <script defer>
+        localStorage.setItem('last_watched_video', localStorage.getItem("videoPath"));
 
-            time_text.innerText = Math.floor(movie.currentTime)
+        let path = localStorage.getItem("videoPath");
+
+        let directory = { "key"}
+
+        if (path) {
+            let text = "Hallo Welt";
+            let pos = text.indexOf("Welt"); // 6
         }
     </script>
+        
     <script src="no_context_menu.js"></script>
 </body>
 </html>
