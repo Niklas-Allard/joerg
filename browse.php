@@ -345,7 +345,7 @@ body {
                         <script defer>
                             const element' . $id . ' = document.getElementById("' . $item . '");
 
-                            const delay' . $id . ' = 1000; // Wartezeit in Millisekunden (2 Sekunden)
+                            const delay' . $id . ' = 2000; // Wartezeit in Millisekunden (2 Sekunden)
                             const bigCard' . $id . ' = document.getElementById("bigCard");
 
                             // triggers if the user clicks at the div
@@ -360,10 +360,36 @@ body {
                               
                               // Starte den Timer
                               timer = setTimeout(() => {
-                                console.log("Der Cursor war 2 Sekunden auf dem Element."); // TODO Sound ist noch nicht implementiert
+                                console.log("Der Cursor war 2 Sekunden auf dem Element.");
+
+                                let item' . $id . ' = "' . $item . '";
+
+                                let newItem' . $id . ' = ""
+
+                                for (let i = 0; i < item' . $id . '.length; i++) {
+                                  if (item' . $id . '[i] == "(") {
+                                    break;
+                                  }
+                                  
+                                  newItem' . $id . ' += item' . $id . '[i];
+                                }
+
+                                console.log(newItem' . $id . ');
+
+                                item' . $id . ' = newItem' . $id . ';
+
+
+                                item' . $id . ' = item' . $id . '.replace("ö", "oe");
+                                item' . $id . ' = item' . $id . '.replace("ä", "ae");
+                                item' . $id . ' = item' . $id . '.replace("ü", "ue");
+                                item' . $id . ' = item' . $id . '.replace("Ö", "Oe");
+                                item' . $id . ' = item' . $id . '.replace("Ä", "Ae");
+                                item' . $id . ' = item' . $id . '.replace("Ü", "Ue");
+                                item' . $id . ' = item' . $id . '.replace("ß", "ss");
+
                                 
                                 const audio_content' . $id . ' = "<audio id=\"audio_element\">" + 
-                                  "<source src=\"tts/output/' . $item . '.wav\" type=\"audio/wav\" id=\"audio_src\"/>" + 
+                                  "<source src=\"tts/output/" + item' . $id . ' + ".wav\" type=\"audio/wav\" id=\"audio_src\"/>" + 
                                 "</audio>";
 
                                 audio_div.innerHTML = audio_content' . $id . ';
