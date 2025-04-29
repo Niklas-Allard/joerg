@@ -11,4 +11,11 @@ function loading_user_data($path) {
     return $data;
 };
 
+function saving_user_data($item, $path) {
+    
+    $new_json_file = json_encode($item, JSON_PRETTY_PRINT);
+
+    file_put_contents($path, $new_json_file);
+}
+
 ?>

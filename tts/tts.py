@@ -11,7 +11,7 @@ for file_name in os.listdir(folder):
     file_path = os.path.join(folder, file_name)
     if os.path.isfile(file_path): # Keine Ordner werden gelöscht
         os.remove(file_path)
-        print(f"{file_name} wurde geloescht") # TODO den Output in der Konsole des Users sichtbar machen
+        print(f"{file_name} wurde geloescht")
 
 
 # Generierung der Text-To-Speach-Datei

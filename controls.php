@@ -4,7 +4,7 @@
 
     $log = new Log;
 
-    if (isset($_POST["submit"])) {
+    if (isset($_GET["submit"])) {
 
         $log->deleting_all_logs();
     };
@@ -18,11 +18,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="controls.php" method="post">
+    <form action="controls.php" method="get">
         <input type="submit" name="submit" value="Alles Löschen">
     </form>
 
-    <form action="controls.php" method="post">
+    <form action="controls.php" method="get">
         <br>
         <input type="submit" name="delete_submit" value="Refresh"><br><br>
         <?php 

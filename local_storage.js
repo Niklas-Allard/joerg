@@ -8,5 +8,3 @@ function loading_storage(key) {
     var username = localStorage.getItem(key);
     console.log(username);
 }
-
-// TODO Installing NodeJS

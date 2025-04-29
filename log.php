@@ -48,5 +48,4 @@ class Log {
         file_put_contents('log.json', $jsonData); // saves the json data
     }
 }
-
 ?>

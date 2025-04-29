@@ -1,14 +1,3 @@
-<?php
-
-  // Session starten
-  session_start();
-
-  // Alle Session-Keys
-
-  // page
-  //
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layout</title>
   <script src="no_context_menu.js"></script>
-  <script src="cookie.js" defer></script>
   <style>
 
 body {
@@ -174,7 +162,7 @@ body {
       <ul>
         <li>
           <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
+          <form action="browse.php" method="get" id="form_filme">
             <label for="filme"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg></label>
             <input type="hidden" name="category" value="filme">
             <button type="submit" id="filme" class="submit" name="submit" value="submit"></button>
@@ -183,7 +171,7 @@ body {
                 
         <li>
           <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
+          <form action="browse.php" method="get" id="form_serien">
             <label for="serien"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M320-320h480v-400H320v400Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg></label>
             <input type="hidden" name="category" value="serien">
             <button type="submit" id="serien" class="submit" name="submit" value="submit"></button>
@@ -192,7 +180,7 @@ body {
               
         <li>
           <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
+          <form action="browse.php" method="get" id="form_hoerspiele">
             <label for="audio"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"/></svg></label>
             <input type="hidden" name="category" value="hoerspiele">
             <button type="submit" id="audio" class="submit" name="submit" value="submit"></button>
@@ -201,16 +189,16 @@ body {
         
         <li>
           <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
+          <form action="browse.php" method="get" id ="form_puppen">
             <label for="puppen"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg></label>
             <input type="hidden" name="category" value="puppen">
             <button type="submit" id="puppen" class="submit" name="submit" value="submit"></button>
           </form>               
         </li>
               
-        <li id="li-up">
+        <li id="li_up">
           <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
+          <form action="browse.php" method="get">
             <label for="up"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg></label>
             <input type="hidden" name="category" value="up">
             <button type="submit" id="up" class="submit" name="submit" value="submit"></button>
@@ -218,15 +206,32 @@ body {
         </li>
 
         <li>
-          <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
-            <strong id="page" style="font-size: 500%;">1</strong>
-          </form>
+
+            <strong id="page" style="font-size: 500%;">
+              <?php 
+                require "transforming_user_data.php";
+                
+                $user_data = loading_user_data("user_data.json");
+                
+                if (isset($_GET["category"])) {
+
+                  if ($_GET["category"] == "up" && $user_data["current_page"] != 1) {
+                    $user_data["current_page"] = $user_data["current_page"] - 1;
+                  }
+                  elseif ($_GET["category"] == "down") {
+                    $user_data["current_page"] = $user_data["current_page"] + 1;
+                  };
+
+                  echo '<script>document.getElementById("page").innerHTML = ' . $user_data["current_page"] . '; console.log("display page");</script>';
+                };
+              ?>
+            </strong>
+          
         </li>
               
-        <li>
+        <li id="li_down" style="display: inline;">
           <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
+          <form action="browse.php" method="get">
             <label for="down"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg></label>
             <input type="hidden" name="category" value="down">
             <button type="submit" id="down" class="submit" name="submit" value="submit"></button>
@@ -235,7 +240,7 @@ body {
 
         <li>
           <!-- a single icon with an formulare -->
-          <form action="browse.php" method="post">
+          <form action="browse.php" method="get">
             <label for="resume"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
             <input type="hidden" name="category" value="resume">
             <button type="submit" id="resume" class="submit" name="submit" value="submit"></button>
@@ -245,7 +250,7 @@ body {
           const page = document.getElementById("page").innerHTML;
 
           if (page == 1) {
-            document.getElementById("li-up").style.display = "none";
+            document.getElementById("li_up").style.display = "none";
           }
         </script>
       </ul>
@@ -263,23 +268,20 @@ body {
       <div class="content">
         <div class="grid-container">
           <script src="send_data.js"></script>
-          <script src="local_storage.js"></script>
           <div style="display: none;" id="audio_container">
             <audio id="audio_element">  
               <source src="tts/output/Die Fraggles - Back to the Rock.wav" type="audio/wav" id="audio_src"/>
             </audio>
           </div>
-          <script src="getting_server_data.js"></script>
           <div id="bigCard" class="bigCard"></div>
           <script>
 
             const audio_div = document.getElementById("audio_container");
+
           </script>
           <?php 
 
             require "console_log.php";
-
-            require "loading_user_data.php";
 
             function loading_cards($directory) {
               
@@ -296,9 +298,16 @@ body {
 
                 $id = 0; // solves problems if an item has spaces in it
                 
-                $counter = 0; // for the page system | counts the cars
+                $user_data = loading_user_data("user_data.json");
+
+                $user_data["current_directory"] = $directory;
+
+                saving_user_data($user_data, "user_data.json");
                 
+                $counter = 0; // for the page system | counts the carts
+
                 foreach ($items as $item) {
+
                     // Nur Ordner anzeigen (ohne "." und "..")
                     if ($item !== "." && $item !== ".." && is_dir($directory . "/" . $item) && $item !== ".wd_tv") {
                       
@@ -309,22 +318,23 @@ body {
                             
                             $message = "No Image: " . $item;
 
+                            $log = new Log();
+
                             $log->saving_log($message);
                           }
-                        } 
-                        
-                        $page = loading_user_data("user_data.json");
+                        }
 
-                        if ($page["current_page"] * 21 == $counter) {
-                                                  continue;
-                        };
-
-                        if ($counter == 21) {
-                          continue;
-                        };
+                        // page system
                         
                         $counter++;
 
+                        if ($counter > ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
+                          break;
+                        }
+                        elseif ($counter <= ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
+                          continue;
+                        };
+                        
                         $id = $id + 1; 
 
                         console_log('img/' . $item . '.ico'); // background-size: cover; background-position: center;
@@ -337,7 +347,7 @@ body {
                         <div class="card" id="'. $item . '" style="background-image: url(\'img/' . $item . '.ico\'); background-size: cover; background-position: center;">
                             
                             <h3>' . htmlspecialchars($item) . '</h3>
-                            <form action="browse.php" method="post" id="form' . $item . '">
+                            <form action="browse.php" method="get" id="form' . $item . '">
                                 <input type="hidden" name="cardDir" value="'. $directory . "/"  . htmlspecialchars($item) . '">
                             </form>
                         </div> 
@@ -434,6 +444,22 @@ body {
 
                     }
                 };
+
+                $user_data = loading_user_data("user_data.json");
+
+                $page_limit = ceil(count($items) / $user_data["elements_per_page"]);
+
+                $user_data["max_pages"] = $page_limit;
+
+                $user_data["overall_cards"] = count($items);
+
+                saving_user_data($user_data, "user_data.json");
+
+                // removing the down arrow if the max limit reached
+
+                if ($user_data["max_pages"] <= $user_data["current_page"]) {
+                  echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+                };
               }
               elseif (is_file($directory)) {
 
@@ -455,64 +481,200 @@ body {
               };
             };
 
-            function pages() {
+            function reloading_cards($page_or_category) { // page_or_category means if the page or the category called the function
+              // Displays the cards if the page number was changed
 
+              $user_data = loading_user_data("user_data.json");      
               
+              echo '
+              <script>
+
+                let link = "";
+
+                const page_or_category = "' . $page_or_category . '";
+
+                const url = window.location.href;
+
+                console.log(url);
+                
+                let counter = 0;
+
+                let current_dir = "' . $user_data["current_directory"] . '";
+
+                if (current_dir.includes("filme")) {
+                  current_dir = "filme";
+                }
+                else if (current_dir.includes("serien")) {
+                  current_dir = "serien";
+                }
+                else if (current_dir.includes("hoerspiele")) {
+                  current_dir = "hoerspiele";
+                }
+                else if (current_dir.includes("puppen")) {
+                  current_dir = "puppen";
+                }
+
+                while (counter + 1 != url.length) {
+                  
+                  if (url[counter] == "?") {
+                    
+                    break;
+                  }
+
+                  link += url[counter];
+
+                  counter++;
+                };
+
+                if (page_or_category == "page") {
+                  window.location.href = link + "?" + "category=" + current_dir + "&submit=reload";
+                }
+                else if (page_or_category == "category") {
+                  window.location.href = link + "?" + "category=" + current_dir + "&submit=submit";
+                };
+
+                console.log(link + "?" + "category=" + current_dir + "&submit=submit");
+
+              </script>
+              ';
             };
 
-            if (isset($_POST["submit"])) {
+              
+
+            function page_down() {
+              $user_data = loading_user_data("user_data.json");
+
+              $user_data["current_page"] = $user_data["current_page"] + 1;
+
+              reloading_cards("page");
+              saving_user_data($user_data, "user_data.json");
+            };
+
+            function page_up() {
+              $user_data = loading_user_data("user_data.json");
+
+              if ($user_data["current_page"] != 1) {
+                $user_data["current_page"] = $user_data["current_page"] - 1;
+              };
+              
+              reloading_cards("page");
+              saving_user_data($user_data, "user_data.json");
+            };
+
+            if (@$_GET["submit"] == "reload") { // The @ blends error messages at this line out
+                
+              // loads the cards if the page was reloaded
+
+              $user_data = loading_user_data("user_data.json");
+
+              loading_cards($user_data["current_directory"]);
+
+              echo '<script>document.getElementById("page").innerHTML = ' . $user_data["current_page"] . '; console.log("display page");</script>';
+
+              if ($user_data["max_pages"] <= $user_data["current_page"]) {
+                echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+              };
+            }
+
+            elseif (isset($_GET["submit"])) {
 
                 // variables
 
-                $main_path = loading_user_data("user_data.json");
+                $user_data = loading_user_data("user_data.json");
 
-                $category = $_POST["category"];
+                $category = $_GET["category"];
 
-                $path = $main_path["main_path"] . "/" . $category;
+                $path = $user_data["main_path"] . "/" . $category;
+
+                $current_dir = $user_data["current_directory"]; // saves the current directory for comparing it with the new one
 
                 // TODO Implementierung von Seiten und der resume Funktion
 
                 switch ($category) {
                     case "filme":
+                        $user_data["current_directory"] = $path;
+                        $user_data["current_page"] = 1;
+                        saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
-                        $_SESSION["page"] = null;
                         break;
                     case "serien":
+                        $user_data["current_directory"] = $path;
+                        $user_data["current_page"] = 1;
+                        saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
-                        $_SESSION["page"] = null;
                         break;
                     case "hoerspiele":
+                        $user_data["current_directory"] = $path;
+                        $user_data["current_page"] = 1;
+                        saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
-                        $_SESSION["page"] = null;
                         break;
                     case "puppen":
+                        $user_data["current_directory"] = $path;
+                        $user_data["current_page"] = 1;
+                        saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
-                        $_SESSION["page"] = null;
                         break;
                     case "up":
-                        loading_cards($path);
+                        page_up();
                         break;
                     case "down":
-                        loading_cards($path);
+                        page_down();
                         break;
                     case "resume":
                         loading_cards($path);
                         break;
                 };
+
+                // Updates the page display
+
+                echo '<script>document.getElementById("page").innerHTML = ' . $user_data["current_page"] . '; console.log("display page");</script>';
+
+                if ($user_data["max_pages"] <= $user_data["current_page"]) {
+                  echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+                };
             }
 
-            if (isset($_POST["cardDir"])) {
+            if (isset($_GET["cardDir"])) {
 
-              $card_dir = $_POST["cardDir"];
+              $card_dir = $_GET["cardDir"];
 
-              $_SESSION["page"] = null;
+              $user_data = loading_user_data("user_data.json");
+
+              $user_data["current_page"] = 1;
 
               console_log($card_dir);
 
               loading_cards($card_dir);
 
+              echo '<script>document.getElementById("page").innerHTML = ' . $user_data["current_page"] . '; console.log("display page");</script>';
+
+              if ($user_data["max_pages"] <= $user_data["current_page"]) {
+                echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+              };
+
             };
           ?>
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              const currentPage = <?php echo loading_user_data("user_data.json")["current_page"]; ?>;
+              const maxPages = <?php echo loading_user_data("user_data.json")["max_pages"]; ?>;
+
+              if (currentPage <= 1) {
+              document.getElementById("li_up").style.display = "none";
+              }
+              else {
+                document.getElementById("li_up").style.display = "inline";
+              }
+
+              if (currentPage >= maxPages) {
+              document.getElementById("li_down").style.display = "none";
+              }
+              else {
+                document.getElementById("li_down").style.display = "inline";
+              }
+            });
+          </script>
 
             
         </div>
