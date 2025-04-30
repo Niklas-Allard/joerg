@@ -442,6 +442,7 @@ body {
                     }
                     elseif (is_file($directory . "/" . $item)) {  // TODO Video/Audio Support
                       
+                      $id = $id + 1; 
                       
                       echo '
                       <div class="card" id="'. $item . '" style="background-image: url(\'img/' . $item . '.ico\'); background-size: cover; background-position: center;">
@@ -568,13 +569,31 @@ body {
 
                 require "movie_or_audio.php";
 
-                $type_file = movie_or_audio($directory);
+                // extract the file name from the directory path
+
+                $file_name = ""; // saves the name of the file
+
+                for ($i = 1; $i < strlen($directory); $i++) {
+                  if ($directory[-$i] == "/") {
+                    break;
+                  };
+                  $file_name .= $directory[-$i];
+                };
+
+                // reverse the string
+                $file_name = strrev($file_name);
+
+                echo $file_name;
+
+                $type_file = movie_or_audio($file_name);
 
                 if ($type_file == "movie") {
-                  require "movie.php";
+                  echo "movie";
+                  reloading_cards("movie");
                 }
                 elseif ($type_file == "audio") {
-                  require "audio.php";
+                  echo "audio";
+                  reloading_cards("audio");
                 }
 
               }
@@ -593,7 +612,7 @@ body {
               };
             };
 
-            function reloading_cards($page_or_category) { // page_or_category means if the page or the category called the function
+            function reloading_cards($page_movie_or_audio) { // page_movie_or_audio means if the page, movie or audio called the function
               // Displays the cards if the page number was changed
 
               $user_data = loading_user_data("user_data.json");      
@@ -603,11 +622,9 @@ body {
 
                 let link = "";
 
-                const page_or_category = "' . $page_or_category . '";
+                const page_movie_or_audio = "' . $page_movie_or_audio . '";
 
                 const url = window.location.href;
-
-                console.log(url);
                 
                 let counter = 0;
 
@@ -626,10 +643,8 @@ body {
                   current_dir = "puppen";
                 }
 
-                while (counter + 1 != url.length) {
-                  
+                while (counter + 1 != url.length) {  
                   if (url[counter] == "?") {
-                    
                     break;
                   }
 
@@ -638,15 +653,17 @@ body {
                   counter++;
                 };
 
-                if (page_or_category == "page") {
+                if (page_movie_or_audio == "page") {
                   window.location.href = link + "?" + "category=" + current_dir + "&submit=reload";
                 }
-                else if (page_or_category == "category") {
-                  window.location.href = link + "?" + "category=" + current_dir + "&submit=submit";
+                else if (page_movie_or_audio == "movie") {
+                  console.log("' . $user_data["local_host_url"] . '" + "movie.php");
+                  window.location.href = "movie.php";
+                }
+                else if (page_movie_or_audio == "audio") {
+                  console.log("' . $user_data["local_host_url"] . '" + "audio.php");
+                  window.location.href = "audio.php";
                 };
-
-                console.log(link + "?" + "category=" + current_dir + "&submit=submit");
-
               </script>
               ';
             };

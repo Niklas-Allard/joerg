@@ -24,7 +24,7 @@
     
         const movie = document.getElementById("movie");
 
-        const src_element = '<source id="movie_source" src="' + <?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $user_data["current_file"] ?> + '"/>'
+        const src_element = '<source id="movie_source" src="' + "<?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); echo $user_data["current_file"] ?>" + '"/>'
 
         movie.innerHTML = src_element
 
@@ -69,8 +69,6 @@
         localStorage.setItem('last_watched_video', localStorage.getItem("videoPath"));
 
         let path = localStorage.getItem("videoPath");
-
-        let directory = { "key"}
 
         if (path) {
             let text = "Hallo Welt";

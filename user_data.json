@@ -1,7 +1,7 @@
 {
     "name": "Joerg",
-    "main_path": ".\/test_dir",
-    "current_directory": ".\/test_dir\/filme",
+    "main_path": "H:",
+    "current_directory": "H:\/filme\/Die Dackel sind los (2013)",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
@@ -10,5 +10,5 @@
     "current_page": 1,
     "max_pages": 1,
     "overall_cards": 3,
-    "current_file": ".\/test_dir\/filme\/marvel\/marvel.mp4"
+    "current_file": "H:\/filme\/Die Dackel sind los (2013)\/Die Dackel sind los (2013).mkv"
 }
