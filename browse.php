@@ -441,7 +441,103 @@ body {
                         ';
                     }
                     elseif (is_file($directory . "/" . $item)) {  // TODO Video/Audio Support
+                      
+                      
+                      echo '
+                      <div class="card" id="'. $item . '" style="background-image: url(\'img/' . $item . '.ico\'); background-size: cover; background-position: center;">
+                            
+                            <h3>' . htmlspecialchars($item) . '</h3>
+                            <form action="browse.php" method="get" id="form' . $item . '">
+                                <input type="hidden" name="cardDir" value="'. $directory . "/"  . htmlspecialchars($item) . '">
+                            </form>
+                        </div> 
 
+                        <script defer>
+                            const element' . $id . ' = document.getElementById("' . $item . '");
+
+                            const delay' . $id . ' = 2000; // Wartezeit in Millisekunden (2 Sekunden)
+                            const bigCard' . $id . ' = document.getElementById("bigCard");
+
+                            // triggers if the user clicks at the div
+                            element' . $id . '.addEventListener("click", () => {
+                              document.getElementById("form' . $item . '").submit();
+                            });
+
+
+                            // triggers if the cursor enters the div
+                            element' . $id . '.addEventListener("mouseenter", () => {
+                              console.log("Cursor ist auf dem Element.");
+                              
+                              // Starte den Timer
+                              timer = setTimeout(() => {
+                                console.log("Der Cursor war 2 Sekunden auf dem Element.");
+
+                                let item' . $id . ' = "' . $item . '";
+
+                                let newItem' . $id . ' = ""
+
+                                for (let i = 0; i < item' . $id . '.length; i++) {
+                                  if (item' . $id . '[i] == "(") {
+                                    break;
+                                  }
+                                  
+                                  newItem' . $id . ' += item' . $id . '[i];
+                                }
+
+                                console.log(newItem' . $id . ');
+
+                                item' . $id . ' = newItem' . $id . ';
+
+
+                                item' . $id . ' = item' . $id . '.replace("ö", "oe");
+                                item' . $id . ' = item' . $id . '.replace("ä", "ae");
+                                item' . $id . ' = item' . $id . '.replace("ü", "ue");
+                                item' . $id . ' = item' . $id . '.replace("Ö", "Oe");
+                                item' . $id . ' = item' . $id . '.replace("Ä", "Ae");
+                                item' . $id . ' = item' . $id . '.replace("Ü", "Ue");
+                                item' . $id . ' = item' . $id . '.replace("ß", "ss");
+
+                                
+                                const audio_content' . $id . ' = "<audio id=\"audio_element\">" + 
+                                  "<source src=\"tts/output/" + item' . $id . ' + ".wav\" type=\"audio/wav\" id=\"audio_src\"/>" + 
+                                "</audio>";
+
+                                audio_div.innerHTML = audio_content' . $id . ';
+
+                                document.getElementById("audio_element").play();
+
+                                bigCard' . $id . '.style.display = "block";
+                                bigCard' . $id . '.style.width = "50%";
+                                bigCard' . $id . '.style.height = "50%";
+                                console.log("bigCard visible");
+
+                                const bigCardHTML = \'<img src="img/' . rawurlencode($item) . '.ico" alt="Fehler beim Laden des Bildes">\';
+
+                                bigCard.innerHTML = bigCardHTML;
+                              }, delay' . $id . ');
+
+                              // Starte den Timer
+                              timer = setTimeout(() => {
+
+                                send_data("' . $item . '");
+                              }, 500);
+                            });
+
+                            // Event, wenn die Maus das Element verlässt
+                            element' . $id . '.addEventListener("mouseleave", () => {
+                              console.log("Cursor hat das Element verlassen.");
+                              
+                              // Timer stoppen, falls noch nicht abgelaufen
+                              clearTimeout(timer);
+
+                              bigCard.style.display = "none";
+                              bigCard' . $id . '.style.width = "0%";
+                              bigCard' . $id . '.style.height = "0%";
+                              
+                              //audio_stop();
+                            });
+
+                        </script>';
                     }
                 };
 
@@ -463,7 +559,23 @@ body {
               }
               elseif (is_file($directory)) {
 
-                require "movie.php";
+                $user_data = loading_user_data("user_data.json");
+
+                $user_data["current_file"] = $directory;
+                $user_data["current_page"] = 1;
+
+                saving_user_data($user_data, "user_data.json");
+
+                require "movie_or_audio.php";
+
+                $type_file = movie_or_audio($directory);
+
+                if ($type_file == "movie") {
+                  require "movie.php";
+                }
+                elseif ($type_file == "audio") {
+                  require "audio.php";
+                }
 
               }
               

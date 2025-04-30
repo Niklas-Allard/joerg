@@ -33,7 +33,4 @@ function movie_or_audio($path) {
     return $file = "dir";
 
 };
-
-movie_or_audio("./assets");
-
 ?>

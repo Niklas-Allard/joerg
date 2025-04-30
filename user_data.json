@@ -1,13 +1,14 @@
 {
     "name": "Joerg",
-    "main_path": "H:",
-    "current_directory": "H:\/serien",
+    "main_path": ".\/test_dir",
+    "current_directory": ".\/test_dir\/filme",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "log": false,
     "elements_per_page": 21,
     "current_page": 1,
-    "max_pages": 3,
-    "overall_cards": 45
+    "max_pages": 1,
+    "overall_cards": 3,
+    "current_file": ".\/test_dir\/filme\/marvel\/marvel.mp4"
 }

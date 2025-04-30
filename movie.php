@@ -24,7 +24,7 @@
     
         const movie = document.getElementById("movie");
 
-        const src_element = '<source id="movie_source" src="' + localStorage.getItem('videoPath') + '"/>'
+        const src_element = '<source id="movie_source" src="' + <?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $user_data["current_file"] ?> + '"/>'
 
         movie.innerHTML = src_element
 
