@@ -377,7 +377,7 @@ body {
                                 let newItem' . $id . ' = ""
 
                                 for (let i = 0; i < item' . $id . '.length; i++) {
-                                  if (item' . $id . '[i] == "(") {
+                                  if (item' . $id . '[i] == "(") {                                  
                                     break;
                                   }
                                   
@@ -657,11 +657,9 @@ body {
                   window.location.href = link + "?" + "category=" + current_dir + "&submit=reload";
                 }
                 else if (page_movie_or_audio == "movie") {
-                  console.log("' . $user_data["local_host_url"] . '" + "movie.php");
                   window.location.href = "movie.php";
                 }
                 else if (page_movie_or_audio == "audio") {
-                  console.log("' . $user_data["local_host_url"] . '" + "audio.php");
                   window.location.href = "audio.php";
                 };
               </script>

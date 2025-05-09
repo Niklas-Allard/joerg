@@ -1,7 +1,8 @@
 {
     "name": "Joerg",
     "main_path": "H:",
-    "current_directory": "H:\/filme\/Die Dackel sind los (2013)",
+    "path_link": "..\/videos",
+    "current_directory": "H:\/serien\/Die Fraggles - Back to the Rock",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
@@ -9,6 +10,6 @@
     "elements_per_page": 21,
     "current_page": 1,
     "max_pages": 1,
-    "overall_cards": 3,
-    "current_file": "H:\/filme\/Die Dackel sind los (2013)\/Die Dackel sind los (2013).mkv"
+    "overall_cards": 15,
+    "current_file": "H:\/serien\/Die Fraggles - Back to the Rock\/DF-BttR - s02e01 - Der gro\u00dfe Sturm.mkv"
 }

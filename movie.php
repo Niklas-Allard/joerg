@@ -13,18 +13,18 @@
     </style>
 
     <video autoplay id="movie" width="80%">
-
+        
     </video>
 
     <!-- TODO Den Rahmen mit Navbar und Titel usw. hinzufügen.-->
  
     <script> 
-
+    
         localStorage.setItem("videoPath", "assets/BIKINI PLANET - Ehrenmänner of the Galaxy 2 I Julien Bam.mp4")
     
         const movie = document.getElementById("movie");
 
-        const src_element = '<source id="movie_source" src="' + "<?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); echo $user_data["current_file"] ?>" + '"/>'
+        const src_element = '<source id="movie_source" type="video/mp4" src="' + "<?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $video_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $video_path; ?>" + '"/>'
 
         movie.innerHTML = src_element
 
