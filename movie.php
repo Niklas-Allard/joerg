@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="send_data_media_progress.js"></script>
 </head>
 <body>
     <style>
@@ -55,27 +56,19 @@
             console.log('Das Video ist zu Ende.');
         });
 
-        // automatical saving of the videos current time
         setInterval(() => {
-            // save current time
-            const currentTime = movie.currentTime;
-            console.log(currentTime)
-            localStorage.setItem('videoTime', currentTime);
-        }, 5000); // Alle 5 Sekunden
+            const current_time = movie.currentTime;
+            const file_path = movie.querySelector('source').getAttribute('src');
+
+            // Dynamically create an object where the key is the file_path
+            const data = {};
+            data[file_path] = current_time;
+
+            // Send progress data to the server
+            sendDataViaGet('getting_media_progress.php', data);
+        }, 5000);
         
-    </script>
-
-    <script defer>
-        localStorage.setItem('last_watched_video', localStorage.getItem("videoPath"));
-
-        let path = localStorage.getItem("videoPath");
-
-        if (path) {
-            let text = "Hallo Welt";
-            let pos = text.indexOf("Welt"); // 6
-        }
-    </script>
-        
+    </script>        
     <script src="no_context_menu.js"></script>
 </body>
 </html>

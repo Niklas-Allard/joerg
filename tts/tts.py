@@ -25,7 +25,7 @@ message = ""
 
 for letter in input:
 
-    if letter == "(":
+    if letter == "(" or ".":
         break
 
     message += letter

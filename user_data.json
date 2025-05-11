@@ -2,14 +2,14 @@
     "name": "Joerg",
     "main_path": "H:",
     "path_link": "..\/videos",
-    "current_directory": "H:\/serien\/Die Fraggles - Back to the Rock",
+    "current_directory": "H:\/serien",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "log": false,
     "elements_per_page": 21,
     "current_page": 1,
-    "max_pages": 1,
-    "overall_cards": 15,
-    "current_file": "H:\/serien\/Die Fraggles - Back to the Rock\/DF-BttR - s02e01 - Der gro\u00dfe Sturm.mkv"
+    "max_pages": 3,
+    "overall_cards": 45,
+    "current_file": "H:\/filme\/2 Wunderhunde - Das M\u00e4rchen geht weiter (2006)\/2 Wunderhunde - Das M\u00e4rchen geht weiter (2006).mkv"
 }
