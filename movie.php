@@ -18,6 +18,20 @@
     </video>
 
     <!-- TODO Den Rahmen mit Navbar und Titel usw. hinzufügen.-->
+
+    <?php
+        require "transforming_user_data.php";
+        $user_data = loading_user_data("user_data.json");
+        $video_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]);
+
+        $media_progress = loading_user_data("media_progress.json");
+
+        if (isset($media_progress[$video_path])) {
+            $current_time = $media_progress[$video_path];
+        } else {
+            $current_time = 0;
+        }
+    ?> 
  
     <script> 
     
@@ -25,9 +39,18 @@
     
         const movie = document.getElementById("movie");
 
-        const src_element = '<source id="movie_source" type="video/mp4" src="' + "<?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $video_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $video_path; ?>" + '"/>'
+        const src_element = '<source id="movie_source" type="video/mp4" src="' + "<?php echo $video_path; ?>" + '"/>'
 
         movie.innerHTML = src_element
+
+        current_time = <?php echo $current_time; ?> // current time of the video
+        
+        if (current_time > 0 && current_time < movie.duration) {
+            console.log("Current time" + movie.currentTime);
+            movie.currentTime = current_time; // set the current time of the video
+            console.log("Current time set to: " + current_time);
+
+        }
 
         const movie_source_src = document.getElementById("movie_source").getAttribute("src") // src of video/source
 
@@ -60,6 +83,8 @@
             const current_time = movie.currentTime;
             const file_path = movie.querySelector('source').getAttribute('src');
 
+            console.log("Current time: " + current_time);
+
             // Dynamically create an object where the key is the file_path
             const data = {};
             data[file_path] = current_time;
@@ -72,13 +97,3 @@
     <script src="no_context_menu.js"></script>
 </body>
 </html>
-
-<?php
-
-function movie($directory) {
-
-    
-
-}
-
-?>

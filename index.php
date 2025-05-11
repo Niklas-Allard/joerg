@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layout</title>
   <script src="no_context_menu.js"></script>
+  <?php
+    if ($_GET["category"] == "resume") {
+      header("Location: movie.php");
+      exit();
+    }
+  ?>
   <style>
 
 body {
