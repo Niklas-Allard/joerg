@@ -9,7 +9,7 @@
 <body>
     <style>
         body{
-            background: black;
+            background: white;
         }
     </style>
 
@@ -24,18 +24,28 @@
         $user_data = loading_user_data("user_data.json");
         $video_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]);
 
+        $video_path = str_replace(".", "_", $video_path); 
+        $video_path = str_replace(" ", "_", $video_path);
+        $video_path = str_replace("/", "\/", $video_path);
+        $video_path = str_replace("ä", "\u00e4", $video_path); 
+
+        echo $video_path;
+
         $media_progress = loading_user_data("media_progress.json");
 
+        $current_time = $media_progress[$video_path]; // current time of the video
+        
+        /*
         if (isset($media_progress[$video_path])) {
             $current_time = $media_progress[$video_path];
         } else {
             $current_time = 0;
-        }
+        }*/
+
+        $video_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]);
     ?> 
  
     <script> 
-    
-        localStorage.setItem("videoPath", "assets/BIKINI PLANET - Ehrenmänner of the Galaxy 2 I Julien Bam.mp4")
     
         const movie = document.getElementById("movie");
 
@@ -43,18 +53,15 @@
 
         movie.innerHTML = src_element
 
-        current_time = <?php echo $current_time; ?> // current time of the video
-        
-        if (current_time > 0 && current_time < movie.duration) {
-            console.log("Current time" + movie.currentTime);
-            movie.currentTime = current_time; // set the current time of the video
-            console.log("Current time set to: " + current_time);
+        const current_time = <?php echo $current_time; ?> // current time of the video
 
-        }
+        // Setze die Startzeit des Videos (z. B. 30 Sekunden)
+        movie.addEventListener("loadedmetadata", () => {
+            movie.currentTime = current_time; // Setze die Startzeit auf 30 Sekunden
+            console.log("Current time: " + current_time);
+        });
 
         const movie_source_src = document.getElementById("movie_source").getAttribute("src") // src of video/source
-
-        console.log(movie_source_src)
         
         // saving the path
         localStorage.setItem('videoPath', movie_source_src);
@@ -62,6 +69,7 @@
         // pausing and playing through an click
         movie.addEventListener("click", () => {
             console.log("event")
+            console.log(movie.duration)
 
             if (movie.paused) {
 
@@ -80,10 +88,14 @@
         });
 
         setInterval(() => {
-            const current_time = movie.currentTime;
-            const file_path = movie.querySelector('source').getAttribute('src');
 
-            console.log("Current time: " + current_time);
+            console.log(movie.duration)
+
+            const current_time = movie.currentTime;
+
+            const file_path = "<?php echo $video_path; ?>" // src of video/source
+
+            console.log("Current time:s " + current_time);
 
             // Dynamically create an object where the key is the file_path
             const data = {};

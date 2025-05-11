@@ -563,6 +563,7 @@ body {
                 $user_data = loading_user_data("user_data.json");
 
                 $user_data["current_file"] = $directory;
+                
                 $user_data["current_page"] = 1;
 
                 saving_user_data($user_data, "user_data.json");
