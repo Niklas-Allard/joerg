@@ -24,11 +24,6 @@
         $user_data = loading_user_data("user_data.json");
         $video_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]);
 
-        $video_path = str_replace(".", "_", $video_path); 
-        $video_path = str_replace(" ", "_", $video_path);
-        $video_path = str_replace("/", "\/", $video_path);
-        $video_path = str_replace("ä", "\u00e4", $video_path); 
-
         echo $video_path;
 
         $media_progress = loading_user_data("media_progress.json");
@@ -102,7 +97,7 @@
             data[file_path] = current_time;
 
             // Send progress data to the server
-            sendDataViaGet('getting_media_progress.php', data);
+            sendDataViaPOST('getting_media_progress.php', data);
         }, 5000);
         
     </script>        

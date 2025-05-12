@@ -1,13 +1,13 @@
-// This function sends data to a PHP file using the GET method
-function sendDataViaGet(url, params) {
-    // Construct the query string from the params object
-    const queryString = new URLSearchParams(params).toString();
-
+// This function sends data to a PHP file using the POST method
+function sendDataViaPOST(url, params) {
     // Create a new XMLHttpRequest
     const xhr = new XMLHttpRequest();
 
-    // Open a GET request with the constructed URL
-    xhr.open("GET", `${url}?${queryString}`, true);
+    // Open a POST request
+    xhr.open("POST", url, true);
+
+    // Set the Content-Type header for sending JSON data
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
     // Set up a callback to handle the response
     xhr.onreadystatechange = function () {
@@ -20,9 +20,9 @@ function sendDataViaGet(url, params) {
         }
     };
 
-    // Send the request
-    xhr.send();
+    // Send the request with JSON stringified data
+    xhr.send(JSON.stringify(params));
 }
 
 // Example usage:
-// sendDataViaGet('example.php', { "file_name": 'Seconds'});
+// sendDataViaPOST('example.php', { "file_name": 'Seconds' });

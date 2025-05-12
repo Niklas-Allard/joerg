@@ -29,7 +29,12 @@
     </style>
 
     <div id="audio-icon"></div>
-    <audio id="audio" autoplay src="<?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $audio_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $audio_path; ?> "></audio>
+    <audio id="audio" autoplay src="<?php require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $audio_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $audio_path; ?>"></audio>
+    
+    <?php
+        $media_progress = loading_user_data("media_progress.json");
+        $current_time = $media_progress[$audio_path]; // current time of the audio
+    ?>
 
     <script>
         const audio = document.getElementById("audio");
@@ -42,6 +47,11 @@
             } else {
                 audio.pause();
             }
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            audio.currentTime = <?php echo $current_time; ?>; //Set the start time
+            console.log('Current time: ' + <?php echo $current_time; ?>);
         });
 
         // Log audio state changes
@@ -63,14 +73,9 @@
             data[file_path] = current_time;
 
             // Send progress data to the server
-            sendDataViaGet('getting_media_progress.php', data);
+            sendDataViaPOST('getting_media_progress.php', data);
         }, 5000);
 
-        // Load last played time
-        const savedTime = localStorage.getItem('audioTime');
-        if (savedTime) {
-            audio.currentTime = savedTime;
-        }
     </script>
 </body>
 </html>
