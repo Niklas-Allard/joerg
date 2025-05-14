@@ -2,14 +2,14 @@
     "name": "Joerg",
     "main_path": "H:",
     "path_link": "..\/videos",
-    "current_directory": "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus",
+    "current_directory": "H:\/serien",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "log": false,
     "elements_per_page": 21,
     "current_page": 1,
-    "max_pages": 1,
-    "overall_cards": 4,
-    "current_file": "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus\/01 - Seite 1.mp3"
+    "max_pages": 3,
+    "overall_cards": 48,
+    "current_file": "H:\/filme\/BIKINI PLANET - Ehrenm\u00e4nner of the Galaxy 2 I Julien Bam.mp4"
 }

@@ -23,13 +23,39 @@ print(input)
 
 message = ""
 
-for letter in input:
+counter = 0
 
-    if letter == "(" or ".":
-        break
+if input.find("(") != -1:
 
-    message += letter
+    counter = 0
+    
+    for letter in input:
 
+        if letter == "(":
+                counter +=1
+
+        if counter == input.count("("):
+            break
+
+        message += letter
+
+elif input.find(".") != -1:
+    iterated_on_the_point = False
+
+    for letter in reversed(input):
+
+        if iterated_on_the_point == True:
+            message += letter
+
+        if letter == ".":
+            iterated_on_the_point = True
+
+    message = "".join(reversed(message))
+    print(message)
+
+else:
+    message = input
+    
 if message != "":
 
     # Text-to-Speech-Engine initialisieren

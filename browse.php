@@ -376,13 +376,34 @@ body {
 
                                 let newItem' . $id . ' = ""
 
-                                for (let i = 0; i < item' . $id . '.length; i++) {
-                                  if (item' . $id . '[i] == "(") {                                  
-                                    break;
-                                  }
-                                  
-                                  newItem' . $id . ' += item' . $id . '[i];
-                                }
+                                if (item' . $id . '.indexOf("(") !== -1) {
+                                    let counter = 0;
+                                    for (let i = 0; i < item' . $id . '.length; i++) {
+                                        const letter = item' . $id . '[i];
+                                        if (letter === "(") {
+                                            counter += 1;
+                                        }
+                                        if (counter === (item' . $id . '.match(/\(/g) || []).length) {
+                                            break;
+                                        }
+                                        newItem' . $id . ' += letter;
+                                    }
+                                } else if (item' . $id . '.indexOf(".") !== -1) {
+                                    let iterated_on_the_point = false;
+                                    for (let i = item' . $id . '.length - 1; i >= 0; i--) {
+                                        const letter = item' . $id . '[i];
+
+                                        if (iterated_on_the_point === true) {
+                                            newItem' . $id . ' += letter;
+                                        }
+
+                                        if (letter === ".") {
+                                            iterated_on_the_point = true;
+                                        }
+                                    }
+                                    // Um die Reihenfolge wie im Original zu erhalten:
+                                    newItem' . $id . ' = newItem' . $id . '.split("").reverse().join("");
+                                } 
 
                                 console.log(newItem' . $id . ');
 
@@ -477,13 +498,34 @@ body {
 
                                 let newItem' . $id . ' = ""
 
-                                for (let i = 0; i < item' . $id . '.length; i++) {
-                                  if (item' . $id . '[i] == "(") {
-                                    break;
-                                  }
-                                  
-                                  newItem' . $id . ' += item' . $id . '[i];
-                                }
+                                if (item' . $id . '.indexOf("(") !== -1) {
+                                    let counter = 0;
+                                    for (let i = 0; i < item' . $id . '.length; i++) {
+                                        const letter = item' . $id . '[i];
+                                        if (letter === "(") {
+                                            counter += 1;
+                                        }
+                                        if (counter === (item' . $id . '.match(/\(/g) || []).length) {
+                                            break;
+                                        }
+                                        newItem' . $id . ' += letter;
+                                    }
+                                } else if (item' . $id . '.indexOf(".") !== -1) {
+                                    let iterated_on_the_point = false;
+                                    for (let i = item' . $id . '.length - 1; i >= 0; i--) {
+                                        const letter = item' . $id . '[i];
+
+                                        if (iterated_on_the_point === true) {
+                                            newItem' . $id . ' += letter;
+                                        }
+
+                                        if (letter === ".") {
+                                            iterated_on_the_point = true;
+                                        }
+                                    }
+                                    // Um die Reihenfolge wie im Original zu erhalten:
+                                    newItem' . $id . ' = newItem' . $id . '.split("").reverse().join("");
+                                } 
 
                                 console.log(newItem' . $id . ');
 

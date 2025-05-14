@@ -27,9 +27,10 @@ if (file_put_contents($file, $receivedString) === false) {
 
 // Python-Skript ausführen
 exec('C:\Python\Python3123\python.exe C:\xampp\htdocs\joerg\tts\tts.py 2>&1', $output, $status);
+
 require "log.php";
 
-saving_log($output);
+$log->saving_log($output);
 
 if ($status !== 0) {
     echo "Fehler beim Ausführen des Python-Skripts. Status: $status";
