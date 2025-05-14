@@ -6,10 +6,12 @@
   <title>Layout</title>
   <script src="no_context_menu.js"></script>
   <?php
-    if ($_GET["category"] == "resume") {
-      header("Location: movie.php");
-      exit();
-    }
+    if (isset($_GET["category"])) {
+      if ($_GET["category"] == "resume") {
+        header("Location: movie.php");
+        exit();
+      }
+    };
   ?>
   <style>
 
