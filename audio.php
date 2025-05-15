@@ -29,13 +29,14 @@
     </style>
 
     <div id="audio-icon"></div>
+
     <audio id="audio" autoplay src="<?php
 
 use function PHPSTORM_META\type;
 
  require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $audio_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $audio_path; ?>"></audio>
-    <input type="range" id="audio-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">
-    
+    <input type="range" id="audio-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">    
+    <button id="reset_button"></button>
     <?php
         $media_progress = loading_user_data("media_progress.json");
 
@@ -116,6 +117,12 @@ use function PHPSTORM_META\type;
             sendDataViaPOST('getting_media_progress.php', data);
         }, 5000);
 
+        const reset_button = document.getElementById("reset_button");
+        reset_button.addEventListener("click", () => {
+            movie.currentTime = 0;
+            movie.pause(); // Optional: Video pausieren, wenn zurückgesetzt wird
+        });
+
     </script>
-</body>
+</body>s
 </html>

@@ -16,6 +16,7 @@
     <video autoplay id="movie" width="80%"></video>
 
     <input type="range" id="video-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">
+    <button id="reset-button" style="display:block;margin:20px auto;">Reset</button>
     <!-- Vollbild-Button entfernt -->
 
     <!-- TODO Den Rahmen mit Navbar und Titel usw. hinzufügen.-->
@@ -149,6 +150,12 @@
             } else if (document.msFullscreenElement && document.msExitFullscreen) {
                 document.msExitFullscreen();
             }
+        });
+
+        const resetButton = document.getElementById("reset-button");
+        resetButton.addEventListener("click", () => {
+            movie.currentTime = 0;
+            movie.pause(); // Optional: Video pausieren, wenn zurückgesetzt wird
         });
         
     </script>        
