@@ -124,5 +124,5 @@ use function PHPSTORM_META\type;
         });
 
     </script>
-</body>s
+</body>
 </html>

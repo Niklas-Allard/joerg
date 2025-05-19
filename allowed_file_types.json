@@ -1,0 +1,19 @@
+{
+    "movie": [
+        "mp4",
+        "mkv",
+        "avi",
+        "mov",
+        "wmv",
+        "flv",
+        "webm"
+    ],
+    "audio": [
+        "mp3",
+        "wav",
+        "aac",
+        "flac",
+        "ogg",
+        "wma"
+    ]
+}
