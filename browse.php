@@ -602,15 +602,16 @@ body {
               }
               elseif (is_file($directory)) {
 
-
                 // saving the last watched file in a category or directory
                 $last_watched_file = loading_user_data("last_watched_file.json");
 
                 $last_file = explode("/", $directory);
 
-                $last_watched_file[$last_file[count($last_file) - 2]] = $directory; // saving the last watched file in the directory
+                if ($last_file[count($last_file)] != 2) {
+                  $last_watched_file[$last_file[count($last_file) - 4]] = $directory; // saving the last watched file in the category
+                }
 
-                $last_watched_file[$last_file[count($last_file) - 3]] = $directory; // saving the last watched file in the category
+                $last_watched_file[$last_file[count($last_file) - 3]] = $directory; // saving the last watched file in the directory
 
                 saving_user_data($last_watched_file, "last_watched_file.json"); // saving it finally :)
 
@@ -744,33 +745,13 @@ body {
               saving_user_data($user_data, "user_data.json");
             };
 
-            function resume($directory) {
-
-              $seperated_path = explode("/", $directory);
-
-              $allowed_file_types = loading_user_data("allowed_file_types.json");
+            function resume($path) {
 
               $last_watched_file = loading_user_data("last_watched_file.json");
 
-              $category_or_directory = "category";
+              $last_watched_file = $last_watched_file[$path];
 
-              foreach ($allowed_file_types as $file_type) {
-                if (str_contains($seperated_path[count($seperated_path) - 1], $file_type)) {
-                  $category_or_directory = "directory";
-                  break;
-                };
-              };
-
-              if ($category_or_directory == "category") {
-                $url = "Location: " . $last_watched_file[$seperated_path[count($seperated_path) - 2]];
-                header($url);
-                exit;
-              }
-              elseif ($category_or_directory == "directory") {
-                $url = "Location: " . $last_watched_file[$seperated_path[count($seperated_path) - 1]];
-                header($url);
-                exit;
-              };
+              
             };
 
             if (@$_GET["submit"] == "reload") { // The @ blends error messages at this line out
@@ -832,9 +813,10 @@ body {
                         break;
                     case "down":
                         page_down();
-                        break;
+                        break;                    
                     case "resume":
-                        resume($directory);
+                        // Funktion ohne Parameter aufrufen - verwendet current_file aus user_data
+                        resume($user_data["current_directory"]);
                         break;
                 };
 
