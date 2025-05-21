@@ -604,20 +604,35 @@ body {
 
                 // saving the last watched file in a category or directory
                 $last_watched_file = loading_user_data("last_watched_file.json");
+                $user_data = loading_user_data("user_data.json");
+                
+                // saving the last watched file in the directory
+                $last_watched_file[$user_data["current_directory"]] = $directory; 
+                
+                // saving the last watched file in the category
 
-                $last_file = explode("/", $directory);
+                $seperated_path = explode("/", $directory);
 
-                if ($last_file[count($last_file)] != 2) {
-                  $last_watched_file[$last_file[count($last_file) - 4]] = $directory; // saving the last watched file in the category
+                // deciding in which category the user currently is
+                switch (true) {
+                    case in_array("filme", $seperated_path):
+                        $last_watched_file[$user_data["main_path"] . "/" . "filme"] = $directory;
+                        break;
+                    case in_array("serien", $seperated_path):
+                        $last_watched_file[$user_data["main_path"] . "/" . "serien"] = $directory;
+                        break;
+                    case in_array("hoerspiele", $seperated_path):
+                        $last_watched_file[$user_data["main_path"] . "/" . "hoerspiele"] = $directory;
+                        break;
+                    case in_array("puppen", $seperated_path):
+                        $last_watched_file[$user_data["main_path"] . "/" . "puppen"] = $directory;
+                        break;
                 }
 
-                $last_watched_file[$last_file[count($last_file) - 3]] = $directory; // saving the last watched file in the directory
-
-                saving_user_data($last_watched_file, "last_watched_file.json"); // saving it finally :)
+                saving_user_data($last_watched_file, "last_watched_file.json");
 
                 // saving the last fil & the page in user_data.json
-                $user_data = loading_user_data("user_data.json");
-
+                
                 $user_data["current_file"] = $directory;
                 
                 $user_data["current_page"] = 1;
@@ -639,8 +654,6 @@ body {
 
                 // reverse the string
                 $file_name = strrev($file_name);
-
-                echo $file_name;
 
                 $type_file = movie_or_audio($file_name);
 
@@ -748,9 +761,25 @@ body {
             function resume($path) {
 
               $last_watched_file = loading_user_data("last_watched_file.json");
+              
+              $user_data = loading_user_data("user_data.json");
 
               $last_watched_file = $last_watched_file[$path];
 
+              $user_data["current_file"] = $last_watched_file;
+
+              saving_user_data($user_data, "user_data.json");
+
+              require "movie_or_audio.php";
+
+              if (movie_or_audio($last_watched_file) == "movie") {
+                reloading_cards("movie");
+              }
+              elseif (movie_or_audio($last_watched_file) == "audio") {
+                reloading_cards("audio");
+              };
+
+              exit;
               
             };
 
