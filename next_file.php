@@ -5,8 +5,13 @@ function get_next_file($path) {
         return false;
     }
 
+    $directory = str_replace(basename($path), "", $path);
+
     // Dateien und Ordner im Verzeichnis auslesen
-    $items = scandir($path);
+    $items = scandir($directory);
+
+    echo $items;
+    echo $directory;
 
     // Nur Dateien filtern und alphabetisch sortieren
     $files = array_values(array_filter($items, function($item) use ($path) {
@@ -37,10 +42,31 @@ function get_next_file($path) {
     return $message;
 }
 
-$x = get_next_file("H:\\Hoerspiele\\5 Freunde\\001 - ... beim Wanderzirkus");
+$path = "H:\\Hoerspiele\\5 Freunde\\001 - ... beim Wanderzirkus\\001 - ... Wanderzirkus.mp4";
 
-if ($x === false) {
-    echo "Der angegebene Pfad ist kein Verzeichnis.";
-} else {
+$output = "";
+
+$is_slash = false; // true if the for loop noticed a "/"
+
+echo strlen($path);
+
+for ($x = strlen($path) - 1; $x != strlen($path); $x--) {
     echo $x;
+    echo $path[$x];
+    echo $is_slash;
+    echo $output;
+    if ($path[$x] == "/") {
+        $is_slash = true;
+    };
+    if ($is_slash) {
+        $output = $path[$x] . $output;
+    };
 }
+
+$path = $output;
+
+echo $path;
+
+$directory = str_replace(basename($path), "", $path);
+
+echo $directory;
