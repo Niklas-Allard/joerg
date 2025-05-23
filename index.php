@@ -4,8 +4,9 @@ require "transforming_user_data.php";
 $css = loading_user_data("css.json");
 
 $navbar_width = $css["navbar_width"];
+$navbar_color = $css["navbar_color"];
 $icon_size = $css["icon_size"];
-$main_part_color = $css["main_part_color"];
+$main_container_color = $css["main_container_color"];
 $content_color = $css["content_color"];
 ?>
 
@@ -72,8 +73,8 @@ body {
 }
 
 .main-container {
-  width: 80%; /* Restliche Breite */
-  background-color: <?php echo $main_part_color; ?>;
+  width: 100%; /* Restliche Breite */
+  background-color: <?php echo $main_container_color; ?>;
   padding: 20px;
   box-sizing: border-box;
   display: flex;

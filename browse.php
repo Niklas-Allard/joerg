@@ -1,3 +1,15 @@
+<?php
+require "transforming_user_data.php";
+
+$css = loading_user_data("css.json");
+
+$navbar_width = $css["navbar_width"];
+$navbar_color = $css["navbar_color"];
+$icon_size = $css["icon_size"];
+$main_container_color = $css["main_container_color"];
+$content_color = $css["content_color"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +34,8 @@ body {
 .navbar {
   display: flex;
   flex-direction: column; /* Vertikale Anordnung der Navbar */
-  width: 20%; /* Festlegen der Navbar-Breite */
-  background-color: #2c3e50;
+  width: <?php echo $navbar_width; ?>; /* Festlegen der Navbar-Breite */
+  background-color:<?php echo $navbar_color; ?>;
   color: white;
   padding: 20px;
   box-sizing: border-box;
@@ -53,8 +65,8 @@ body {
 }
 
 .main-container {
-  width: 80%; /* Restliche Breite */
-  background-color: #ecf0f1;
+  width: 100%;
+  background-color: "<?php echo $main_container_color; ?>";
   padding: 20px;
   box-sizing: border-box;
   display: flex;
@@ -88,7 +100,7 @@ body {
 }
 
 .content {
-  background-color: white;
+  background-color: <?php echo $content_color; ?>;
   padding: 20px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -163,7 +175,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_filme">
-            <label for="filme"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg></label>
+            <label for="filme"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg></label>
             <input type="hidden" name="category" value="filme">
             <button type="submit" id="filme" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -172,7 +184,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_serien">
-            <label for="serien"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M320-320h480v-400H320v400Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg></label>
+            <label for="serien"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M320-320h480v-400H320v400Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg></label>
             <input type="hidden" name="category" value="serien">
             <button type="submit" id="serien" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -181,7 +193,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_hoerspiele">
-            <label for="audio"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"/></svg></label>
+            <label for="audio"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"/></svg></label>
             <input type="hidden" name="category" value="hoerspiele">
             <button type="submit" id="audio" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -190,7 +202,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id ="form_puppen">
-            <label for="puppen"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg></label>
+            <label for="puppen"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg></label>
             <input type="hidden" name="category" value="puppen">
             <button type="submit" id="puppen" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -199,7 +211,7 @@ body {
         <li id="li_up">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get">
-            <label for="up"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg></label>
+            <label for="up"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg></label>
             <input type="hidden" name="category" value="up">
             <button type="submit" id="up" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -208,9 +220,7 @@ body {
         <li>
 
             <strong id="page" style="font-size: 500%;">
-              <?php 
-                require "transforming_user_data.php";
-                
+              <?php
                 $user_data = loading_user_data("user_data.json");
                 
                 if (isset($_GET["category"])) {
@@ -232,7 +242,7 @@ body {
         <li id="li_down" style="display: inline;">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get">
-            <label for="down"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg></label>
+            <label for="down"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg></label>
             <input type="hidden" name="category" value="down">
             <button type="submit" id="down" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -241,7 +251,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get">
-            <label for="resume"><svg width="30%" viewBox="0 -960 960 960" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
+            <label for="resume"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
             <input type="hidden" name="category" value="resume">
             <button type="submit" id="resume" class="submit" name="submit" value="submit"></button>
           </form>               
