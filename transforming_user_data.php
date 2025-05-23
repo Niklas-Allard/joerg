@@ -12,6 +12,10 @@ function loading_user_data($path) {
 };
 
 function saving_user_data($item, $path) {
+
+    if (!is_string($path)) {
+        throw new InvalidArgumentException("Filename must be a string.");
+    }
     
     $new_json_file = json_encode($item, JSON_PRETTY_PRINT);
 

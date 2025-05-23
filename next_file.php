@@ -5,17 +5,32 @@ function get_next_file($path) {
         return false;
     }
 
-    $directory = str_replace(basename($path), "", $path);
+    $output = "";
+
+    $is_slash = false; // true if the for loop noticed a "/"
+
+    for ($x = strlen($path) - 1; $x >= 0; $x--) {
+        if ($path[$x] == "/" || $path[$x] == "\\") {
+            $is_slash = true;
+        };
+        if ($is_slash) {
+            $output = $path[$x] . $output;
+        };
+    }
+
+    $directory = $output;
 
     // Dateien und Ordner im Verzeichnis auslesen
     $items = scandir($directory);
 
-    echo $items;
-    echo $directory;
+    // Entferne "." und ".."
+    $items = array_filter($items, function($item) {
+        return $item !== "." && $item !== "..";
+    });
 
     // Nur Dateien filtern und alphabetisch sortieren
-    $files = array_values(array_filter($items, function($item) use ($path) {
-        return is_file($path . DIRECTORY_SEPARATOR . $item);
+    $files = array_values(array_filter($items, function($item) use ($path, $directory) {
+        return is_file($directory . DIRECTORY_SEPARATOR . $item);
     }));
 
     sort($files);
@@ -23,17 +38,27 @@ function get_next_file($path) {
     // Aktuelle Datei auslesen
     require "transforming_user_data.php";
     $user_data = loading_user_data("user_data.json");
-    $current_file = $user_data["current_file"];
 
     // Index der aktuellen Datei finden
-    $current_index = array_search(basename($current_file), $files);
+    $current_index = array_search(basename($path), $files);
 
     $message = ""; // the message to be returned
 
+    //echo basename($path);
+
+    echo $current_index;
+
+    if ($current_index === false) {
+        $message = "no current file";
+        return $message;
+    }
+
     // Nächste Datei bestimmen
     if ($current_index !== false && isset($files[$current_index + 1])) {
-        $user_data["current_file"] = $files[$current_index + 1];
-        saving_user_data("user_data.json", $user_data);
+        $user_data["current_file"] = $directory . $files[$current_index + 1];
+
+        saving_user_data($user_data, "user_data.json");
+
         $message = $files[$current_index + 1];
     } else {
         $message = "no next file";
@@ -42,31 +67,6 @@ function get_next_file($path) {
     return $message;
 }
 
-$path = "H:\\Hoerspiele\\5 Freunde\\001 - ... beim Wanderzirkus\\001 - ... Wanderzirkus.mp4";
+$path = "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus\/01 - Seite 1.mp3";
 
-$output = "";
-
-$is_slash = false; // true if the for loop noticed a "/"
-
-echo strlen($path);
-
-for ($x = strlen($path) - 1; $x != strlen($path); $x--) {
-    echo $x;
-    echo $path[$x];
-    echo $is_slash;
-    echo $output;
-    if ($path[$x] == "/") {
-        $is_slash = true;
-    };
-    if ($is_slash) {
-        $output = $path[$x] . $output;
-    };
-}
-
-$path = $output;
-
-echo $path;
-
-$directory = str_replace(basename($path), "", $path);
-
-echo $directory;
+get_next_file($path);

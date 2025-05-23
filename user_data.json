@@ -1,15 +1,15 @@
 {
     "name": "Joerg",
-    "main_path": "test_dir",
-    "path_link": "test_dir",
-    "current_directory": "test_dir\/filme",
+    "main_path": "H:",
+    "path_link": "..\/videos",
+    "current_directory": "H:\/filme",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "log": false,
     "elements_per_page": 21,
-    "current_page": 1,
+    "current_page": 2,
     "max_pages": 1,
-    "overall_cards": 3,
-    "current_file": "test_dir\/filme\/marvel\/BIKINI PLANET - Ehrenm\u00e4nner of the Galaxy 2 I Julien Bam.mp4"
+    "overall_cards": 9,
+    "current_file": "H:\/filme\/BIKINI PLANET - Ehrenm\u00e4nner of the Galaxy 2 I Julien Bam.mp4"
 }
