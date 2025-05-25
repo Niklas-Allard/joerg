@@ -73,32 +73,6 @@ body {
   flex-direction: column;
 }
 
-.header {
-  position: relative;
-  padding: 20px;
-  background-color: #2c3e50;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  color: white;
-  font-size: 1.5rem;
-  text-align: left; /* Header-Text linksbündig */
-}
-
-.header-text {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.header-text:hover .info-box {
-  display: block; /* Zeigt die Info-Box beim Hover */
-}
-
-.header-icon {
-  font-size: 2rem;
-  float: right;
-}
-
 .content {
   background-color: <?php echo $content_color; ?>;
   padding: 20px;
@@ -137,8 +111,14 @@ body {
 }
 
 .card h3 {
-  margin: 0 0 8px;
-  font-size: 1.2rem; /* Kleinere Schriftgröße */
+  <?php 
+  if ($user_data["show_title"] == true) {
+    echo 'font-size:' . '$css["title_size"]'; // Kleinere Schriftgröße
+  } elseif ($user_data["show_title"] == false) {
+    echo "display: none;";
+  }
+  ?>
+  margin: 0 0 8px
 }
 
 .card p {

@@ -2,6 +2,8 @@
     "navbar_width": "250px",
     "navbar_color": "#2c3e50",
     "icon_size": "100px",
-    "main_container_color": "#f0f0f0",
-    "content_color": "white"
+    "main_container_color": "#ffffff",
+    "content_color": "#ffffff",
+    "background_color": "#ffffff",
+    "title_size": "10px"
 }

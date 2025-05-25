@@ -17,6 +17,7 @@ if (isset($_GET["settings"])) {
     $icon_size = $_GET["icon_size"];
     $main_container_color = $_GET["background_color"];
     $content_color = $_GET["content_color"];
+    $title_size = $_GET["title_size"];
 
     $css["navbar_width"] = $navbar_width;
     $css["navbar_color"] = $navbar_color;
@@ -24,6 +25,7 @@ if (isset($_GET["settings"])) {
     $css["main_container_color"] = $main_container_color;
     $css["content_color"] = $content_color;
     $css["background_color"] = $main_container_color;
+    $css["title_size"] = $title_size;
 
     saving_user_data($css, "css.json");
 }
@@ -51,7 +53,7 @@ if (isset($_GET["settings"])) {
         <br><br>
 
         <label for="icon_size">Icon Size:</label>
-        <input type="text" id="icon_size" name="icon_size" value="<?php echo $icon_size; ?>" step="5" required>
+        <input type="text" id="icon_size" name="icon_size" value="<?php echo $icon_size; ?>" step="5" required> 
         <br><br>
 
         <label for="background_color">Background Color:</label>
@@ -60,6 +62,10 @@ if (isset($_GET["settings"])) {
 
         <label for="content_color">Content Color:</label>
         <input type="color" id="content_color" name="content_color" value="<?php echo $background_color; ?>" required>
+        <br><br>
+
+        <label for="title_size">Title Size:</label>
+        <input type="text" id="title_size" name="title_size" value="<?php echo $title_size; ?>" required>
         <br><br>
 
         <input type="submit" name="settings" value="Save Settings">
