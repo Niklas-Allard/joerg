@@ -8,6 +8,7 @@ $navbar_color = $css["navbar_color"];
 $icon_size = $css["icon_size"];
 $main_container_color = $css["main_container_color"];
 $content_color = $css["content_color"];
+$title_size = $css["title_size"];
 
 
 // Saving mechanic

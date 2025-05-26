@@ -90,6 +90,32 @@ body {
   border-radius: 8px;
 }
 
+.header {
+  position: relative;
+  padding: 20px;
+  background-color: #2c3e50;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: white;
+  font-size: 1.5rem;
+  text-align: left; /* Header-Text linksbündig */
+}
+
+.header-text {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.header-text:hover .info-box {
+  display: block; /* Zeigt die Info-Box beim Hover */
+}
+
+.header-icon {
+  font-size: 2rem;
+  float: right;
+}
+
 .card {
   background-color: white;
   border: 1px solid #ddd;
