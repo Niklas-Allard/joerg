@@ -1,5 +1,5 @@
 <?php
-function get_next_file($path) {
+function get_next_file($path, $user_data) {
     // Überprüfen, ob der gegebene Pfad ein Verzeichnis ist
     if (is_dir($path)) {
         return false;
@@ -35,18 +35,10 @@ function get_next_file($path) {
 
     sort($files);
 
-    // Aktuelle Datei auslesen
-    require "transforming_user_data.php";
-    $user_data = loading_user_data("user_data.json");
-
     // Index der aktuellen Datei finden
     $current_index = array_search(basename($path), $files);
 
     $message = ""; // the message to be returned
-
-    //echo basename($path);
-
-    echo $current_index;
 
     if ($current_index === false) {
         $message = "no current file";
@@ -66,7 +58,3 @@ function get_next_file($path) {
     
     return $message;
 }
-
-$path = "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus\/01 - Seite 1.mp3";
-
-get_next_file($path);
