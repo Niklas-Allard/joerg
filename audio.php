@@ -1,128 +1,322 @@
+<?php
+require "transforming_user_data.php";
+
+$css = loading_user_data("css.json");
+
+$navbar_width = $css["navbar_width"];
+$navbar_color = $css["navbar_color"];
+$icon_size = $css["icon_size"];
+$main_container_color = $css["main_container_color"];
+$content_color = $css["content_color"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Player</title>
-    <script src="send_data_media_progress.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout</title>
+  <script src="no_context_menu.js"></script>
+  <?php
+    if (isset($_GET["category"])) {
+      if ($_GET["category"] == "resume") {
+        header("Location: movie.php");
+        exit();
+      }
+    };
+  ?>
+  <style>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  height: 100vh; /* Volle Höhe des Viewports */
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column; /* Vertikale Anordnung der Navbar */
+  width: <?php echo $navbar_width; ?>; /* Festlegen der Navbar-Breite */
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100vh; /* Volle Höhe des Viewports */
+}
+
+.navbar ul {
+  list-style: none; /* Entfernt Standardpunkte */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Flexbox auf die Liste anwenden */
+  flex-direction: column; /* Vertikale Anordnung der Links */
+  justify-content: space-between; /* Gleichmäßiger Abstand zwischen den Links */
+  height: 100%; /* Volle Höhe des übergeordneten Containers */
+}
+
+.navbar li {
+  text-align: center;
+}
+
+.navbar ul li form label{
+  cursor: pointer;
+}
+
+.submit {
+  display: none;
+}
+
+.main-container {
+  width: 100%; /* Restliche Breite */
+  background-color: <?php echo $main_container_color; ?>;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: relative;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 20px;
+  background-color: #2c3e50;
+  color: white;
+  font-size: 1.5rem;
+  text-align: left; /* Header-Text linksbündig */
+}
+
+.header-text {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.header-text:hover .info-box {
+  display: block; /* Zeigt die Info-Box beim Hover */
+}
+
+.header-icon {
+  font-size: 2rem; /* Icon bleibt mittig */
+  float: right;
+}
+
+.content {
+  background-color: <?php echo $content_color; ?>;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-grow: 1; /* Nimmt den verbleibenden Platz ein */
+  overflow: hidden;
+  position: relative;
+  padding-right: 2
+}
+
+.content {
+    object-fit: fill;
+}
+  </style>
 </head>
 <body>
-    <style>
-        body {
-            background: black;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-        }
+  <div class="layout">
+    <!-- Navbar rechts -->
+    <div class="navbar">
 
-        #audio-icon {
-            width: 200px;
-            height: 200px;
-            background: url('icons/audio.svg') no-repeat center center;
-            background-size: contain;
-            cursor: pointer;
-        }
-    </style>
+      <ul>
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="movie"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg></label>
+            <input type="hidden" name="category" value="filme">
+            <button type="submit" id="movie" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
+                
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="serie"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M320-320h480v-400H320v400Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg></label>
+            <input type="hidden" name="category" value="serien">
+            <button type="submit" id="serie" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
+              
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="audio"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"/></svg></label>
+            <input type="hidden" name="category" value="hoerspiele">
+            <button type="submit" id="audio" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
+        
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="puppen"><svg width= "<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg></label>
+            <input type="hidden" name="category" value="puppen">
+            <button type="submit" id="puppen" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
+              
+        <li id="li-up">
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="up"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg></label>
+            <input type="hidden" name="category" value="up">
+            <button type="submit" id="up" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
 
-    <div id="audio-icon"></div>
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <strong id="page" style="font-size: 500%;">1</strong>
+          </form>
+        </li>
+              
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="down"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg></label>
+            <input type="hidden" name="category" value="down">
+            <button type="submit" id="down" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
 
-    <audio id="audio" autoplay src="<?php
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="resume"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
+            <input type="hidden" name="category" value="resume">
+            <button type="submit" id="resume" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
+        <script>
+          const page = document.getElementById("page").innerHTML;
 
-use function PHPSTORM_META\type;
+          if (page == 1) {
+            document.getElementById("li-up").style.display = "none";
+          }
+        </script>
+      </ul>
+    </div>
 
- require "transforming_user_data.php"; $user_data = loading_user_data("user_data.json"); $audio_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $audio_path; ?>"></audio>
-    <input type="range" id="audio-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">    
-    <button id="reset_button"></button>
-    <?php
-        $media_progress = loading_user_data("media_progress.json");
+    <!-- Hauptcontainer links -->
+    <div class="main-container">
+      <!-- Bereich über dem Container -->
+      <div class="header">
+        <span class="header-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" fill="white"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
+        </span>
+      </div>
 
-        $current_time = $media_progress[$audio_path]; // current time of the audio
+      <!-- Hauptinhalt -->
+      <div class="content">
+        
+          <div id="audio-icon"></div>
 
-        if (!is_float($current_time)) {
-            $current_time = 0;
-        }
-    ?>
+          <audio id="audio" autoplay src=">
+          <input type="range" id="audio-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">    
+          <button id="reset_button"></button>
+          <?php
+              $media_progress = loading_user_data("media_progress.json");
 
-    <script>
-        const audio = document.getElementById("audio");
-        const audioIcon = document.getElementById("audio-icon");
-        const progressRange = document.getElementById("audio-progress-range");
+              $user_data = loading_user_data("user_data.json"); $audio_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $audio_path; ?>"></audio>
 
-        // Play or pause audio on icon click
-        audioIcon.addEventListener("click", () => {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        });
+              $current_time = $media_progress[$audio_path]; // current time of the audio
 
-        audio.addEventListener('loadedmetadata', () => {
-            audio.currentTime = <?php echo $current_time; ?>; //Set the start time
-            console.log('Current time: ' + audio.currentTime);
-        });
+              if (!is_float($current_time)) {
+                  $current_time = 0;
+              }
+          ?>
 
-        // === Synchronisation Range <-> Audio ===
-        // Aktualisiere den Range-Input, wenn das Audio abspielt
-        audio.addEventListener('timeupdate', () => {
-            if (!audio.duration) return;
-            progressRange.value = (audio.currentTime / audio.duration) * 100;
-        });
+          <script>
+              const audio = document.getElementById("audio");
+              const audioIcon = document.getElementById("audio-icon");
+              const progressRange = document.getElementById("audio-progress-range");
 
-        // Wenn der User den Range-Input bewegt, Audiozeit anpassen
-        progressRange.addEventListener('input', (e) => {
-            if (!audio.duration) return;
-            const percent = parseFloat(progressRange.value) / 100;
-            audio.currentTime = percent * audio.duration;
-        });
+              // Play or pause audio on icon click
+              audioIcon.addEventListener("click", () => {
+                  if (audio.paused) {
+                      audio.play();
+                  } else {
+                      audio.pause();
+                  }
+              });
 
-        // Klick auf beliebige Stelle im Range-Input setzt die Zeit
-        progressRange.addEventListener('mousedown', (e) => {
-            progressRange.isSeeking = true;
-        });
-        progressRange.addEventListener('mouseup', (e) => {
-            progressRange.isSeeking = false;
-        });
-        // Optional: Touch Events für mobile Geräte
-        progressRange.addEventListener('touchstart', (e) => {
-            progressRange.isSeeking = true;
-        });
-        progressRange.addEventListener('touchend', (e) => {
-            progressRange.isSeeking = false;
-        });
+              audio.addEventListener('loadedmetadata', () => {
+                  audio.currentTime = <?php echo $current_time; ?>; //Set the start time
+                  console.log('Current time: ' + audio.currentTime);
+              });
 
-        // Log audio state changes
-        audio.addEventListener("play", () => {
-            console.log("Audio is playing");
-        });
+              // === Synchronisation Range <-> Audio ===
+              // Aktualisiere den Range-Input, wenn das Audio abspielt
+              audio.addEventListener('timeupdate', () => {
+                  if (!audio.duration) return;
+                  progressRange.value = (audio.currentTime / audio.duration) * 100;
+              });
 
-        audio.addEventListener("pause", () => {
-            console.log("Audio is paused");
-        });
+              // Wenn der User den Range-Input bewegt, Audiozeit anpassen
+              progressRange.addEventListener('input', (e) => {
+                  if (!audio.duration) return;
+                  const percent = parseFloat(progressRange.value) / 100;
+                  audio.currentTime = percent * audio.duration;
+              });
 
-        // Send progress data to the server periodically
-        setInterval(() => {
-            const current_time = audio.currentTime;
-            const file_path = audio.getAttribute('src');
+              // Klick auf beliebige Stelle im Range-Input setzt die Zeit
+              progressRange.addEventListener('mousedown', (e) => {
+                  progressRange.isSeeking = true;
+              });
+              progressRange.addEventListener('mouseup', (e) => {
+                  progressRange.isSeeking = false;
+              });
+              // Optional: Touch Events für mobile Geräte
+              progressRange.addEventListener('touchstart', (e) => {
+                  progressRange.isSeeking = true;
+              });
+              progressRange.addEventListener('touchend', (e) => {
+                  progressRange.isSeeking = false;
+              });
 
-            // Dynamically create an object where the key is the file_path
-            const data = {};
-            data[file_path] = current_time;
+              // Log audio state changes
+              audio.addEventListener("play", () => {
+                  console.log("Audio is playing");
+              });
 
-            // Send progress data to the server
-            sendDataViaPOST('getting_media_progress.php', data);
-        }, 5000);
+              audio.addEventListener("pause", () => {
+                  console.log("Audio is paused");
+              });
 
-        const reset_button = document.getElementById("reset_button");
-        reset_button.addEventListener("click", () => {
-            movie.currentTime = 0;
-            movie.pause(); // Optional: Video pausieren, wenn zurückgesetzt wird
-        });
+              // Send progress data to the server periodically
+              setInterval(() => {
+                  const current_time = audio.currentTime;
+                  const file_path = audio.getAttribute('src');
 
-    </script>
+                  // Dynamically create an object where the key is the file_path
+                  const data = {};
+                  data[file_path] = current_time;
+
+                  // Send progress data to the server
+                  sendDataViaPOST('getting_media_progress.php', data);
+              }, 5000);
+
+              const reset_button = document.getElementById("reset_button");
+              reset_button.addEventListener("click", () => {
+                  movie.currentTime = 0;
+                  movie.pause(); // Optional: Video pausieren, wenn zurückgesetzt wird
+              });
+
+          </script>
+
+      </div>
+    </div>
+  </div>
 </body>
-</html>
+</html>     

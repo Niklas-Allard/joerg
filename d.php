@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\type;
-
 require "transforming_user_data.php";
 
 $css = loading_user_data("css.json");
@@ -20,7 +17,14 @@ $content_color = $css["content_color"];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layout</title>
   <script src="no_context_menu.js"></script>
-  <script src="send_data_media_progress.js"></script>
+  <?php
+    if (isset($_GET["category"])) {
+      if ($_GET["category"] == "resume") {
+        header("Location: movie.php");
+        exit();
+      }
+    };
+  ?>
   <style>
 
 body {
@@ -160,6 +164,31 @@ body {
             <button type="submit" id="puppen" class="submit" name="submit" value="submit"></button>
           </form>               
         </li>
+              
+        <li id="li-up">
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="up"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg></label>
+            <input type="hidden" name="category" value="up">
+            <button type="submit" id="up" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
+
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <strong id="page" style="font-size: 500%;">1</strong>
+          </form>
+        </li>
+              
+        <li>
+          <!-- a single icon with an formulare -->
+          <form action="browse.php" method="get">
+            <label for="down"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg></label>
+            <input type="hidden" name="category" value="down">
+            <button type="submit" id="down" class="submit" name="submit" value="submit"></button>
+          </form>               
+        </li>
 
         <li>
           <!-- a single icon with an formulare -->
@@ -169,6 +198,13 @@ body {
             <button type="submit" id="resume" class="submit" name="submit" value="submit"></button>
           </form>               
         </li>
+        <script>
+          const page = document.getElementById("page").innerHTML;
+
+          if (page == 1) {
+            document.getElementById("li-up").style.display = "none";
+          }
+        </script>
       </ul>
     </div>
 
@@ -183,101 +219,101 @@ body {
 
       <!-- Hauptinhalt -->
       <div class="content">
-
-        <input type="range" id="video-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">
-        <button id="reset-button" style="display:block;margin:20px auto;">Reset</button>
-        <!-- Vollbild-Button entfernt -->
-
-        <!-- TODO Den Rahmen mit Navbar und Titel usw. hinzufügen.-->
-
-        <?php
-            $user_data = loading_user_data("user_data.json");
-
-            $video_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]);
-            
-            $media_progress = loading_user_data("media_progress.json");
-        ?> 
-
-        <video autoplay id="movie">
-          <source src="<?php echo $video_path; ?>" type="video/mp4">
-        </video>
-    
-        <script> 
-
-            console.log("Video path: " + "<?php echo $video_path; ?>");
         
-            const movie = document.getElementById("movie");
-            const progressRange = document.getElementById("video-progress-range");
+          <div id="audio-icon"></div>
 
-            });
+          <audio id="audio" autoplay src=">
+          <input type="range" id="audio-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">    
+          <button id="reset_button"></button>
+          <?php
+              $media_progress = loading_user_data("media_progress.json");
 
-            // checks if the video has ended
-            movie.addEventListener('ended', () => {
-                console.log('Das Video ist zu Ende.');
-            });
+              $user_data = loading_user_data("user_data.json"); $audio_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]); echo $audio_path; ?>"></audio>
 
-            // === Synchronisation Range <-> Video ===
-            // Aktualisiere den Range-Input, wenn das Video abspielt
-            movie.addEventListener('timeupdate', () => {
-                if (!movie.duration) return;
-                progressRange.value = (movie.currentTime / movie.duration) * 100;
-            });
+              $current_time = $media_progress[$audio_path]; // current time of the audio
 
-            // Wenn der User den Range-Input bewegt, Videozeit anpassen
-            progressRange.addEventListener('input', (e) => {
-                if (!movie.duration) return;
-                const percent = parseFloat(progressRange.value) / 100;
-                movie.currentTime = percent * movie.duration;
-            });
+              if (!is_float($current_time)) {
+                  $current_time = 0;
+              }
+          ?>
 
-            // Klick auf beliebige Stelle im Range-Input setzt die Zeit
-            progressRange.addEventListener('mousedown', (e) => {
-                progressRange.isSeeking = true;
-            });
-            progressRange.addEventListener('mouseup', (e) => {
-                progressRange.isSeeking = false;
-            });
-            // Optional: Touch Events für mobile Geräte
-            progressRange.addEventListener('touchstart', (e) => {
-                progressRange.isSeeking = true;
-            });
-            progressRange.addEventListener('touchend', (e) => {
-                progressRange.isSeeking = false;
-            });
+          <script>
+              const audio = document.getElementById("audio");
+              const audioIcon = document.getElementById("audio-icon");
+              const progressRange = document.getElementById("audio-progress-range");
 
-            // === Vollbild beim Abspielen, aber nicht beim Pausieren ===
-            function triggerFullscreen() {
-                if (document.fullscreenElement) return; // Bereits im Vollbild
-                if (movie.requestFullscreen) {
-                    movie.requestFullscreen();
-                } else if (movie.webkitRequestFullscreen) {
-                    movie.webkitRequestFullscreen();
-                } else if (movie.msRequestFullscreen) {
-                    movie.msRequestFullscreen();
-                }
-            }
+              // Play or pause audio on icon click
+              audioIcon.addEventListener("click", () => {
+                  if (audio.paused) {
+                      audio.play();
+                  } else {
+                      audio.pause();
+                  }
+              });
 
-            movie.addEventListener('play', () => {
-                triggerFullscreen();
-            });
-            movie.addEventListener('pause', () => {
-                if (document.fullscreenElement && document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msFullscreenElement && document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            });
+              audio.addEventListener('loadedmetadata', () => {
+                  audio.currentTime = <?php echo $current_time; ?>; //Set the start time
+                  console.log('Current time: ' + audio.currentTime);
+              });
 
-            const resetButton = document.getElementById("reset-button");
-            resetButton.addEventListener("click", () => {
-                movie.currentTime = 0;
-                movie.pause(); // Optional: Video pausieren, wenn zurückgesetzt wird
-            });
-            
-        </script>        
-        <script src="no_context_menu.js"></script>
+              // === Synchronisation Range <-> Audio ===
+              // Aktualisiere den Range-Input, wenn das Audio abspielt
+              audio.addEventListener('timeupdate', () => {
+                  if (!audio.duration) return;
+                  progressRange.value = (audio.currentTime / audio.duration) * 100;
+              });
+
+              // Wenn der User den Range-Input bewegt, Audiozeit anpassen
+              progressRange.addEventListener('input', (e) => {
+                  if (!audio.duration) return;
+                  const percent = parseFloat(progressRange.value) / 100;
+                  audio.currentTime = percent * audio.duration;
+              });
+
+              // Klick auf beliebige Stelle im Range-Input setzt die Zeit
+              progressRange.addEventListener('mousedown', (e) => {
+                  progressRange.isSeeking = true;
+              });
+              progressRange.addEventListener('mouseup', (e) => {
+                  progressRange.isSeeking = false;
+              });
+              // Optional: Touch Events für mobile Geräte
+              progressRange.addEventListener('touchstart', (e) => {
+                  progressRange.isSeeking = true;
+              });
+              progressRange.addEventListener('touchend', (e) => {
+                  progressRange.isSeeking = false;
+              });
+
+              // Log audio state changes
+              audio.addEventListener("play", () => {
+                  console.log("Audio is playing");
+              });
+
+              audio.addEventListener("pause", () => {
+                  console.log("Audio is paused");
+              });
+
+              // Send progress data to the server periodically
+              setInterval(() => {
+                  const current_time = audio.currentTime;
+                  const file_path = audio.getAttribute('src');
+
+                  // Dynamically create an object where the key is the file_path
+                  const data = {};
+                  data[file_path] = current_time;
+
+                  // Send progress data to the server
+                  sendDataViaPOST('getting_media_progress.php', data);
+              }, 5000);
+
+              const reset_button = document.getElementById("reset_button");
+              reset_button.addEventListener("click", () => {
+                  movie.currentTime = 0;
+                  movie.pause(); // Optional: Video pausieren, wenn zurückgesetzt wird
+              });
+
+          </script>
 
       </div>
     </div>
