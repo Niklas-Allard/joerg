@@ -19,6 +19,8 @@ if (isset($_GET["category"])) {
 
   echo "<script>let resume = 'none';</script>";
 
+  $user_data = loading_user_data("user_data.json");
+
   if ($output === "no next file") {
     echo "
     <script>
@@ -35,12 +37,44 @@ if (isset($_GET["category"])) {
   } else {
     // Weiterleitung zur nächsten Datei
     header("Location: movie.php");
-    exit();
-  }
+  };
+
+  if ($output !== "no next file" && $output !== "no current file") {
+    $directory = $user_data["current_directory"];
+
+    // saving the last watched file in a category or directory
+    $last_watched_file = loading_user_data("last_watched_file.json");
+    
+    // saving the last watched file in the directory
+    $last_watched_file[$user_data["current_directory"]] = $user_data["current_file"]; 
+                  
+    // saving the last watched file in the category
+
+    $seperated_path = explode("/", $directory);
+
+    $key = "";
+
+    for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
+      for ($id = 0; $id < $item_id; $id++) {
+        if ($id == $item_id - 1) {
+          $key .= $seperated_path[$id];
+        }
+        else {
+          $key .= $seperated_path[$id] . "/";
+        }
+      }
+      $last_watched_file[$key] = $directory;
+
+      echo $key;
+
+      $key = "";
+    }
+
+    saving_user_data($last_watched_file, "last_watched_file.json");
+  };
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

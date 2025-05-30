@@ -15,5 +15,14 @@
         "flac",
         "ogg",
         "wma"
+    ],
+    "img": [
+        "ico",
+        "jpg",
+        "jpeg",
+        "png",
+        "gif",
+        "bmp",
+        "tiff"
     ]
 }

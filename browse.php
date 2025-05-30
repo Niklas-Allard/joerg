@@ -323,6 +323,11 @@ body {
                 $counter = 0; // for the page system | counts the carts
 
                 foreach ($items as $item) {
+                    // checking if it is a file and if it an allowed file type
+                    $allowed_file_types = loading_user_data("allowed_file_types.json");
+                    if (is_file($item)) {
+                        $item = str_replace(" ", "\\00a0", $item); // replaces the spaces with \00a0
+                    }
 
                     // Nur Ordner anzeigen (ohne "." und "..")
                     if ($item !== "." && $item !== ".." && is_dir($directory . "/" . $item) && $item !== ".wd_tv") {
@@ -629,20 +634,20 @@ body {
 
                 $seperated_path = explode("/", $directory);
 
-                // deciding in which category the user currently is
-                switch (true) {
-                    case in_array("filme", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "filme"] = $directory;
-                        break;
-                    case in_array("serien", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "serien"] = $directory;
-                        break;
-                    case in_array("hoerspiele", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "hoerspiele"] = $directory;
-                        break;
-                    case in_array("puppen", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "puppen"] = $directory;
-                        break;
+                $key = "";
+
+                for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
+                  for ($id = 0; $id < $item_id; $id++) {
+                    if ($id == $item_id - 1) {
+                      $key .= $seperated_path[$id];
+                    }
+                    else {
+                      $key .= $seperated_path[$id] . "/";
+                    }
+                  }
+                  $last_watched_file[$key] = $directory;
+
+                  $key = "";
                 }
 
                 saving_user_data($last_watched_file, "last_watched_file.json");

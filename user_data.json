@@ -1,8 +1,8 @@
 {
     "name": "Joerg",
-    "main_path": "test_dir",
-    "path_link": "test_dir",
-    "current_directory": "test_dir\/hoerspiele",
+    "main_path": "H:",
+    "path_link": "..\/videos",
+    "current_directory": "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
@@ -10,6 +10,6 @@
     "elements_per_page": 21,
     "current_page": 1,
     "max_pages": 1,
-    "overall_cards": 3,
-    "current_file": "test_dir\/hoerspiele\/future-design-344320.mp3"
+    "overall_cards": 4,
+    "current_file": "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus\/01 - Seite 1.mp3"
 }

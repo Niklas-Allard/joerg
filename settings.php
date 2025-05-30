@@ -6,6 +6,7 @@ $css = loading_user_data("css.json");
 $navbar_width = $css["navbar_width"];
 $navbar_color = $css["navbar_color"];
 $icon_size = $css["icon_size"];
+$cover_size = $css["cover_size"];
 $main_container_color = $css["main_container_color"];
 $content_color = $css["content_color"];
 $title_size = $css["title_size"];
@@ -16,6 +17,7 @@ if (isset($_GET["settings"])) {
     $navbar_width = $_GET["navbar_width"];
     $navbar_color = $_GET["navbar_color"];
     $icon_size = $_GET["icon_size"];
+    $cover_size = $_GET["cover_size"];
     $main_container_color = $_GET["background_color"];
     $content_color = $_GET["content_color"];
     $title_size = $_GET["title_size"];
@@ -23,6 +25,7 @@ if (isset($_GET["settings"])) {
     $css["navbar_width"] = $navbar_width;
     $css["navbar_color"] = $navbar_color;
     $css["icon_size"] = $icon_size;
+    $css["cover_size"] = $cover_size;
     $css["main_container_color"] = $main_container_color;
     $css["content_color"] = $content_color;
     $css["background_color"] = $main_container_color;
@@ -55,6 +58,10 @@ if (isset($_GET["settings"])) {
 
         <label for="icon_size">Icon Size:</label>
         <input type="text" id="icon_size" name="icon_size" value="<?php echo $icon_size; ?>" step="5" required> 
+        <br><br>
+
+        <label for="cover_size">Cover Size:</label>
+        <input type="text" id="cover_size" name="cover_size" value="<?php echo $cover_size; ?>" step="5" required> 
         <br><br>
 
         <label for="background_color">Background Color:</label>

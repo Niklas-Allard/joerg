@@ -1,10 +1,11 @@
 <?php
 
 function movie_or_audio($item) { // TODO turn into 
+    $file_types = loading_user_data("allowed_file_types.json");
     
-    $all_movie_ends = array(".mp4", ".mkv", ".avs");
+    $all_movie_ends = $file_types["movie"];
 
-    $all_audio_ends = array(".mp3", ".wav");
+    $all_audio_ends = $file_types["audio"];
 
     foreach ($all_movie_ends as $movie_end) {
 
