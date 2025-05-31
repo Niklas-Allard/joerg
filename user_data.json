@@ -2,14 +2,14 @@
     "name": "Joerg",
     "main_path": "H:",
     "path_link": "..\/videos",
-    "current_directory": "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus",
+    "current_directory": "H:\/filme",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "log": false,
-    "elements_per_page": 21,
+    "elements_per_page": 24,
     "current_page": 1,
     "max_pages": 1,
-    "overall_cards": 4,
+    "overall_cards": 10,
     "current_file": "H:\/hoerspiele\/5 Freunde\/001 - ... beim Wanderzirkus\/01 - Seite 1.mp3"
 }

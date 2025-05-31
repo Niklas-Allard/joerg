@@ -424,7 +424,9 @@ body {
                                     }
                                     // Um die Reihenfolge wie im Original zu erhalten:
                                     newItem' . $id . ' = newItem' . $id . '.split("").reverse().join("");
-                                } 
+                                } else {
+                                    newItem' . $id . ' = item' . $id . ';
+                                }
 
                                 console.log(newItem' . $id . ');
 
