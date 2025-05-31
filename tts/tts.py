@@ -73,6 +73,26 @@ if message != "":
     # Austauschen der Umlaute mit Unicode-Zeichen
 
     output_file_name = message # Dateiname für die WAV-Datei
+    
+    first_num = False
+    allowed_number = "0123456789"
+
+    output = ""
+
+    for char in message:
+        if char in allowed_number:
+            if not first_num:
+                if char == "0":
+                    continue
+                output += char
+                first_num = True
+            else:
+                output += char
+        else:
+            output += char
+            first_num = False
+
+    output_file_name = output
 
     output_file_name = output_file_name.replace("ä", "ae")
     output_file_name = output_file_name.replace("ö", "oe")
