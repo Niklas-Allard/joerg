@@ -24,7 +24,7 @@ if (isset($_GET["category"])) {
   if ($output === "no next file") {
     echo "
     <script>
-      var audio = new Audio('audio_feedback/Keine naechste Datei.wav');
+      var audio = new Audio('feedback/Keine naechste Datei.wav');
       audio.play();
       
       resume = 'resume';
@@ -182,6 +182,10 @@ body {
 
 .range_reset {
   display: flex;
+}
+
+#video {
+  cursor: pointer; /* Zeigt an, dass das Element klickbar ist */
 }
   </style>
 </head>

@@ -23,7 +23,7 @@ if (isset($_GET["category"])) {
   if ($output === "no next file") {
     echo "
     <script>
-      var response = new Audio('audio_feedback/Keine naechste Datei.wav');
+      var response = new Audio('feedback/Keine naechste Datei.wav');
       response.play();
 
       resume = 'resume';
@@ -196,6 +196,7 @@ body {
     display: block;
     width: <?php echo $cover_size; ?>; /* Größe des Icons */
     margin: 20px auto; /* Zentriert das Icon */
+    cursor: pointer; /* Zeigt an, dass das Icon klickbar ist */
 }
   </style>
 </head>
@@ -280,6 +281,7 @@ body {
               $all_img_ends = $allowed_file_types["img"];
 
               $found_exact_file_img = false; // Variable to check if an exact file image is found
+              $found_dir_file_img = false; // Variable to check if a directory file image is found
 
               foreach ($all_img_ends as $img_end) {
                   if (is_file("img/" . $path . $img_end)) {
@@ -299,9 +301,14 @@ body {
                   foreach ($all_img_ends as $img_end) {
                     if (is_file("img/" . $path . "." . $img_end)) {
                         $cover_path = "img/" . $path . "." . $img_end;
+                        $found_dir_file_img = true; // Set to true if a directory file image is found
                         break;
                     }
                   }
+              }
+
+              if (!$found_exact_file_img && !$found_dir_file_img) {
+                  $cover_path = "feedback/no_audio_cover.png"; // Default cover image if no specific image is found
               }
           ?>
         
