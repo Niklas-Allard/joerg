@@ -1,20 +1,13 @@
 {
     "movie": [
         "mp4",
+        "webm",
         "mkv",
-        "avi",
-        "mov",
-        "wmv",
-        "flv",
-        "webm"
+        "avi"
     ],
     "audio": [
         "mp3",
-        "wav",
-        "aac",
-        "flac",
-        "ogg",
-        "wma"
+        "wav"
     ],
     "img": [
         "ico",
