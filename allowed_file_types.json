@@ -15,7 +15,6 @@
         "jpeg",
         "png",
         "gif",
-        "bmp",
-        "tiff"
+        "bmp"
     ]
 }

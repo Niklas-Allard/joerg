@@ -1,15 +1,15 @@
 {
     "name": "Joerg",
-    "main_path": "H:",
+    "main_path": "H:\/Joerg",
     "path_link": "..\/videos",
-    "current_directory": "H:\/filme",
+    "current_directory": "H:\/Joerg\/serien",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "log": false,
     "elements_per_page": 24,
-    "current_page": 1,
-    "max_pages": 1,
-    "overall_cards": 10,
+    "current_page": 2,
+    "max_pages": 5,
+    "overall_cards": 97,
     "current_file": "Die Fraggles - s01e09 - Der verlorene Schatz der Fraggles.avi"
 }

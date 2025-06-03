@@ -361,11 +361,21 @@ body {
                         console_log('img/' . $item . '.ico'); // background-size: cover; background-position: center;
 
                         $item_img_path = $item;
+
+                        $suffix_img_path = "ico";
+
+                        $allowed_file_types = loading_user_data("allowed_file_types.json");
+
+                        foreach ($allowed_file_types["img"] as $type) {
+                          if (is_file("img/" . $item . "." . $type)) {
+                            $suffix_img_path = $type;
+                          }
+                        }
                       
                         $item_img_path = str_replace(" ", "\\00a0", $item_img_path);
 
                         echo '
-                        <div class="card" id="'. $item . '" style="background-image: url(\'img/' . $item . '.ico\'); background-size: cover; background-position: center;">
+                        <div class="card" id="'. $item . '" style="background-image: url(\'img/' . rawurlencode($item) . "." . rawurlencode($suffix_img_path) . '\'); background-size: cover; background-position: center;">
                             
                             <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="get" id="form' . $item . '">
