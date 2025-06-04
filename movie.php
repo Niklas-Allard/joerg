@@ -266,7 +266,7 @@ body {
         ?> 
 
         <video autoplay id="video">
-          <source src="<?php echo $video_path; ?>" type="video/mp4">
+          <source src="<?php echo $video_path; ?>">
         </video>
         
         <div class="range_reset">
