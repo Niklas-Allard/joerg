@@ -495,8 +495,17 @@ body {
                         ';
                     }
                     elseif (is_file($directory . "/" . $item)) {  // TODO Video/Audio Support
+
+                      $counter++;
                       
                       $id = $id + 1; 
+
+                      if ($counter > ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
+                        break;
+                      }
+                      elseif ($counter <= ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
+                        continue;
+                      };
                       
                       echo '
                       <div class="card" id="'. $item . '" style="background-image: url(\'img/' . $item . '.ico\'); background-size: cover; background-position: center;">
