@@ -1,15 +1,16 @@
 {
     "name": "Joerg",
-    "main_path": "H:\/Joerg",
+    "main_path": "D:\/Joerg",
     "path_link": "..\/videos\/Joerg",
-    "current_directory": "H:\/Joerg\/serien",
+    "current_directory": "D:\/Joerg\/serien",
     "path_background": "background\/hexagon.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
+    "python_path": "python",
     "log": false,
     "elements_per_page": 52,
     "current_page": 1,
     "max_pages": 2,
     "overall_cards": 97,
-    "current_file": "H:\/Joerg\/serien\/Der rosarote Panther\/Der rosarote Panther - Folge 001 - Der rosarote Schmierfink.mp4"
+    "current_file": "D:\/Joerg\/serien\/Alvinnn!!! und die Chipmunks\/Alvinnn und die Chipmunks - Folge 01 - Die neue Schulleiterin - und - Der sprechende Teddy.mp4"
 }

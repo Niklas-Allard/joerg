@@ -25,8 +25,11 @@ if (file_put_contents($file, $receivedString) === false) {
     echo "Daten erfolgreich in die Datei geschrieben.<br>";
 }
 
+require "transforming_user_data.php";
+$user_data = loading_user_data("user_data.json");
+
 // Python-Skript ausführen
-exec('C:\Python\Python3123\python.exe C:\xampp\htdocs\joerg\tts\tts.py 2>&1', $output, $status);
+exec($user_data["python_path"] . ' C:\xampp\htdocs\joerg\tts\tts.py 2>&1', $output, $status);
 
 require "log.php";
 
