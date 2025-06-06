@@ -358,11 +358,16 @@ body {
                         
                         $id = $id + 1; 
 
-                        console_log('img/' . $item . '.ico'); // background-size: cover; background-position: center;
-
                         $item_img_path = $item;
 
                         $suffix_img_path = "ico";
+
+                        if (str_ends_with($item, "!")) {
+                          $item_img_path = substr($item, 0, -1); // removes the ! at the end of the item
+                        }
+
+                        console_log("!!!!!!" . $item_img_path); 
+                        console_log('img/' . $item_img_path . '.ico'); // background-size: cover; background-position: center;
 
                         $allowed_file_types = loading_user_data("allowed_file_types.json");
 
@@ -371,11 +376,9 @@ body {
                             $suffix_img_path = $type;
                           }
                         }
-                      
-                        $item_img_path = str_replace(" ", "\\00a0", $item_img_path);
 
                         echo '
-                        <div class="card" id="'. $item . '" style="background-image: url(\'img/' . rawurlencode($item) . "." . rawurlencode($suffix_img_path) . '\'); background-size: cover; background-position: center;">
+                        <div class="card" id="'. $item . '" style="background-image: url(\'img/' . rawurlencode($item_img_path) . "." . rawurlencode($suffix_img_path) . '\'); background-size: cover; background-position: center;">
                             
                             <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="get" id="form' . $item . '">

@@ -265,7 +265,7 @@ body {
             }
         ?> 
 
-        <video autoplay id="video">
+        <video id="video">
           <source src="<?php echo $video_path; ?>">
         </video>
         
@@ -278,7 +278,6 @@ body {
         <!-- TODO Den Rahmen mit Navbar und Titel usw. hinzufügen.-->
     
         <script> 
-
             console.log("Video path: " + "<?php echo $video_path; ?>");
         
             const movie = document.getElementById("video");
@@ -304,6 +303,8 @@ body {
                 };
             });
 
+            let fullscreen = false; // Variable to track fullscreen state
+
             // pausing and playing through an click
             movie.addEventListener("click", () => {
                 console.log("event")
@@ -314,8 +315,13 @@ body {
                     movie.play();
                 }
                 else {
-
-                    movie.pause()
+                    const browser = "<?php echo $user_data["browser"]; ?>"; // browser of the user
+                    if (browser == "firefox") {
+                        movie.pause();
+                    }
+                    else if (!fullscreen) {
+                        movie.pause();
+                    }
                 };
 
             });
@@ -374,6 +380,7 @@ body {
 
             // === Vollbild beim Abspielen, aber nicht beim Pausieren ===
             function triggerFullscreen() {
+                fullscreen = true;
                 if (document.fullscreenElement) return; // Bereits im Vollbild
                 if (movie.requestFullscreen) {
                     movie.requestFullscreen();
@@ -388,6 +395,7 @@ body {
                 triggerFullscreen();
             });
             movie.addEventListener('pause', () => {
+                fullscreen = false;
                 if (document.fullscreenElement && document.exitFullscreen) {
                     document.exitFullscreen();
                 } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
