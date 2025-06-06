@@ -2,6 +2,7 @@
 require "transforming_user_data.php";
 
 $css = loading_user_data("css.json");
+$user_data = loading_user_data("user_data.json");
 
 $navbar_width = $css["navbar_width"];
 $navbar_color = $css["navbar_color"];
@@ -121,6 +122,14 @@ body {
 .content {
     object-fit: fill;
 }
+
+#background{
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;  
+}
   </style>
 </head>
 <body>
@@ -222,10 +231,7 @@ body {
         
           <img src="
           <?php 
-          
-            require "transforming_user_data.php.php";
-            $data = loading_user_data("user_data.json");
-            echo $data["path_background"];
+            echo $user_data["path_background"];
           
           ?>
           " id="background">

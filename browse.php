@@ -372,7 +372,7 @@ body {
                         $allowed_file_types = loading_user_data("allowed_file_types.json");
 
                         foreach ($allowed_file_types["img"] as $type) {
-                          if (is_file("img/" . $item . "." . $type)) {
+                          if (is_file("img/" . $allowed_file_types . "." . $type)) {
                             $suffix_img_path = $type;
                           }
                         }
@@ -413,7 +413,7 @@ body {
                                 if (item' . $id . '.indexOf("(") !== -1) {
                                     let counter = 0;
                                     for (let i = 0; i < item' . $id . '.length; i++) {
-                                        const letter = item' . $id . '[i];
+                                        ccxonst letter = item' . $id . '[i];
                                         if (letter === "(") {
                                             counter += 1;
                                         }
@@ -468,7 +468,7 @@ body {
                                 bigCard' . $id . '.style.height = "50%";
                                 console.log("bigCard visible");
 
-                                const bigCardHTML = \'<img src="img/' . rawurlencode($item) . '.ico" alt="Fehler beim Laden des Bildes">\';
+                                const bigCardHTML = \'<img src="img/' . rawurlencode($item) . "." . $suffix_img_path . '" alt="Fehler beim Laden des Bildes">\';
 
                                 bigCard.innerHTML = bigCardHTML;
                               }, delay' . $id . ');
