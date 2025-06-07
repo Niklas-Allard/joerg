@@ -14,63 +14,69 @@ $content_color = $css["content_color"];
 
 
 if (isset($_GET["category"])) {
-  require "next_file.php";
-  $output = get_next_file($user_data["current_file"], $user_data);
+  $directory = $user_data["current_directory"];
 
-  echo "<script>let resume = 'none';</script>";
-
-  $user_data = loading_user_data("user_data.json");
-
-  if ($output === "no next file") {
-    echo "
-    <script>
-      var audio = new Audio('feedback/Keine naechste Datei.wav');
-      audio.play();
-      
-      resume = 'resume';
-    </script>";
-  } elseif ($output === "no current file") {
-    if ($user_data["log"] === true) {
-      $log = new Log();
-      $log->saving_log("movie.php: no current file");
-    }
-  } else {
-    // Weiterleitung zur nächsten Datei
+  if (str_ends_with($directory, "!")) {
+    require "shuffle.php";
+    shuffle_files($directory, $user_data);
     header("Location: movie.php");
-  };
+  } else {
+    require "next_file.php";
+    $output = get_next_file($user_data["current_file"], $user_data);
 
-  if ($output !== "no next file" && $output !== "no current file") {
-    $directory = $user_data["current_directory"];
+    echo "<script>let resume = 'none';</script>";
 
-    // saving the last watched file in a category or directory
-    $last_watched_file = loading_user_data("last_watched_file.json");
-    
-    // saving the last watched file in the directory
-    $last_watched_file[$user_data["current_directory"]] = $user_data["current_file"]; 
-                  
-    // saving the last watched file in the category
+    $user_data = loading_user_data("user_data.json");
 
-    $seperated_path = explode("/", $directory);
-
-    $key = "";
-
-    for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
-      for ($id = 0; $id < $item_id; $id++) {
-        if ($id == $item_id - 1) {
-          $key .= $seperated_path[$id];
-        }
-        else {
-          $key .= $seperated_path[$id] . "/";
-        }
+    if ($output === "no next file") {
+      echo "
+      <script>
+        var audio = new Audio('feedback/Keine naechste Datei.wav');
+        audio.play();
+        
+        resume = 'resume';
+      </script>";
+    } elseif ($output === "no current file") {
+      if ($user_data["log"] === true) {
+        $log = new Log();
+        $log->saving_log("movie.php: no current file");
       }
-      $last_watched_file[$key] = $directory;
+    } else {
+      // Weiterleitung zur nächsten Datei
+      header("Location: movie.php");
+    };
 
-      echo $key;
+    if ($output !== "no next file" && $output !== "no current file") {
+      // saving the last watched file in a category or directory
+      $last_watched_file = loading_user_data("last_watched_file.json");
+      
+      // saving the last watched file in the directory
+      $last_watched_file[$user_data["current_directory"]] = $user_data["current_file"]; 
+                      
+      // saving the last watched file in the category
+
+      $seperated_path = explode("/", $directory);
 
       $key = "";
-    }
 
-    saving_user_data($last_watched_file, "last_watched_file.json");
+      for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
+        for ($id = 0; $id < $item_id; $id++) {
+          if ($id == $item_id - 1) {
+            $key .= $seperated_path[$id];
+          }
+          else {
+            $key .= $seperated_path[$id] . "/";
+          }
+        }
+        $last_watched_file[$key] = $directory;
+
+        echo $key;
+
+        $key = "";
+      }
+
+      saving_user_data($last_watched_file, "last_watched_file.json");
+    };
   };
 }
 
@@ -258,7 +264,7 @@ body {
             
             $media_progress = loading_user_data("media_progress.json");
 
-            $current_time = $media_progress[$video_path]; // current time of the video
+            @$current_time = $media_progress[$video_path]; // current time of the video
 
             if (!is_float($current_time)) {
                 $current_time = 0;

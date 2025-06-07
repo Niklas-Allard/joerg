@@ -372,7 +372,7 @@ body {
                         $allowed_file_types = loading_user_data("allowed_file_types.json");
 
                         foreach ($allowed_file_types["img"] as $type) {
-                          if (is_file("img/" . $allowed_file_types . "." . $type)) {
+                          if (is_file("img/" . $item_img_path . "." . $type)) {
                             $suffix_img_path = $type;
                           }
                         }
@@ -413,7 +413,7 @@ body {
                                 if (item' . $id . '.indexOf("(") !== -1) {
                                     let counter = 0;
                                     for (let i = 0; i < item' . $id . '.length; i++) {
-                                        ccxonst letter = item' . $id . '[i];
+                                        const letter = item' . $id . '[i];
                                         if (letter === "(") {
                                             counter += 1;
                                         }
@@ -910,6 +910,7 @@ body {
               $user_data = loading_user_data("user_data.json");
 
               $user_data["current_page"] = 1;
+              saving_user_data($user_data, "user_data.json");
 
               console_log($card_dir);
 

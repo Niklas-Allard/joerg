@@ -1,5 +1,4 @@
-<?php 
-require "transforming_user_data.php";
+<?php
 function shuffle_files($dir_name, $user_data) {
 
     $shuffle = loading_user_data("shuffle.json"); // stores the next possible shuffle file
@@ -44,7 +43,7 @@ function shuffle_files($dir_name, $user_data) {
     } else {
         $random_file_name = array_rand($shuffle[$dir_name]);
 
-        $user_data["current_file"] = $shuffle[$dir_name][$random_file_name];
+        $user_data["current_file"] = $user_data["current_directory"] . "\/" . $shuffle[$dir_name][$random_file_name];
         saving_user_data($user_data, "user_data.json");
 
         // Entferne die Datei aus dem Shuffle-Array
@@ -57,16 +56,3 @@ function shuffle_files($dir_name, $user_data) {
         echo $user_data["current_file"];
     }
 }
-
-shuffle_files("H:\\Serien\\Die Fraggles", loading_user_data("user_data.json"));
-
-/*
-Warning: Undefined array key "H:\Hoerspiele\5 Freunde" in C:\xampp\htdocs\joerg\shuffle.php on line 34
-
-Fatal error: Uncaught TypeError: array_rand(): Argument #1 ($array) must be of type array, null given in C:\xampp\htdocs\joerg\shuffle.php:34
-Stack trace:
-#0 C:\xampp\htdocs\joerg\shuffle.php(34): array_rand(NULL)
-#1 C:\xampp\htdocs\joerg\shuffle.php(39): shuffle_files('H:\\Hoerspiele\\5...', Array)
-#2 {main}
-  thrown in C:\xampp\htdocs\joerg\shuffle.php on line 34
-*/

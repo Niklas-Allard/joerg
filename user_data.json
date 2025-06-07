@@ -2,7 +2,7 @@
     "name": "Joerg",
     "main_path": "D:\/Joerg",
     "path_link": "..\/videos\/Joerg",
-    "current_directory": "D:\/Joerg\/serien",
+    "current_directory": "D:\/Joerg\/serien\/Das geheimnisvolle Kochbuch!",
     "path_background": ".\/background\/joerg+regina.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
@@ -11,7 +11,7 @@
     "log": false,
     "elements_per_page": 12,
     "current_page": 1,
-    "max_pages": 9,
-    "overall_cards": 98,
-    "current_file": "D:\/Joerg\/serien\/ALF\/ALF - Folge 01 - Hallo, da bin ich (Pilot).mp4"
+    "max_pages": 5,
+    "overall_cards": 52,
+    "current_file": "D:\/Joerg\/serien\/Das geheimnisvolle Kochbuch!\\\/Das geheimnisvolle Kochbuch - Folge 14 - Eine Prise Halloween.mp4"
 }
