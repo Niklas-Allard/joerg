@@ -1,17 +1,17 @@
 {
     "name": "Joerg",
-    "main_path": "D:\/Joerg",
+    "main_path": "D:\/",
     "path_link": "..\/videos\/Joerg",
-    "current_directory": "D:\/Joerg\/serien\/Das geheimnisvolle Kochbuch!",
+    "current_directory": "D:\/\/puppen",
     "path_background": ".\/background\/joerg+regina.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "python_path": "python",
     "browser": "edge",
     "log": false,
-    "elements_per_page": 12,
+    "elements_per_page": 27,
     "current_page": 1,
-    "max_pages": 5,
-    "overall_cards": 52,
-    "current_file": "D:\/Joerg\/serien\/Das geheimnisvolle Kochbuch!\\\/Das geheimnisvolle Kochbuch - Folge 14 - Eine Prise Halloween.mp4"
+    "max_pages": 1,
+    "overall_cards": 2,
+    "current_file": "D:\/\/serien\/Benjamin Bl\u00fcmchen\/Benjamin Bl\u00fcmchen - alte Version - Folge 05 - und Bibi Blocksberg.mkv"
 }
