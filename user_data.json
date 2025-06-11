@@ -1,17 +1,17 @@
 {
     "name": "Joerg",
-    "main_path": "D:\/",
+    "main_path": "D:\/Joerg",
     "path_link": "..\/videos\/Joerg",
-    "current_directory": "D:\/\/puppen",
+    "current_directory": "D:\/Joerg\/serien",
     "path_background": ".\/background\/joerg+regina.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
     "python_path": "python",
     "browser": "edge",
     "log": false,
-    "elements_per_page": 27,
+    "elements_per_page": 12,
     "current_page": 1,
-    "max_pages": 1,
-    "overall_cards": 2,
-    "current_file": "D:\/\/serien\/Benjamin Bl\u00fcmchen\/Benjamin Bl\u00fcmchen - alte Version - Folge 05 - und Bibi Blocksberg.mkv"
+    "max_pages": 9,
+    "overall_cards": 98,
+    "current_file": "D:\/Joerg\/hoerspiele\/5 Freunde (1978)\/F\u00fcnf Freunde - Folge 001 - beim Wanderzirkus, Teil 1.mp3"
 }

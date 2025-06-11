@@ -271,22 +271,15 @@ body {
       <div class="content">
           <?php
               $cover_path = basename($user_data["current_file"]);
-
-              $path = "";
               
-              for ($i = 0; $i < strlen($cover_path) - 1; $i++) {
-                  $path .= $cover_path[$i];
-
-                  if ($cover_path[$i] === ".") {
-                      break;
-                  }
-              }
+              $path = pathinfo($cover_path, PATHINFO_FILENAME);
 
               $allowed_file_types = loading_user_data("allowed_file_types.json");
               $all_img_ends = $allowed_file_types["img"];
 
               $found_exact_file_img = false; // Variable to check if an exact file image is found
-              $found_dir_file_img = false; // Variable to check if a directory file image is found
+              $found_dir_file_img = false; // Variable to check if a directory file image is found#
+              require "console_log.php";
 
               foreach ($all_img_ends as $img_end) {
                   if (is_file("img/" . $path . $img_end)) {
@@ -294,6 +287,12 @@ body {
                       $found_exact_file_img = true; // Set to true if an exact file image is found
                       break;
                   }
+              }
+
+              if ($found_exact_file_img) {
+                console_log("Exact file image found: " . $cover_path);
+              } else {
+                console_log("not found:". $cover_path);
               }
 
               if (!$found_exact_file_img) {
@@ -304,11 +303,18 @@ body {
                   $path = $seperated_path[count($seperated_path) - 2];
 
                   foreach ($all_img_ends as $img_end) {
+                    console_log("Checking for directory file image: img/" . $path . "." . $img_end);
                     if (is_file("img/" . $path . "." . $img_end)) {
                         $cover_path = "img/" . $path . "." . $img_end;
                         $found_dir_file_img = true; // Set to true if a directory file image is found
                         break;
                     }
+                  }
+
+                  if ($found_dir_file_img) {
+                    console_log("Directory file image found: " . $cover_path);
+                  } else {
+                    console_log("No specific image found for directory: " . $path);
                   }
               }
 
@@ -324,7 +330,7 @@ body {
               
               $audio_path = str_replace($user_data["main_path"], $user_data["path_link"], $user_data["current_file"]);
 
-              $current_time = $media_progress[$audio_path]; // current time of the audio
+              @$current_time = $media_progress[$audio_path]; // current time of the audio
 
               if (!is_float($current_time)) {
                   $current_time = 0;

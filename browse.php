@@ -307,6 +307,8 @@ body {
 
               console_log($directory);
 
+              $allowed_file_types = loading_user_data("allowed_file_types.json");
+
               if (is_dir($directory)) {
 
                 // Dateien und Ordner auslesen
@@ -324,7 +326,6 @@ body {
 
                 foreach ($items as $item) {
                     // checking if it is a file and if it an allowed file type
-                    $allowed_file_types = loading_user_data("allowed_file_types.json");
                     if (is_file($item)) {
                         $item = str_replace(" ", "\\00a0", $item); // replaces the spaces with \00a0
                     }
@@ -468,7 +469,7 @@ body {
                                 bigCard' . $id . '.style.height = "50%";
                                 console.log("bigCard visible");
 
-                                const bigCardHTML = \'<img src="img/' . rawurlencode($item) . "." . $suffix_img_path . '" alt="Fehler beim Laden des Bildes">\';
+                                const bigCardHTML = \'<img src="img/' . rawurlencode($item_img_path) . "." . $suffix_img_path . '" alt="Fehler beim Laden des Bildes">\';
 
                                 bigCard.innerHTML = bigCardHTML;
                               }, delay' . $id . ');
@@ -509,9 +510,54 @@ body {
                       elseif ($counter <= ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
                         continue;
                       };
+
+                      // image path
+                      $cover_path = $item;
+
+                      $path = pathinfo($cover_path, PATHINFO_FILENAME);
+
+                      console_log("Path: " . $path);
+                      
+                      $all_img_ends = loading_user_data("allowed_file_types.json")["img"];
+
+                      $found_exact_file_img = false; // Variable to check if an exact file image is found
+                      $found_dir_file_img = false; // Variable to check if a directory file image is found#
+
+                      foreach ($all_img_ends as $img_end) {
+                          if (is_file("img/" . $path . $img_end)) {
+                              $cover_path = "img/" . $path . $img_end;
+                              $found_exact_file_img = true; // Set to true if an exact file image is found
+                              break;
+                          }
+                      }
+
+                      if (!$found_exact_file_img) {
+                        $cover_path = $directory;
+
+                        $seperated_path = explode("/", $cover_path);
+
+                        console_log(json_encode($all_img_ends));
+
+                        $path = $seperated_path[count($seperated_path) - 1];
+
+                        console_log("Path_dir: " . $path);
+
+                        foreach ($all_img_ends as $img_end) {
+                          console_log("Checking for directory file image: img/" . $path . "." . $img_end);
+                          if (is_file("img/" . $path . "." . $img_end)) {
+                              $cover_path = "img/" . $path . "." . $img_end;
+                              $found_dir_file_img = true; // Set to true if a directory file image is found
+                              break;
+                          }
+                        }
+                      }
+
+                      if (!$found_dir_file_img && !$found_exact_file_img) {
+                        console_log("No image found for: " . $item);
+                      }
                       
                       echo '
-                      <div class="card" id="'. $item . '" style="background-image: url(\'img/' . $item . '.ico\'); background-size: cover; background-position: center;">
+                      <div class="card" id="'. $item . '" style="background-image: url(\'' . $cover_path . '\'); background-size: cover; background-position: center;">
                             
                             <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="get" id="form' . $item . '">
