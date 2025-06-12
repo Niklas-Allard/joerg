@@ -65,7 +65,7 @@ if message != "":
     engine.setProperty('voice', 'de')
 
     # Geschwindigkeit (optional)
-    engine.setProperty('rate', 150)  # Standard: 200
+    engine.setProperty('rate', 200)  # Standard: 200
 
     # Lautstärke (optional)
     engine.setProperty('volume', 1.0)  # Werte zwischen 0.0 und 1.0
