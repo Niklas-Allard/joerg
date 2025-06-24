@@ -18,7 +18,7 @@ if (isset($_GET["category"])) {
 
   $directory = $user_data["current_directory"];
 
-  if (str_ends_with($directory, "!")) {
+  if (!str_ends_with($directory, "!")) {
     require "shuffle.php";
     shuffle($directory, $user_data);
     header("Location: audio.php");
