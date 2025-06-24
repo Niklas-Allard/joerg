@@ -16,7 +16,7 @@ $content_color = $css["content_color"];
 if (isset($_GET["category"])) {
   $directory = $user_data["current_directory"];
 
-  if (str_ends_with($directory, "!")) {
+  if (!str_ends_with($directory, "!")) {
     require "shuffle.php";
     shuffle_files($directory, $user_data);
     header("Location: movie.php");
