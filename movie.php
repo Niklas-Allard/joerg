@@ -12,6 +12,40 @@ $icon_size = $css["icon_size"];
 $main_container_color = $css["main_container_color"];
 $content_color = $css["content_color"];
 
+// saving the current file and directory in last_watched_file.json
+
+$directory = $user_data["current_directory"];
+
+// saving the last watched file in a category or directory
+$last_watched_file = loading_user_data("last_watched_file.json");
+      
+// saving the last watched file in the directory
+$last_watched_file[$user_data["current_directory"]] = $user_data["current_file"]; 
+                      
+// saving the last watched file in the category
+
+$seperated_path = explode("/", $directory);
+
+$key = "";
+
+for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
+  for ($id = 0; $id < $item_id; $id++) {
+    if ($id == $item_id - 1) {
+      $key .= $seperated_path[$id];
+    }
+    else {
+      $key .= $seperated_path[$id] . "/";
+    }
+  }
+  $last_watched_file[$key] = $user_data["current_file"];
+
+  $user_data["test_key"] = $key; // for debugging purposes
+  $user_data["test_directory"] = $directory; // for debugging purposes
+  saving_user_data($user_data, "user_data.json");
+
+  $key = "";
+}
+saving_user_data($last_watched_file, "last_watched_file.json");
 
 if (isset($_GET["category"])) {
   $directory = $user_data["current_directory"];
@@ -47,6 +81,7 @@ if (isset($_GET["category"])) {
     };
 
     if ($output !== "no next file" && $output !== "no current file") {
+      /*
       // saving the last watched file in a category or directory
       $last_watched_file = loading_user_data("last_watched_file.json");
       
@@ -75,7 +110,7 @@ if (isset($_GET["category"])) {
         $key = "";
       }
 
-      saving_user_data($last_watched_file, "last_watched_file.json");
+      saving_user_data($last_watched_file, "last_watched_file.json");*/
     };
   };
 }
