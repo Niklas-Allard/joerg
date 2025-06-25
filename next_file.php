@@ -38,7 +38,7 @@ function get_next_file($path, $user_data) {
     // Index der aktuellen Datei finden
     $current_index = array_search(basename($path), $files);
 
-    $message = ""; // the message to be returned
+    $message = "success"; // the message to be returned
 
     if ($current_index === false) {
         $message = "no current file";
@@ -50,8 +50,6 @@ function get_next_file($path, $user_data) {
         $user_data["current_file"] = $directory . $files[$current_index + 1];
 
         saving_user_data($user_data, "user_data.json");
-
-        $message = $files[$current_index + 1];
     } else {
         $message = "no next file";
     }

@@ -1,8 +1,8 @@
 {
     "name": "Joerg",
-    "main_path": "test_dir",
-    "path_link": "test_dir",
-    "current_directory": "test_dir\/serien",
+    "main_path": "D:",
+    "path_link": "..\/videos",
+    "current_directory": "D:\/serien\/Alf",
     "path_background": ".\/background\/joerg+regina.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
@@ -11,7 +11,10 @@
     "log": false,
     "elements_per_page": 12,
     "current_page": 1,
-    "max_pages": 1,
-    "overall_cards": 3,
-    "current_file": "test_dir\/hoerspiele\/future-design-344320.mp3"
+    "max_pages": 5,
+    "overall_cards": 52,
+    "current_file": "D:\/serien\/Alf\\\/ALF - Folge 40 - Onkel Albert.mp4",
+    "speech_necessary": false,
+    "test_key": "D:\/serien",
+    "test_directory": "D:\/serien\/Alf"
 }

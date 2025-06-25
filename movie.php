@@ -48,6 +48,7 @@ for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
 saving_user_data($last_watched_file, "last_watched_file.json");
 
 if (isset($_GET["category"])) {
+
   $directory = $user_data["current_directory"];
 
   if (!str_ends_with($directory, "!")) {
@@ -81,36 +82,8 @@ if (isset($_GET["category"])) {
     };
 
     if ($output !== "no next file" && $output !== "no current file") {
-      /*
-      // saving the last watched file in a category or directory
-      $last_watched_file = loading_user_data("last_watched_file.json");
-      
-      // saving the last watched file in the directory
-      $last_watched_file[$user_data["current_directory"]] = $user_data["current_file"]; 
-                      
-      // saving the last watched file in the category
-
-      $seperated_path = explode("/", $directory);
-
-      $key = "";
-
-      for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
-        for ($id = 0; $id < $item_id; $id++) {
-          if ($id == $item_id - 1) {
-            $key .= $seperated_path[$id];
-          }
-          else {
-            $key .= $seperated_path[$id] . "/";
-          }
-        }
-        $last_watched_file[$key] = $directory;
-
-        echo $key;
-
-        $key = "";
-      }
-
-      saving_user_data($last_watched_file, "last_watched_file.json");*/
+      $user_data["speech_necessary"] = true; // set the speech_necessary variable to true
+      saving_user_data($user_data, "user_data.json");
     };
   };
 }
@@ -124,6 +97,7 @@ if (isset($_GET["category"])) {
   <title>Layout</title>
   <script src="no_context_menu.js"></script>
   <script src="send_data_media_progress.js"></script>
+  <script src="send_data.js"></script>
   <style>
 
 body {
@@ -303,6 +277,24 @@ body {
 
             if (!is_float($current_time)) {
                 $current_time = 0;
+            }
+
+            if ($user_data["speech_necessary"] == true) {
+              echo '
+              <script>
+                const file_name = "' . pathinfo($user_data["current_file"], PATHINFO_FILENAME) . '";
+                send_data(file_name);
+                console.log("File name: " + file_name);
+                setTimeout(() => {
+                  console.log("Playing audio for file: " + file_name);
+                  const audio = document.createElement("audio");
+                  audio.src = "tts/output/" + file_path + ".wav"; // Pfad zur Audiodatei anpassen
+                  audio.autoplay = true;
+                  document.body.appendChild(audio);
+                }, 1000);
+              </script>';
+              $user_data["speech_necessary"] = false; // reset the speech_necessary variable
+              saving_user_data($user_data, "user_data.json");
             }
         ?> 
 

@@ -116,21 +116,56 @@
         "49": "Das geheimnisvolle Kochbuch - Folge 50 - Der Abschied.mp4"
     },
     "D:\/serien\/Alf": {
+        "0": "ALF - Folge 01 - Hallo, da bin ich (Pilot).mp4",
+        "1": "ALF - Folge 02 - Die Nacht, in der die Pizza kam.mp4",
         "2": "ALF - Folge 03 - Katzenjammer.mp4",
+        "3": "ALF - Folge 04 - Gro\u00dfer Mann, was nun.mp4",
+        "4": "ALF - Folge 05 - Parasit mit Puderquaste.mp4",
+        "5": "ALF - Folge 06 - Ganz im Vertrauen.mp4",
+        "6": "ALF - Folge 07 - Ein M\u00e4dchen names Rhonda.mp4",
+        "7": "ALF - Folge 08 - Eifersucht nach Noten.mp4",
+        "8": "ALF - Folge 09 - Der Sprung in die Tiefe.mp4",
+        "9": "ALF - Folge 10 - Die Spritztour.mp4",
         "10": "ALF - Folge 11 - Fr\u00f6hliche Ferien.mp4",
+        "11": "ALF - Folge 12 - Eine sch\u00f6ne Bescherung (Oh, Tannerbaum).mp4",
         "12": "ALF - Folge 13 - Wenn Schwiegermutter kommt.mp4",
+        "13": "ALF - Folge 14 - Die Fernsehfamilie.mp4",
         "14": "ALF - Folge 15 - Mit den besten W\u00fcnschen aus dem Jenseits.mp4",
         "15": "ALF - Folge 16 - Gestatten, mein Name ist Schlegel.mp4",
+        "16": "ALF - Folge 17 - Der Ausrei\u00dfer.mp4",
+        "17": "ALF - Folge 18 - Ein K\u00e4fig f\u00fcr den Narren.mp4",
+        "18": "ALF - Folge 19 - Der Rollentausch.mp4",
         "19": "ALF - Folge 20 - Das Fenster zum Garten.mp4",
         "20": "ALF - Folge 21 - B\u00fchne frei f\u00fcr Spargelspitzen.mp4",
+        "21": "ALF - Folge 22 - Schulden und S\u00fchne.mp4",
+        "22": "ALF - Folge 23 - Brians Sternstunde.mp4",
         "24": "ALF - Folge 25 - Der blinde Passagier.mp4",
         "25": "ALF - Folge 26 - Stets zu ihren Diensten.mp4",
+        "26": "ALF - Folge 27 - Reif f\u00fcr die Insel.mp4",
         "27": "ALF - Folge 28 - Ein Schock f\u00fcrs Leben.mp4",
+        "28": "ALF - Folge 29 - In der Kutte des B\u00fc\u00dfers.mp4",
+        "29": "ALF - Folge 30 - Zur besten Sendezeit.mp4",
+        "30": "ALF - Folge 31 - Das Kost\u00fcmfest.mp4",
         "31": "ALF - Folge 32 - Der Sch\u00f6nheitswettbewerb.mp4",
+        "32": "ALF - Folge 33 - Schluckauf Marke Melmac.mp4",
+        "33": "ALF - Folge 34 - Eine Reise durch die Nacht.mp4",
+        "35": "ALF - Folge 36 - Der Traumkandidat.mp4",
+        "36": "ALF - Folge 37 - Wenn der Weihnachtsmann kommt.mp4",
         "37": "ALF - Folge 38 - Der Junge von Nebenan.mp4",
         "38": "ALF - Folge 39 - Anwalt in eigener Sache.mp4",
+        "40": "ALF - Folge 41 - Auf Verbrecherjagd, Teil 1.mp4",
         "41": "ALF - Folge 42 - Auf Verbrecherjagd, Teil 2.mp4",
         "42": "ALF - Folge 43 - Die Untermieterin.mp4",
-        "44": "ALF - Folge 45 - Auge um Auge.mp4"
-    }
+        "44": "ALF - Folge 45 - Auge um Auge.mp4",
+        "45": "ALF - Folge 46 - Die Bef\u00f6rderung.mp4",
+        "47": "ALF - Folge 48 - Der Geist aus der Flasche.mp4"
+    },
+    "test_dir\/filme\/marvel": [
+        "BIKINI PLANET - Ehrenm\u00e4nner of the Galaxy 2 I Julien Bam - Kopie.mp4",
+        "BIKINI PLANET - Ehrenm\u00e4nner of the Galaxy 2 I Julien Bam.mp4",
+        "zmarvel.mp4"
+    ],
+    "test_dir\/filme\/!marvel": [
+        "BIKINI PLANET - Ehrenm\u00e4nner of the Galaxy 2 I Julien Bam - Kopie.mp4"
+    ]
 }

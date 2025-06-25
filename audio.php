@@ -20,7 +20,7 @@ if (isset($_GET["category"])) {
 
   if (!str_ends_with($directory, "!")) {
     require "shuffle.php";
-    shuffle($directory, $user_data);
+    shuffle_files($directory, $user_data);
     header("Location: audio.php");
   } else {
     require "next_file.php";
