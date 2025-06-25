@@ -1,24 +1,33 @@
-                // saving the last watched file in the directory
-                $last_watched_file[$user_data["current_directory"]] = $directory; 
-                
-                // saving the last watched file in the category
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php
 
-                $seperated_path = explode("/", $directory);
+$path = "dsfmdsfjsdf/fdsfbdsjfbsd/sdfbdsjhfbs.mp4";
 
-                // deciding in which category the user currently is
-                switch (true) {
-                    case in_array("filme", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "filme"] = $directory;
-                        break;
-                    case in_array("serien", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "serien"] = $directory;
-                        break;
-                    case in_array("hoerspiele", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "hoerspiele"] = $directory;
-                        break;
-                    case in_array("puppen", $seperated_path):
-                        $last_watched_file[$user_data["main_path"] . "/" . "puppen"] = $directory;
-                        break;
-                }
+$seperated_path = explode("/", $path);
 
-                saving_user_data($last_watched_file, "last_watched_file.json");
+$path = "";
+
+for ($i = 0; $i < 0; $i++) {
+    if ($i != count($seperated_path) - 1) {
+        $path += $seperated_path[$i -1];
+    } else {
+        break;
+    }
+};
+
+if ($path == "") {
+    $path = "No path found";
+}
+
+echo $path;
+
+?>
+</body>
+</html>

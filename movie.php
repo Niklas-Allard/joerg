@@ -39,10 +39,6 @@ for ($item_id = count($seperated_path) - 1; $item_id > 1; $item_id--) {
   }
   $last_watched_file[$key] = $user_data["current_file"];
 
-  $user_data["test_key"] = $key; // for debugging purposes
-  $user_data["test_directory"] = $directory; // for debugging purposes
-  saving_user_data($user_data, "user_data.json");
-
   $key = "";
 }
 saving_user_data($last_watched_file, "last_watched_file.json");
@@ -80,13 +76,18 @@ if (isset($_GET["category"])) {
       // Weiterleitung zur nächsten Datei
       header("Location: movie.php");
     };
-
-    if ($output !== "no next file" && $output !== "no current file") {
-      $user_data["speech_necessary"] = true; // set the speech_necessary variable to true
-      saving_user_data($user_data, "user_data.json");
-    };
   };
 }
+
+echo '
+const file_name = "tts/output/" + "' . pathinfo($user_data["current_file"], PATHINFO_FILENAME);' + ".wav";
+
+
+const audio = document.createElement("audio");
+audio.src = "' . $user_data["current_file"] . '"; // Pfad zur Audiodatei anpassen
+audio.autoplay = true;
+document.body.appendChild(audio);
+';
 
 ?>
 <!DOCTYPE html>
@@ -277,24 +278,6 @@ body {
 
             if (!is_float($current_time)) {
                 $current_time = 0;
-            }
-
-            if ($user_data["speech_necessary"] == true) {
-              echo '
-              <script>
-                const file_name = "' . pathinfo($user_data["current_file"], PATHINFO_FILENAME) . '";
-                send_data(file_name);
-                console.log("File name: " + file_name);
-                setTimeout(() => {
-                  console.log("Playing audio for file: " + file_name);
-                  const audio = document.createElement("audio");
-                  audio.src = "tts/output/" + file_path + ".wav"; // Pfad zur Audiodatei anpassen
-                  audio.autoplay = true;
-                  document.body.appendChild(audio);
-                }, 1000);
-              </script>';
-              $user_data["speech_necessary"] = false; // reset the speech_necessary variable
-              saving_user_data($user_data, "user_data.json");
             }
         ?> 
 
