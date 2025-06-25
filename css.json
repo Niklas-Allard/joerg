@@ -6,5 +6,8 @@
     "main_container_color": "#ffffff",
     "content_color": "#ffffff",
     "background_color": "#ffffff",
-    "title_size": "10px"
+    "title_size": "10px",
+    "current_category_border_color": "red",
+    "current_category_border_width": "12px",
+    "current_category_border_style": "solid"
 }

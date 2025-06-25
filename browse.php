@@ -8,6 +8,9 @@ $navbar_color = $css["navbar_color"];
 $icon_size = $css["icon_size"];
 $main_container_color = $css["main_container_color"];
 $content_color = $css["content_color"];
+$current_category_border_color = $css["current_category_border_color"];
+$current_category_border_width = $css["current_category_border_width"];
+$current_category_border_style = $css["current_category_border_style"];
 ?>
 
 <!DOCTYPE html>
@@ -181,7 +184,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_filme">
-            <label for="filme"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg></label>
+            <label for="filme"><svg id="icon_filme" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg></label>
             <input type="hidden" name="category" value="filme">
             <button type="submit" id="filme" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -190,7 +193,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_serien">
-            <label for="serien"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M320-320h480v-400H320v400Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg></label>
+            <label for="serien"><svg id="icon_serien" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M320-320h480v-400H320v400Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg></label>
             <input type="hidden" name="category" value="serien">
             <button type="submit" id="serien" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -199,7 +202,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_hoerspiele">
-            <label for="audio"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"/></svg></label>
+            <label for="audio"><svg id="icon_hoerspiele" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"/></svg></label>
             <input type="hidden" name="category" value="hoerspiele">
             <button type="submit" id="audio" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -208,7 +211,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id ="form_puppen">
-            <label for="puppen"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg></label>
+            <label for="puppen"><svg id="icon_puppen" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg></label>
             <input type="hidden" name="category" value="puppen">
             <button type="submit" id="puppen" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -300,6 +303,9 @@ body {
             require "console_log.php";
 
             function loading_cards($directory) {
+
+              // highligthing the current category
+              highlight_category($directory);
               
               // TODO Die Möglichkeit das Videos angezeigt werden muss implementiert werden
 
@@ -770,6 +776,41 @@ body {
 
                   $log->saving_log($message);
                 }
+              };
+            };
+
+            function highlight_category($directory) {
+              
+              global $current_category_border_color;
+              global $current_category_border_width; 
+              global $current_category_border_style;
+
+              $category = null;              
+              switch ($directory) {
+                case str_contains($directory, "filme"):
+                  $category = "filme";
+                  break;
+                case str_contains($directory, "serien"):
+                  $category = "serien";
+                  break;
+                case str_contains($directory, "hoerspiele"):
+                  $category = "hoerspiele";
+                  break;
+                case str_contains($directory, "puppen"):
+                  $category = "puppen";
+                  break;
+              };
+    
+              if ($category !== null) {
+                echo '
+                  <style> 
+                    #icon_' . $category . ' {
+                      border-color: ' . $current_category_border_color . ';
+                      border-size: ' . $current_category_border_width . ';
+                      border-style: ' . $current_category_border_style . ';
+                    }
+                  </style>
+                ';
               };
             };
 
