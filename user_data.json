@@ -2,7 +2,7 @@
     "name": "Joerg",
     "main_path": "D:",
     "path_link": "..\/videos",
-    "current_directory": "D:\/filme",
+    "current_directory": "D:\/serien",
     "path_background": ".\/background\/joerg+regina.jpg",
     "cover_path": "H:\/Covers",
     "show_title": "True",
@@ -10,11 +10,16 @@
     "browser": "edge",
     "log": false,
     "elements_per_page": 12,
-    "current_page": 1,
-    "max_pages": 81,
-    "overall_cards": 965,
+    "current_page": 5,
+    "max_pages": 9,
+    "overall_cards": 99,
     "current_file": "D:\/serien\/Alf\\\/ALF - Folge 38 - Der Junge von Nebenan.mp4",
     "speech_necessary": false,
-    "test_key": "D:\/serien",
-    "test_directory": "D:\/serien\/Alf"
+    "category_pages": {
+        "filme": 4,
+        "serien": 5,
+        "hoerspiele": 4,
+        "puppen": 1
+    },
+    "current_pages": 1
 }

@@ -873,7 +873,30 @@ body {
             function page_down() {
               $user_data = loading_user_data("user_data.json");
 
+              $directory = $user_data["current_directory"];
+
+              switch ($directory) {
+                case str_contains($directory, "filme"):
+                  $category = "filme";
+                  break;
+                case str_contains($directory, "serien"):
+                  $category = "serien";
+                  break;
+                case str_contains($directory, "hoerspiele"):
+                  $category = "hoerspiele";
+                  break;
+                case str_contains($directory, "puppen"):
+                  $category = "puppen";
+                  break;
+                default:
+                  $category = null;
+              };
+
               $user_data["current_page"] = $user_data["current_page"] + 1;
+
+              if ($category !== null) {
+                $user_data["category_pages"][$category] = $user_data["current_page"];
+              }
 
               reloading_cards("page");
               saving_user_data($user_data, "user_data.json");
@@ -882,8 +905,31 @@ body {
             function page_up() {
               $user_data = loading_user_data("user_data.json");
 
+              $directory = $user_data["current_directory"];
+
+              switch ($directory) {
+                case str_contains($directory, "filme"):
+                  $category = "filme";
+                  break;
+                case str_contains($directory, "serien"):
+                  $category = "serien";
+                  break;
+                case str_contains($directory, "hoerspiele"):
+                  $category = "hoerspiele";
+                  break;
+                case str_contains($directory, "puppen"):
+                  $category = "puppen";
+                  break;
+                default:
+                  $category = null;
+              };
+
               if ($user_data["current_page"] != 1) {
                 $user_data["current_page"] = $user_data["current_page"] - 1;
+
+                if ($category !== null) {
+                  $user_data["category_pages"][$category] = $user_data["current_page"];
+                }
               };
               
               reloading_cards("page");
@@ -947,25 +993,25 @@ body {
                 switch ($category) {
                     case "filme":
                         $user_data["current_directory"] = $path;
-                        $user_data["current_page"] = 1;
+                        $user_data["current_page"] = $user_data["category_pages"]["filme"];
                         saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
                         break;
                     case "serien":
                         $user_data["current_directory"] = $path;
-                        $user_data["current_page"] = 1;
+                        $user_data["current_page"] = $user_data["category_pages"]["serien"];
                         saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
                         break;
                     case "hoerspiele":
                         $user_data["current_directory"] = $path;
-                        $user_data["current_page"] = 1;
+                        $user_data["current_page"] = $user_data["category_pages"]["hoerspiele"];
                         saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
                         break;
                     case "puppen":
                         $user_data["current_directory"] = $path;
-                        $user_data["current_page"] = 1;
+                        $user_data["current_page"] = $user_data["category_pages"]["puppen"];
                         saving_user_data($user_data, "user_data.json");
                         loading_cards($path);
                         break;
