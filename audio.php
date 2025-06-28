@@ -203,6 +203,24 @@ body {
     margin: 20px auto; /* Zentriert das Icon */
     cursor: pointer; /* Zeigt an, dass das Icon klickbar ist */
 }
+
+#reset {
+  margin-right: 20px;
+}
+
+#reset:hover {
+  cursor: pointer; /* Zeigt an, dass das Element klickbar ist */
+  fill:rgb(96, 96, 96); /* Farbe beim Hover */
+}
+
+#back {
+  margin-right: 10px;
+}
+
+#back:hover {
+  cursor: pointer; /* Zeigt an, dass das Element klickbar ist */
+  fill:rgb(96, 96, 96); /* Farbe beim Hover */
+}
   </style>
 </head>
 <body>
@@ -341,8 +359,29 @@ body {
 
           <div class="range_reset">
             <input type="range" id="audio-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">    
-            <button id="reset_button">Reset</button>
+            <svg id="reset" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="black"><path d="M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480-160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58-62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-80Z"/></svg>
+            <svg id="back" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="black"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg>
           </div>
+
+          <script>
+            // goes back to the current directory
+            const back = document.getElementById("back");
+            back.addEventListener("click", () => {
+                <?php
+                    $directory = $user_data["current_directory"];
+                    
+                    $seperated_path = explode("/", $directory);
+
+                    if (count($seperated_path) == 2) {
+                      echo 'window.location.href = "browse.php?category=' . $seperated_path[1] . '";';
+                    } else {
+                      echo 'window.location.href = "browse.php?cardDir=' . urlencode($directory) . '";';
+                    }
+                ?>
+            });
+
+        </script>
+
           <script>
               const audio = document.getElementById("audio_media");
               console.log(audio);
@@ -418,8 +457,8 @@ body {
                   sendDataViaPOST('getting_media_progress.php', data);
               }, 5000);
 
-              const reset_button = document.getElementById("reset_button");
-              reset_button.addEventListener("click", () => {
+              const reset = document.getElementById("reset");
+              reset.addEventListener("click", () => {
                   audio.currentTime = 0;
                   audio.pause(); // Optional: Audio pausieren, wenn zurückgesetzt wird
               });
