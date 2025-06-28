@@ -298,6 +298,7 @@ body {
             const audio_div = document.getElementById("audio_container");
 
           </script>
+
           <?php 
 
             require "console_log.php";
@@ -935,6 +936,46 @@ body {
               reloading_cards("page");
               saving_user_data($user_data, "user_data.json");
             };
+
+            function back_to_previous_directory($url) {
+              $decoded_url = rawurldecode($url);
+
+              $seperated_url = explode("/", $decoded_url);
+
+              $category = null; // saves the category of the current directory
+              
+              // if the previous directory is one of the categories
+              if (count($seperated_url) !== 2) {
+                switch ($seperated_url[1]) {
+                  case "filme":
+                    $category = "filme";
+                    break;
+                  case "serien":
+                    $category = "serien";
+                    break;
+                  case "hoerspiele":
+                    $category = "hoerspiele";
+                    break;
+                  case "puppen":
+                    $category = "puppen";
+                    break;
+                }
+              } else {
+                # removes the last element of the array
+                array_pop($seperated_url);
+
+                # convert array into a string
+                $path = implode("/", $seperated_url);
+              }
+
+              if ($category == null) {
+                header("Location: browse.php?card_dir=" . $path);
+              } else {
+                header("Location: browse.php?category=" . $category . "&submit=submit");
+              }
+
+              exit;
+            }
 
             function resume($path) {
 

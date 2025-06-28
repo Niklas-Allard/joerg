@@ -10,14 +10,14 @@
     "browser": "edge",
     "log": false,
     "elements_per_page": 12,
-    "current_page": 5,
+    "current_page": 1,
     "max_pages": 9,
     "overall_cards": 99,
-    "current_file": "D:\/serien\/Alf\\\/ALF - Folge 38 - Der Junge von Nebenan.mp4",
+    "current_file": "D:\/filme\/Albion - Der verzauberte Hengst (2016)\/Albion - Der verzauberte Hengst (2016).mp4",
     "speech_necessary": false,
     "category_pages": {
-        "filme": 4,
-        "serien": 5,
+        "filme": 3,
+        "serien": 1,
         "hoerspiele": 4,
         "puppen": 1
     },
