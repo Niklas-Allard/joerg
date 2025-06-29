@@ -140,13 +140,6 @@ body {
 }
 
 .card h3 {
-  <?php 
-  if ($user_data["show_title"] == true) {
-    echo 'font-size:' . '$css["title_size"]'; // Kleinere Schriftgröße
-  } elseif ($user_data["show_title"] == false) {
-    echo "display: none;";
-  }
-  ?>
   margin: 0 0 8px
 }
 

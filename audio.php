@@ -300,8 +300,8 @@ body {
               require "console_log.php";
 
               foreach ($all_img_ends as $img_end) {
-                  if (is_file("img/" . $path . $img_end)) {
-                      $cover_path = "img/" . $path . $img_end;
+                  if (is_file("img/" . $path . "." . $img_end)) {
+                      $cover_path = "img/" . $path . "." . $img_end;
                       $found_exact_file_img = true; // Set to true if an exact file image is found
                       break;
                   }
@@ -319,6 +319,10 @@ body {
                   $seperated_path = explode("/", $cover_path);
 
                   $path = $seperated_path[count($seperated_path) - 2];
+
+                  if (str_ends_with($path,"!")) {
+                    $path = substr($path,0,-1);
+                  }
 
                   foreach ($all_img_ends as $img_end) {
                     console_log("Checking for directory file image: img/" . $path . "." . $img_end);
