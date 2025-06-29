@@ -547,6 +547,10 @@ body {
 
                         $path = $seperated_path[count($seperated_path) - 1];
 
+                        if (str_ends_with($path, "!")) {
+                          $path = substr($path, 0, -1); // removes the ! at the end of the path
+                        }
+
                         console_log("Path_dir: " . $path);
 
                         foreach ($all_img_ends as $img_end) {
