@@ -385,10 +385,16 @@ body {
                           }
                         }
 
+                        if ($user_data["show_title"] == false) {
+                          $title = "";
+                        } else {
+                          $title = htmlspecialchars($item);
+                        }
+
                         echo '
                         <div class="card" id="'. $item . '" style="background-image: url(\'img/' . rawurlencode($item_img_path) . "." . rawurlencode($suffix_img_path) . '\'); background-size: cover; background-position: center;">
                             
-                            <h3>' . htmlspecialchars($item) . '</h3>
+                            <h3>' . $title . '</h3>
                             <form action="browse.php" method="get" id="form' . $item . '">
                                 <input type="hidden" name="cardDir" value="'. $directory . "/"  . htmlspecialchars($item) . '">
                             </form>
@@ -566,11 +572,17 @@ body {
                       if (!$found_dir_file_img && !$found_exact_file_img) {
                         console_log("No image found for: " . $item);
                       }
+
+                      if ($user_data["show_title"] == false) {
+                        $title = "";
+                      } else {
+                        $title = htmlspecialchars($item);
+                      }
                       
                       echo '
                       <div class="card" id="'. $item . '" style="background-image: url(\'' . $cover_path . '\'); background-size: cover; background-position: center;">
                             
-                            <h3>' . htmlspecialchars($item) . '</h3>
+                            <h3>' . $title . '</h3>
                             <form action="browse.php" method="get" id="form' . $item . '">
                                 <input type="hidden" name="cardDir" value="'. $directory . "/"  . htmlspecialchars($item) . '">
                             </form>
