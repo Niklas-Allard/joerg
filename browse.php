@@ -531,8 +531,8 @@ body {
                       $found_dir_file_img = false; // Variable to check if a directory file image is found#
 
                       foreach ($all_img_ends as $img_end) {
-                          if (is_file("img/" . $path . $img_end)) {
-                              $cover_path = "img/" . $path . $img_end;
+                          if (is_file("img/" . urldecode($path) . "."  . $img_end)) {
+                              $cover_path = "img/" . $path . "." . $img_end;
                               $found_exact_file_img = true; // Set to true if an exact file image is found
                               break;
                           }

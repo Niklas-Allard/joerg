@@ -1,1 +1,1 @@
-./tts/output/Erzaehl mir was!.wav
+./tts/output/Die Teufelskicker.wav
