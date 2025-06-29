@@ -65,7 +65,7 @@ if message != "":
     engine.setProperty('voice', 'de')
 
     # Geschwindigkeit (optional)
-    engine.setProperty('rate', 200)  # Standard: 200
+    engine.setProperty('rate', 250)  # Standard: 200
 
     # Lautstärke (optional)
     engine.setProperty('volume', 1.0)  # Werte zwischen 0.0 und 1.0
@@ -101,6 +101,9 @@ if message != "":
     output_file_name = output_file_name.replace("Ö", "Oe")
     output_file_name = output_file_name.replace("Ü", "Ue")
     output_file_name = output_file_name.replace("ß", "ss")
+
+    # replace - with , | lowing the - down
+    message = message.replace("-", ",")
 
     # Datei speichern (z. B. als WAV)
     output_file = f"output/{output_file_name}.wav"
