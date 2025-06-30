@@ -1,1 +1,1 @@
-./tts/output/Das Gold am Kraehenberg!.wav
+./tts/output/Der rosarote Panther.wav

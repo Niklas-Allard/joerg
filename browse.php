@@ -69,7 +69,7 @@ body {
 
 .main-container {
   width: 100%;
-  background-color: "<?php echo $main_container_color; ?>";
+  background-color: <?php echo $main_container_color; ?>;
   padding: 20px;
   box-sizing: border-box;
   display: flex;
@@ -129,6 +129,7 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   height: 200px; /* Fixierte Höhe für einheitliche Kartengröße */
   min-width: 5%;
+  max-width: 400px; /*TODO max-width problem*/
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -253,7 +254,7 @@ body {
         <li>
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get">
-            <label for="resume"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
+            <label for="resume"><svg width="<?php echo $icon_size; ?>" viewBox="http://www.w3.org/2000/svg" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
             <input type="hidden" name="category" value="resume">
             <button type="submit" id="resume" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -273,7 +274,7 @@ body {
       <!-- Bereich über dem Container -->
       <div class="header">
         <span class="header-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" fill="white"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="http://www.w3.org/2000/svg" fill="white"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
         </span>
       </div>
       <!-- Hauptinhalt -->
