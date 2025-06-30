@@ -11,14 +11,14 @@
     "tts_speed": 200,
     "log": false,
     "elements_per_page": 12,
-    "current_page": 1,
+    "current_page": 2,
     "max_pages": 9,
     "overall_cards": 99,
     "current_file": "D:\/hoerspiele\/5 Freunde H\u00f6rb\u00fccher\/F\u00fcnf Freunde - H\u00f6rbuch 56 - und das R\u00e4tsel der feinen Dame.mp3",
     "speech_necessary": false,
     "category_pages": {
         "filme": 1,
-        "serien": 1,
+        "serien": 2,
         "hoerspiele": 1,
         "puppen": 1
     },

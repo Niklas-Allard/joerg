@@ -886,16 +886,16 @@ body {
               $directory = $user_data["current_directory"];
 
               switch ($directory) {
-                case str_contains($directory, "filme"):
+                case str_ends_with($directory, "filme"):
                   $category = "filme";
                   break;
-                case str_contains($directory, "serien"):
+                case str_ends_with($directory, "serien"):
                   $category = "serien";
                   break;
-                case str_contains($directory, "hoerspiele"):
+                case str_ends_with($directory, "hoerspiele"):
                   $category = "hoerspiele";
                   break;
-                case str_contains($directory, "puppen"):
+                case str_ends_with($directory, "puppen"):
                   $category = "puppen";
                   break;
                 default:
