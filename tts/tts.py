@@ -2,6 +2,7 @@ import os
 import pyttsx3
 from pathlib import Path 
 os.chdir(Path(__file__).parent)
+from json_transformer import load_json
 
 
 # Löschung alles Datein in dem Output-Folder
@@ -64,8 +65,10 @@ if message != "":
     # Sprache einstellen (Deutsch in diesem Fall)
     engine.setProperty('voice', 'de')
 
+    tts_speed = load_json("../user_data.json")["tts_speed"] # loads the tts_speed from user_data.jsons
+
     # Geschwindigkeit (optional)
-    engine.setProperty('rate', 250)  # Standard: 200
+    engine.setProperty('rate', tts_speed)  # Standard: 200
 
     # Lautstärke (optional)
     engine.setProperty('volume', 1.0)  # Werte zwischen 0.0 und 1.0
