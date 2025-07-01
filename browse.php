@@ -454,13 +454,13 @@ body {
                                 item' . $id . ' = newItem' . $id . ';
 
 
-                                item' . $id . ' = item' . $id . '.replace("ö", "oe");
-                                item' . $id . ' = item' . $id . '.replace("ä", "ae");
-                                item' . $id . ' = item' . $id . '.replace("ü", "ue");
-                                item' . $id . ' = item' . $id . '.replace("Ö", "Oe");
-                                item' . $id . ' = item' . $id . '.replace("Ä", "Ae");
-                                item' . $id . ' = item' . $id . '.replace("Ü", "Ue");
-                                item' . $id . ' = item' . $id . '.replace("ß", "ss");
+                                item' . $id . ' = item' . $id . '.replace(/ö/g, "oe");
+                                item' . $id . ' = item' . $id . '.replace(/ä/g, "ae");
+                                item' . $id . ' = item' . $id . '.replace(/ü/g, "ue");
+                                item' . $id . ' = item' . $id . '.replace(/Ö/g, "Oe");
+                                item' . $id . ' = item' . $id . '.replace(/Ä/g, "Ae");
+                                item' . $id . ' = item' . $id . '.replace(/Ü/g, "Ue");
+                                item' . $id . ' = item' . $id . '.replace(/ß/g, "ss");
 
                                 
                                 const audio_content' . $id . ' = "<audio id=\"audio_element\">" + 
@@ -640,13 +640,13 @@ body {
                                 item' . $id . ' = newItem' . $id . ';
 
 
-                                item' . $id . ' = item' . $id . '.replace("ö", "oe");
-                                item' . $id . ' = item' . $id . '.replace("ä", "ae");
-                                item' . $id . ' = item' . $id . '.replace("ü", "ue");
-                                item' . $id . ' = item' . $id . '.replace("Ö", "Oe");
-                                item' . $id . ' = item' . $id . '.replace("Ä", "Ae");
-                                item' . $id . ' = item' . $id . '.replace("Ü", "Ue");
-                                item' . $id . ' = item' . $id . '.replace("ß", "ss");
+                                item' . $id . ' = item' . $id . '.replace(/ö/g, "oe");
+                                item' . $id . ' = item' . $id . '.replace(/ä/g, "ae");
+                                item' . $id . ' = item' . $id . '.replace(/ü/g, "ue");
+                                item' . $id . ' = item' . $id . '.replace(/Ö/g, "Oe");
+                                item' . $id . ' = item' . $id . '.replace(/Ä/g, "Ae");
+                                item' . $id . ' = item' . $id . '.replace(/Ü/g, "Ue");
+                                item' . $id . ' = item' . $id . '.replace(/ß/g, "ss");
 
                                 
                                 const audio_content' . $id . ' = "<audio id=\"audio_element\">" + 
@@ -993,22 +993,33 @@ body {
               
               $user_data = loading_user_data("user_data.json");
 
-              $last_watched_file = $last_watched_file[$path];
+              if (isset($last_watched_file[$path])) {
+                
+                $last_watched_file = $last_watched_file[$path];
 
-              $user_data["current_file"] = $last_watched_file;
+                $user_data["current_file"] = $last_watched_file;
 
-              saving_user_data($user_data, "user_data.json");
+                saving_user_data($user_data, "user_data.json");
 
-              require "movie_or_audio.php";
+                require "movie_or_audio.php";
 
-              if (movie_or_audio($last_watched_file) == "movie") {
-                reloading_cards("movie");
-              }
-              elseif (movie_or_audio($last_watched_file) == "audio") {
-                reloading_cards("audio");
+                if (movie_or_audio($last_watched_file) == "movie") {
+                  reloading_cards("movie");
+                }
+                elseif (movie_or_audio($last_watched_file) == "audio") {
+                  reloading_cards("audio");
+                };
+
+                exit;
+              } else {
+                echo "
+                  <script>
+                    var audio = new Audio('feedback/feedback_resume_browse.wav');
+                    audio.play();
+                    
+                    resume = 'resume';
+                  </script>";
               };
-
-              exit;
               
             };
 
