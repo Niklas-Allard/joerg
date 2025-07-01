@@ -106,7 +106,18 @@ if message != "":
     output_file_name = output_file_name.replace("ß", "ss")
 
     # replace - with , | lowing the - down
-    message = message.replace("-", ",")
+    previous_char = ""
+    output_replace = ""
+    for char in message:
+        if char == "-" and previous_char == " ":
+            output_replace += ","
+        else:
+            output_replace += char
+        previous_char = char
+    
+    message = output_replace
+
+    print(message)
 
     # Datei speichern (z. B. als WAV)
     output_file = f"output/{output_file_name}.wav"
