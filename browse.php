@@ -315,6 +315,8 @@ body {
                 // Dateien und Ordner auslesen
                 $items = scandir($directory);
 
+                $items = array_diff($items, array('.', '..')); // filters the "." and ".." out
+
                 $id = 0; // solves problems if an item has spaces in it
                 
                 $user_data = loading_user_data("user_data.json");
@@ -332,7 +334,7 @@ body {
                     }
 
                     // Nur Ordner anzeigen (ohne "." und "..")
-                    if ($item !== "." && $item !== ".." && is_dir($directory . "/" . $item) && $item !== ".wd_tv") {
+                    if (is_dir($directory . "/" . $item) && $item !== ".wd_tv") {
                       
                         if (!(is_file("img/" . $item . ".ico"))){
                           if (loading_user_data("user_data.json")["log"]) {
@@ -351,10 +353,10 @@ body {
                         
                         $counter++;
 
-                        if ($counter > ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
+                        if ($counter >= ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
                           break;
                         }
-                        elseif ($counter <= ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
+                        elseif ($counter < ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
                           continue;
                         };
                         
@@ -511,10 +513,10 @@ body {
                       
                       $id = $id + 1; 
 
-                      if ($counter > ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
+                      if ($counter >= ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
                         break;
                       }
-                      elseif ($counter <= ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
+                      elseif ($counter < ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
                         continue;
                       };
 
