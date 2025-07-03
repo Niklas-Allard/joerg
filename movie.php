@@ -78,6 +78,7 @@ if (isset($_GET["category"])) {
     };
   };
 }
+
 /*
 echo '
 const file_name = "tts/output/" + "' . pathinfo($user_data["current_file"], PATHINFO_FILENAME);' + ".wav";
@@ -99,6 +100,67 @@ document.body.appendChild(audio);
   <script src="no_context_menu.js"></script>
   <script src="send_data_media_progress.js"></script>
   <script src="send_data.js"></script>
+  <script>
+    let file_name = "<?php echo pathinfo($user_data['current_file'], PATHINFO_FILENAME); ?>";
+
+    function speak_file_name() {
+      let audio = new Audio("tts/output/" + file_name + ".wav");
+      audio.play();
+    }
+
+    let item = file_name;
+
+    let newItem = ""
+
+    if (item.indexOf("(") !== -1) {
+        let counter = 0;
+        for (let i = 0; i < item.length; i++) {
+            const letter = item[i];
+            if (letter === "(") {
+                counter += 1;
+            }
+            if (counter === (item.match(/\(/g) || []).length) {
+                break;
+            }
+            newItem += letter;
+        }
+    } else if (item.indexOf(".") !== -1) {
+        let iterated_on_the_point = false;
+        for (let i = item.length - 1; i >= 0; i--) {
+            const letter = item[i];
+            if (iterated_on_the_point === true) {
+                newItem += letter;
+            }
+            if (letter === ".") {
+                iterated_on_the_point = true;
+            }
+        }
+        // Um die Reihenfolge wie im Original zu erhalten:
+        newItem = newItem.split("").reverse().join("");
+    } else {
+        newItem = item;
+    }
+
+    console.log(newItem);
+
+    item = newItem;
+
+    item = item.replace(/ö/g, "oe");
+    item = item.replace(/ä/g, "ae");
+    item = item.replace(/ü/g, "ue");
+    item = item.replace(/Ö/g, "Oe");
+    item = item.replace(/Ä/g, "Ae");
+    item = item.replace(/Ü/g, "Ue");
+    item = item.replace(/ß/g, "ss");
+
+    file_name = item
+
+    send_data(file_name); 
+
+    setTimeout(() => {
+      speak_file_name();
+    }, 1000); // Verzögerung von 1 Sekunde, um sicherzustellen, dass die Seite geladen ist
+  </script>
   <style>
 
 body {
@@ -473,4 +535,4 @@ body {
     </div>
   </div>
 </body>
-</html>     
+</html>

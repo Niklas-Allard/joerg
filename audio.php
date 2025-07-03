@@ -21,7 +21,7 @@ if (isset($_GET["category"])) {
   if (!str_ends_with($directory, "!")) {
     require "shuffle.php";
     shuffle_files($directory, $user_data);
-    header("Location: audio.php");
+    @header("Location: audio.php");
   } else {
     require "next_file.php";
     $output = get_next_file($user_data["current_file"], $user_data);
@@ -92,6 +92,77 @@ if (isset($_GET["category"])) {
   <title>Layout</title>
   <script src="no_context_menu.js"></script>
   <script src="send_data_media_progress.js"></script>
+  <script src="send_data.js"></script>
+  <script defer>
+    let file_name = "<?php echo pathinfo($user_data['current_file'], PATHINFO_FILENAME); ?>";
+    let file_name_gets_spoken = false;
+
+    setTimeout(() => {
+      let audio_media = document.getElementById("audio_media");
+      audio_media.play();
+    }, 6000); // Verzögerung von 5 Sekunde, um sicherzustellen, dass die Seite geladen ist
+
+    function speak_file_name() {
+      let audio = new Audio("tts/output/" + file_name + ".wav");
+      audio.id = "audio_speech";
+      audio.play();
+
+      file_name_gets_spoken = true;
+    }
+
+    let item = file_name;
+
+    let newItem = ""
+
+    if (item.indexOf("(") !== -1) {
+        let counter = 0;
+        for (let i = 0; i < item.length; i++) {
+            const letter = item[i];
+            if (letter === "(") {
+                counter += 1;
+            }
+            if (counter === (item.match(/\(/g) || []).length) {
+                break;
+            }
+            newItem += letter;
+        }
+    } else if (item.indexOf(".") !== -1) {
+        let iterated_on_the_point = false;
+        for (let i = item.length - 1; i >= 0; i--) {
+            const letter = item[i];
+            if (iterated_on_the_point === true) {
+                newItem += letter;
+            }
+            if (letter === ".") {
+                iterated_on_the_point = true;
+            }
+        }
+        // Um die Reihenfolge wie im Original zu erhalten:
+        newItem = newItem.split("").reverse().join("");
+    } else {
+        newItem = item;
+    }
+
+    console.log(newItem);
+
+    item = newItem;
+
+    item = item.replace(/ö/g, "oe");
+    item = item.replace(/ä/g, "ae");
+    item = item.replace(/ü/g, "ue");
+    item = item.replace(/Ö/g, "Oe");
+    item = item.replace(/Ä/g, "Ae");
+    item = item.replace(/Ü/g, "Ue");
+    item = item.replace(/ß/g, "ss");
+
+    file_name = item
+
+    send_data(file_name); 
+
+    setTimeout(() => {
+      speak_file_name();
+    }, 1000); // Verzögerung von 1 Sekunde, um sicherzustellen, dass die Seite geladen ist
+  </script>
   <style>
 
 body {
@@ -359,7 +430,7 @@ body {
               }
           ?>
 
-          <audio id="audio_media" autoplay src="<?php echo $audio_path; ?>" ></audio>
+          <audio id="audio_media" src="<?php echo $audio_path; ?>" ></audio>
 
           <div class="range_reset">
             <input type="range" id="audio-progress-range" min="0" max="100" value="0" step="0.001" style="width:80%;margin:20px auto;display:block;">    
