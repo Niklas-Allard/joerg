@@ -8,6 +8,9 @@ $navbar_color = $css["navbar_color"];
 $icon_size = $css["icon_size"];
 $main_container_color = $css["main_container_color"];
 $content_color = $css["content_color"];
+$card_height = $css["card_height"];
+$card_width = $css["card_width"];
+
 $current_category_border_color = $css["current_category_border_color"];
 $current_category_border_width = $css["current_category_border_width"];
 $current_category_border_style = $css["current_category_border_style"];
@@ -87,7 +90,7 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Kleinere Karten mit flexibler Anzahl */
+  grid-template-columns: repeat(auto-fit, minmax(<?php echo $card_width ?>, 1fr)); /* Kleinere Karten mit flexibler Anzahl */
   gap: 15px; /* Geringerer Abstand zwischen den Karten */
   padding: 20px;
   border-radius: 8px;
@@ -127,7 +130,7 @@ body {
   padding: 10px; /* Weniger Padding für kleinere Karten */
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  height: 200px; /* Fixierte Höhe für einheitliche Kartengröße */
+  height: <?php echo $card_height ?>; /* Fixierte Höhe für einheitliche Kartengröße */
   min-width: 5%;
   max-width: 400px; /*TODO max-width problem*/
   display: flex;
