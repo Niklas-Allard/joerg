@@ -16,9 +16,6 @@ function shuffle_files($dir_name, $user_data) {
 
         $new_shuffle = array();
 
-        print_r($all_files);
-        print_r($allowed_files_types);
-
         foreach ($all_files as $file) {
             foreach ($allowed_files_types["movie"] as $type) {
                 if (str_ends_with($file, $type)) {
@@ -31,8 +28,6 @@ function shuffle_files($dir_name, $user_data) {
                 } 
             }
         }
-
-        print_r($new_shuffle);
         
         $shuffle[$dir_name] = $new_shuffle;
 

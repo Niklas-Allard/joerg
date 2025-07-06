@@ -266,7 +266,7 @@ body {
           const page = document.getElementById("page").innerHTML;
 
           if (page == 1) {
-            document.getElementById("li_up").style.display = "none";
+            document.getElementById("li_up").style.visibility = "hidden";
           }
         </script>
       </ul>
@@ -710,7 +710,7 @@ body {
                 // removing the down arrow if the max limit reached
 
                 if ($user_data["max_pages"] <= $user_data["current_page"]) {
-                  echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+                  echo '<script>document.getElementById("li_down").style.visibility = "hidden";</script>';
                 };
               }
               elseif (is_file($directory)) {
@@ -1039,7 +1039,7 @@ body {
               echo '<script>document.getElementById("page").innerHTML = ' . $user_data["current_page"] . '; console.log("display page");</script>';
 
               if ($user_data["max_pages"] <= $user_data["current_page"]) {
-                echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+                echo '<script>document.getElementById("li_down").style.visibility = "hidden";</script>';
               };
             }
 
@@ -1099,7 +1099,7 @@ body {
                 echo '<script>document.getElementById("page").innerHTML = ' . $user_data["current_page"] . '; console.log("display page");</script>';
 
                 if ($user_data["max_pages"] <= $user_data["current_page"]) {
-                  echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+                  echo '<script>document.getElementById("li_down").style.visibility = "hidden";</script>';
                 };
             }
 
@@ -1119,7 +1119,7 @@ body {
               echo '<script>document.getElementById("page").innerHTML = ' . $user_data["current_page"] . '; console.log("display page");</script>';
 
               if ($user_data["max_pages"] <= $user_data["current_page"]) {
-                echo '<script>document.getElementById("li_down").style.display = "none";</script>';
+                echo '<script>document.getElementById("li_down").style.visibility = "hidden";</script>';
               };
 
             };
@@ -1130,17 +1130,17 @@ body {
               const maxPages = <?php echo loading_user_data("user_data.json")["max_pages"]; ?>;
 
               if (currentPage <= 1) {
-              document.getElementById("li_up").style.display = "none";
+              document.getElementById("li_up").style.visibility = "hidden";
               }
               else {
-                document.getElementById("li_up").style.display = "inline";
+                document.getElementById("li_up").style.visibility = "visible";
               }
 
               if (currentPage >= maxPages) {
-              document.getElementById("li_down").style.display = "none";
+              document.getElementById("li_down").style.visibility = "hidden";
               }
               else {
-                document.getElementById("li_down").style.display = "inline";
+                document.getElementById("li_down").style.visibility = "visible";
               }
             });
           </script>

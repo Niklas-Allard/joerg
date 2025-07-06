@@ -69,5 +69,32 @@
                 <code>pip install pyttsx3</code>
             </p>
     </div>
+    <h2>Configurations</h2>
+    <div>
+        <h3>Styling</h3>
+        <p>For optimising the user experience in the programm</p>
+
+        <br>
+        <p>You may style the programm with the following site, which is only accessible through the URL (localhost/your-directory-name/settings.php)</p>
+        <p>There you can see all important styling parameters with a hopefully understandable descripting what it does</p>
+        
+        <h3>Important Information</h3>
+        <p>There is an JSON file (user_data.json), a file for storing data which contains the most important information for running the programm</p>
+        <p>Please edit only the named data, this is very important for running th app</p>
+        <br>
+        <p>A quick dive into the structure of JSON. JSON is structured in a key value format, that means for example there is a key of main_path and the value is then the path to all the important video and audio files</p>
+        <br>
+        <p>The following must be edited or should be</p>
+        <ul>
+            <li>main_path | the value is the absolute or realtive path to all the files</li>
+            <li>path_link | this will be descripted later in more detail</li>
+            <li>path_background (optional; recommended)| here you need to giv the programm the relative or absolute path to a picture which will be shown at the starting page. It must be at the same drive of this programm</li>
+            <li>tts_speed | the tts_speed defines the speed of the audio output from the Text-To-Speech AI Model. Just try some number. The standart is <i>200</i></li>
+            <li>show_title | if true on every card is an title if false there is no title shown</li>
+            <li>python_path | the python path is an important part if you have any problem with running <i>python --version</i> in the terminal</li>
+            <li>browser | we highly recommend using edge but if you really want you can also use firefox (no other browse is supported by us). To select the browser please write  <i>edge</i> or <i>firefox</i> exact. If you use another browser just try around by switching these two values, it only changes the behaviour at the site where you can watch videos</li>
+            <li>log (not fully working at the time)| if true there are logs stored which you can see at <i>localhost/your-directory-name/controls.php</i></li>
+        </ul>
+    </div>
 </body>
 </html>

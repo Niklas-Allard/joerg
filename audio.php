@@ -72,8 +72,6 @@ if (isset($_GET["category"])) {
         }
         $last_watched_file[$key] = $user_data["current_file"];
 
-        echo $key;
-
         $key = "";
       }
 
