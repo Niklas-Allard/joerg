@@ -448,7 +448,7 @@ body {
                     if (count($seperated_path) == 2) {
                       echo 'window.location.href = "browse.php?category=' . $seperated_path[1] . '";';
                     } else {
-                      echo 'window.location.href = "browse.php?cardDir=' . urlencode($directory) . '";';
+                      echo 'window.location.href = "browse.php?cardDir=' . urlencode($directory) . '&back=true";';
                     }
                 ?>
             });

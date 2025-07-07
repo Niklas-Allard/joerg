@@ -747,8 +747,12 @@ body {
                 // saving the last fil & the page in user_data.json
                 
                 $user_data["current_file"] = $directory;
+
+                $user_data["last_page"] = $user_data["current_page"];
+
+                saving_user_data($user_data, "user_data.json");
                 
-                $user_data["current_page"] = 1;
+                $user_data["current_page"] = 1; // resets the page to 1 if a file was opened
 
                 saving_user_data($user_data, "user_data.json");
 
@@ -1108,8 +1112,18 @@ body {
               $card_dir = $_GET["cardDir"];
 
               $user_data = loading_user_data("user_data.json");
+              
+              if ($user_data["last_page"] == null) {
+                $user_data["current_page"] = 1;
+              }
 
-              $user_data["current_page"] = 1;
+              if (isset($_GET["back"])) {
+                if ($_GET["back"] == "true") {
+                  $user_data["current_page"] = $user_data["last_page"];
+                  $user_data["last_page"] = null; // resets the last page to 1 if the user goes backs
+                }
+              }
+
               saving_user_data($user_data, "user_data.json");
 
               console_log($card_dir);

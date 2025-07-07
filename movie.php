@@ -106,6 +106,11 @@ document.body.appendChild(audio);
     function speak_file_name() {
       let audio = new Audio("tts/output/" + file_name + ".wav");
       audio.play();
+
+      setTimeout(() => {
+        const movie_media_element = document.getElementById("video");
+        movie_media_element.play();
+      }, 5000); // Verzögerung von 5 Sekunde, um sicherzustellen, dass die Seite geladen ist
     }
 
     let item = file_name;
@@ -383,7 +388,7 @@ body {
                     if (count($seperated_path) == 2) {
                       echo 'window.location.href = "browse.php?category=' . $seperated_path[1] . '";';
                     } else {
-                      echo 'window.location.href = "browse.php?cardDir=' . urlencode($directory) . '";';
+                      echo 'window.location.href = "browse.php?cardDir=' . urlencode($directory) . '&back=true";';
                     }
                 ?>
             });
