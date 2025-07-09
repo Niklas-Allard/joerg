@@ -288,6 +288,13 @@ body {
   cursor: pointer; /* Zeigt an, dass das Element klickbar ist */
   fill:rgb(96, 96, 96); /* Farbe beim Hover */
 }
+
+#video {
+  display: block;
+  margin: 0 auto;
+  max-height: 80%;
+  width: 100%; /* Maximale Breite des Videos */
+}
   </style>
 </head>
 <body>

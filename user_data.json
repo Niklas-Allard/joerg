@@ -2,7 +2,7 @@
     "name": "Joerg",
     "main_path": "D:",
     "path_link": "..\/videos",
-    "current_directory": "D:\/hoerspiele\/Bibi Blocksberg",
+    "current_directory": "D:\/filme",
     "path_background": ".\/background\/joerg+regina.jpg",
     "cover_path": "H:\/Covers",
     "show_title": true,
@@ -12,9 +12,9 @@
     "log": false,
     "elements_per_page": 27,
     "current_page": 1,
-    "max_pages": 4,
-    "overall_cards": 101,
-    "current_file": "D:\/hoerspiele\/Bibi Blocksberg\\\/Bibi Blocksberg - Folge 068 - Bibi und die Piraten.mp3",
+    "max_pages": 36,
+    "overall_cards": 963,
+    "current_file": "D:\/serien\/Die Fraggles!\/Die Fraggles - Folge 27 - Die M\u00fcllhalde lebt hier nicht.mp4",
     "speech_necessary": false,
     "category_pages": {
         "filme": 1,
@@ -23,5 +23,5 @@
         "puppen": 1
     },
     "current_pages": 1,
-    "last_page": 1
+    "last_page": 2
 }
