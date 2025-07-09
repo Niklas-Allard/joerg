@@ -33,7 +33,7 @@ function shuffle_files($dir_name, $user_data) {
 
         saving_user_data($shuffle, "shuffle.json");
 
-        $user_data["current_file"] = array_rand($shuffle[$dir_name]);
+        $user_data["current_file"] = $shuffle[$dir_name][array_rand($shuffle[$dir_name])];
         saving_user_data($user_data, "user_data.json");
     } else {
         $random_file_name = array_rand($shuffle[$dir_name]);

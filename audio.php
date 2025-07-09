@@ -385,7 +385,11 @@ body {
               if (!$found_exact_file_img) {
                   $cover_path = $user_data["current_file"];
 
+                  echo $cover_path;
+
                   $seperated_path = explode("/", $cover_path);
+
+                  print_r($seperated_path);
 
                   $path = $seperated_path[count($seperated_path) - 2];
 
