@@ -1113,9 +1113,7 @@ body {
 
               $user_data = loading_user_data("user_data.json");
               
-              if ($user_data["last_page"] == null) {
-                $user_data["current_page"] = 1;
-              }
+              $user_data["current_page"] = 1;
 
               if (isset($_GET["back"])) {
                 if ($_GET["back"] == "true") {
