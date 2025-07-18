@@ -47,7 +47,5 @@ function shuffle_files($dir_name, $user_data) {
         }
 
         saving_user_data($shuffle, "shuffle.json");
-
-        echo $user_data["current_file"];
     }
 }
