@@ -23,6 +23,8 @@ $current_category_border_style = $css["current_category_border_style"];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layout</title>
   <script src="no_context_menu.js"></script>
+  <script src="speech_icon.js"></script>
+  <script src="send_data.js"></script>
   <style>
 
 body {
@@ -72,7 +74,7 @@ body {
 
 .main-container {
   width: 100%;
-  background-color: <?php echo $main_container_color; ?>;
+  background-color: "<?php echo $main_container_color; ?>";
   padding: 20px;
   box-sizing: border-box;
   display: flex;
@@ -173,12 +175,30 @@ body {
   </style>
 </head>
 <body>
+  <script>
+    // speech an audio feedback if the user hovers over a supported icon
+
+    document.querySelectorAll('.info-speech').forEach(item => {
+      let timer;
+      item.addEventListener('mouseenter', event => {
+        console.log("Cursor ist auf dem Icon.");
+        timer = setTimeout(function() {
+          const info = item.getAttribute('data-info');
+          console.log("Info: " + info);
+          speech_icon(info);
+        }, 1000);
+      });
+      item.addEventListener('mouseleave', event => {
+        clearTimeout(timer);
+      });
+    });
+  </script>
   <div class="layout">
     <!-- Navbar rechts -->
     <div class="navbar">
-
+2
       <ul>
-        <li>
+        <li data-info="Filme" class="info-speech">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_filme">
             <label for="filme"><svg id="icon_filme" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="m160-800 80 160h120l-80-160h80l80 160h120l-80-160h80l80 160h120l-80-160h120q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800Zm0 240v320h640v-320H160Zm0 0v320-320Z"/></svg></label>
@@ -187,7 +207,7 @@ body {
           </form>               
         </li>
                 
-        <li>
+        <li data-info="Serien" class="info-speech">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_serien">
             <label for="serien"><svg id="icon_serien" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M320-320h480v-400H320v400Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg></label>
@@ -196,7 +216,7 @@ body {
           </form>               
         </li>
               
-        <li>
+        <li data-info="Hörspiele" class="info-speech">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id="form_hoerspiele">
             <label for="audio"><svg id="icon_hoerspiele" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z"/></svg></label>
@@ -205,7 +225,7 @@ body {
           </form>               
         </li>
         
-        <li>
+        <li data-info="Augsburger Puppenkiste" class="info-speech">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get" id ="form_puppen">
             <label for="puppen"><svg id="icon_puppen" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg></label>
@@ -214,7 +234,7 @@ body {
           </form>               
         </li>
               
-        <li id="li_up">
+        <li id="li_up" data-info="Seite hoch" class="info-speech">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get">
             <label for="up"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/></svg></label>
@@ -223,7 +243,7 @@ body {
           </form>               
         </li>
 
-        <li>
+        <li data-info="number" class="info-speech">
 
             <strong id="page" style="font-size: 500%;">
               <?php
@@ -245,7 +265,7 @@ body {
           
         </li>
               
-        <li id="li_down" style="display: inline;">
+        <li id="li_down" style="display: inline;" data-info="Seite runter" class="info-speech">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get">
             <label for="down"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/><path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z"/></svg></label>
@@ -254,10 +274,10 @@ body {
           </form>               
         </li>
 
-        <li>
+        <li data-info="Zuletzt geschautes Video gucken" class="info-speech">
           <!-- a single icon with an formulare -->
           <form action="browse.php" method="get">
-            <label for="resume"><svg xmlns="http://www.w3.org/2000/svg" width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
+            <label for="resume"><svg width="<?php echo $icon_size; ?>" viewBox="0 -960 960 960" fill="white"><path d="M240-240v-480h80v480h-80Zm160 0 400-240-400-240v480Zm80-141v-198l165 99-165 99Zm0-99Z"/></svg></label>
             <input type="hidden" name="category" value="resume">
             <button type="submit" id="resume" class="submit" name="submit" value="submit"></button>
           </form>               
@@ -277,13 +297,12 @@ body {
       <!-- Bereich über dem Container -->
       <div class="header">
         <span class="header-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="http://www.w3.org/2000/svg" fill="white"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -960 960 960" fill="white"><path d="M560-160v-80h104L537-367l57-57 126 126v-102h80v240H560Zm-344 0-56-56 504-504H560v-80h240v240h-80v-104L216-160Zm151-377L160-744l56-56 207 207-56 56Z"/></svg>
         </span>
       </div>
       <!-- Hauptinhalt -->
       <div class="content">
         <div class="grid-container">
-          <script src="send_data.js"></script>
           <div style="display: none;" id="audio_container">
             <audio id="audio_element">  
               <source src="tts/output/Die Fraggles - Back to the Rock.wav" type="audio/wav" id="audio_src"/>
@@ -356,10 +375,10 @@ body {
                         
                         $counter++;
 
-                        if ($counter >= ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
+                        if ($counter > ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
                           break;
                         }
-                        elseif ($counter < ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
+                        elseif ($counter <= ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
                           continue;
                         };
                         
@@ -384,16 +403,10 @@ body {
                           }
                         }
 
-                        if ($user_data["show_title"] == false) {
-                          $title = "";
-                        } else {
-                          $title = htmlspecialchars($item);
-                        }
-
                         echo '
                         <div class="card" id="'. $item . '" style="background-image: url(\'img/' . rawurlencode($item_img_path) . "." . rawurlencode($suffix_img_path) . '\'); background-size: cover; background-position: center;">
                             
-                            <h3>' . $title . '</h3>
+                            <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="get" id="form' . $item . '">
                                 <input type="hidden" name="cardDir" value="'. $directory . "/"  . htmlspecialchars($item) . '">
                             </form>
@@ -459,13 +472,13 @@ body {
                                 item' . $id . ' = newItem' . $id . ';
 
 
-                                item' . $id . ' = item' . $id . '.replace(/ö/g, "oe");
-                                item' . $id . ' = item' . $id . '.replace(/ä/g, "ae");
-                                item' . $id . ' = item' . $id . '.replace(/ü/g, "ue");
-                                item' . $id . ' = item' . $id . '.replace(/Ö/g, "Oe");
-                                item' . $id . ' = item' . $id . '.replace(/Ä/g, "Ae");
-                                item' . $id . ' = item' . $id . '.replace(/Ü/g, "Ue");
-                                item' . $id . ' = item' . $id . '.replace(/ß/g, "ss");
+                                item' . $id . ' = item' . $id . '.replace("ö", "oe");
+                                item' . $id . ' = item' . $id . '.replace("ä", "ae");
+                                item' . $id . ' = item' . $id . '.replace("ü", "ue");
+                                item' . $id . ' = item' . $id . '.replace("Ö", "Oe");
+                                item' . $id . ' = item' . $id . '.replace("Ä", "Ae");
+                                item' . $id . ' = item' . $id . '.replace("Ü", "Ue");
+                                item' . $id . ' = item' . $id . '.replace("ß", "ss");
 
                                 
                                 const audio_content' . $id . ' = "<audio id=\"audio_element\">" + 
@@ -516,10 +529,10 @@ body {
                       
                       $id = $id + 1; 
 
-                      if ($counter >= ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
+                      if ($counter > ($user_data["elements_per_page"]) * ($user_data["current_page"])) { # sets the limit of the page
                         break;
                       }
-                      elseif ($counter < ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
+                      elseif ($counter <= ($user_data["elements_per_page"]) * ($user_data["current_page"] - 1)) { # skips the elements of the previous page
                         continue;
                       };
 
@@ -536,8 +549,8 @@ body {
                       $found_dir_file_img = false; // Variable to check if a directory file image is found#
 
                       foreach ($all_img_ends as $img_end) {
-                          if (is_file("img/" . urldecode($path) . "."  . $img_end)) {
-                              $cover_path = "img/" . $path . "." . $img_end;
+                          if (is_file("img/" . $path . $img_end)) {
+                              $cover_path = "img/" . $path . $img_end;
                               $found_exact_file_img = true; // Set to true if an exact file image is found
                               break;
                           }
@@ -551,10 +564,6 @@ body {
                         console_log(json_encode($all_img_ends));
 
                         $path = $seperated_path[count($seperated_path) - 1];
-
-                        if (str_ends_with($path, "!")) {
-                          $path = substr($path, 0, -1); // removes the ! at the end of the path
-                        }
 
                         console_log("Path_dir: " . $path);
 
@@ -571,17 +580,11 @@ body {
                       if (!$found_dir_file_img && !$found_exact_file_img) {
                         console_log("No image found for: " . $item);
                       }
-
-                      if ($user_data["show_title"] == false) {
-                        $title = "";
-                      } else {
-                        $title = htmlspecialchars($item);
-                      }
                       
                       echo '
                       <div class="card" id="'. $item . '" style="background-image: url(\'' . $cover_path . '\'); background-size: cover; background-position: center;">
                             
-                            <h3>' . $title . '</h3>
+                            <h3>' . htmlspecialchars($item) . '</h3>
                             <form action="browse.php" method="get" id="form' . $item . '">
                                 <input type="hidden" name="cardDir" value="'. $directory . "/"  . htmlspecialchars($item) . '">
                             </form>
@@ -645,13 +648,13 @@ body {
                                 item' . $id . ' = newItem' . $id . ';
 
 
-                                item' . $id . ' = item' . $id . '.replace(/ö/g, "oe");
-                                item' . $id . ' = item' . $id . '.replace(/ä/g, "ae");
-                                item' . $id . ' = item' . $id . '.replace(/ü/g, "ue");
-                                item' . $id . ' = item' . $id . '.replace(/Ö/g, "Oe");
-                                item' . $id . ' = item' . $id . '.replace(/Ä/g, "Ae");
-                                item' . $id . ' = item' . $id . '.replace(/Ü/g, "Ue");
-                                item' . $id . ' = item' . $id . '.replace(/ß/g, "ss");
+                                item' . $id . ' = item' . $id . '.replace("ö", "oe");
+                                item' . $id . ' = item' . $id . '.replace("ä", "ae");
+                                item' . $id . ' = item' . $id . '.replace("ü", "ue");
+                                item' . $id . ' = item' . $id . '.replace("Ö", "Oe");
+                                item' . $id . ' = item' . $id . '.replace("Ä", "Ae");
+                                item' . $id . ' = item' . $id . '.replace("Ü", "Ue");
+                                item' . $id . ' = item' . $id . '.replace("ß", "ss");
 
                                 
                                 const audio_content' . $id . ' = "<audio id=\"audio_element\">" + 
@@ -747,12 +750,8 @@ body {
                 // saving the last fil & the page in user_data.json
                 
                 $user_data["current_file"] = $directory;
-
-                $user_data["last_page"] = $user_data["current_page"];
-
-                saving_user_data($user_data, "user_data.json");
                 
-                $user_data["current_page"] = 1; // resets the page to 1 if a file was opened
+                $user_data["current_page"] = 1;
 
                 saving_user_data($user_data, "user_data.json");
 
@@ -896,16 +895,16 @@ body {
               $directory = $user_data["current_directory"];
 
               switch ($directory) {
-                case str_ends_with($directory, "filme"):
+                case str_contains($directory, "filme"):
                   $category = "filme";
                   break;
-                case str_ends_with($directory, "serien"):
+                case str_contains($directory, "serien"):
                   $category = "serien";
                   break;
-                case str_ends_with($directory, "hoerspiele"):
+                case str_contains($directory, "hoerspiele"):
                   $category = "hoerspiele";
                   break;
-                case str_ends_with($directory, "puppen"):
+                case str_contains($directory, "puppen"):
                   $category = "puppen";
                   break;
                 default:
@@ -1002,33 +1001,22 @@ body {
               
               $user_data = loading_user_data("user_data.json");
 
-              if (isset($last_watched_file[$path])) {
-                
-                $last_watched_file = $last_watched_file[$path];
+              $last_watched_file = $last_watched_file[$path];
 
-                $user_data["current_file"] = $last_watched_file;
+              $user_data["current_file"] = $last_watched_file;
 
-                saving_user_data($user_data, "user_data.json");
+              saving_user_data($user_data, "user_data.json");
 
-                require "movie_or_audio.php";
+              require "movie_or_audio.php";
 
-                if (movie_or_audio($last_watched_file) == "movie") {
-                  reloading_cards("movie");
-                }
-                elseif (movie_or_audio($last_watched_file) == "audio") {
-                  reloading_cards("audio");
-                };
-
-                exit;
-              } else {
-                echo "
-                  <script>
-                    var audio = new Audio('feedback/feedback_resume_browse.wav');
-                    audio.play();
-                    
-                    resume = 'resume';
-                  </script>";
+              if (movie_or_audio($last_watched_file) == "movie") {
+                reloading_cards("movie");
+              }
+              elseif (movie_or_audio($last_watched_file) == "audio") {
+                reloading_cards("audio");
               };
+
+              exit;
               
             };
 
@@ -1114,14 +1102,6 @@ body {
               $user_data = loading_user_data("user_data.json");
               
               $user_data["current_page"] = 1;
-
-              if (isset($_GET["back"])) {
-                if ($_GET["back"] == "true") {
-                  $user_data["current_page"] = $user_data["last_page"];
-                  $user_data["last_page"] = null; // resets the last page to 1 if the user goes backs
-                }
-              }
-
               saving_user_data($user_data, "user_data.json");
 
               console_log($card_dir);
